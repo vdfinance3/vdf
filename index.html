@@ -1974,6 +1974,17 @@ input:focus, select:focus, textarea:focus {
 }
 
 </style>
+<style>
+.existing-customer-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px;}
+.existing-customer-form-grid .form-group{margin:0;}
+.existing-customer-form-grid label{color:#f6d98b !important;font-weight:700;display:block;margin-bottom:7px;}
+.existing-customer-form-grid input,.existing-customer-form-grid select,.existing-customer-form-grid textarea{width:100%;box-sizing:border-box;background:#121216 !important;color:#fff !important;border:1px solid rgba(255,255,255,.2) !important;border-radius:8px;padding:11px;}
+.existing-customer-form-grid input::placeholder{color:#aaa !important;}
+.existing-customer-form-grid select option{background:#121216;color:#fff;}
+.existing-customer-form-grid input[type=date]{color-scheme:dark;}
+@media(max-width:700px){.existing-customer-form-grid{grid-template-columns:1fr;}}
+</style>
+
 </style>
 </head>
 
@@ -2428,8 +2439,14 @@ input:focus, select:focus, textarea:focus {
                 <button type="button" class="btn btn-primary" onclick="viewLoanHistoryFromTopDashboard()">
                     History
                 </button>
+                <button type="button" class="btn btn-primary" onclick="openExistingCustomerForm()">
+                    ➕ Add Existing Customer
+                </button>
                 <button type="button" class="btn btn-primary" onclick="setAdminPopupFromTopDashboard()">
                     Popup / Note
+                </button>
+                <button type="button" class="btn btn-primary" onclick="refreshAdminApplications()" title="Refresh applications from Google Sheet">
+                    ↻ Refresh
                 </button>
                 <button class="btn btn-danger" onclick="adminLogout()">
                     Logout
@@ -2523,6 +2540,48 @@ input:focus, select:focus, textarea:focus {
 </section>
 
 
+
+<!-- ================= ADD EXISTING CUSTOMER ================= -->
+<div id="existingCustomerModal" class="vdf-popup-overlay" style="display:none;">
+    <div class="vdf-popup" style="max-width:900px; max-height:90vh; overflow:auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+            <h3 style="margin:0;">➕ Add Existing Customer</h3>
+            <button type="button" class="btn btn-danger" onclick="closeExistingCustomerForm()">✕</button>
+        </div>
+        <p style="margin-top:8px;">Manually enter customers/loans taken before VDF website started.</p>
+
+        <div class="existing-customer-form-grid">
+            <div class="form-group"><label>Application ID</label><input id="existingCustomerId" placeholder="Leave blank for auto ID"></div>
+            <div class="form-group"><label>Name *</label><input id="existingCustomerName" required></div>
+            <div class="form-group"><label>Mobile *</label><input id="existingCustomerMobile" required></div>
+            <div class="form-group"><label>Co-Applicant</label><input id="existingCustomerCoApplicant"></div>
+            <div class="form-group"><label>Email</label><input id="existingCustomerEmail" type="email"></div>
+            <div class="form-group"><label>UPI ID</label><input id="existingCustomerUpi"></div>
+            <div class="form-group"><label>Reason for Apply</label><input id="existingCustomerReason"></div>
+            <div class="form-group"><label>Address</label><textarea id="existingCustomerAddress" rows="2"></textarea></div>
+            <div class="form-group"><label>Aadhaar File Name</label><input id="existingCustomerAadhaar"></div>
+            <div class="form-group"><label>Amount *</label><input id="existingCustomerAmount" type="number" min="0" oninput="calculateExistingCustomerTotal()"></div>
+            <div class="form-group"><label>Period (days)</label><input id="existingCustomerPeriod" value="30" readonly></div>
+            <div class="form-group"><label>Repayment Date</label><input id="existingCustomerRepaymentDate" type="date"></div>
+            <div class="form-group"><label>Interest</label><input id="existingCustomerInterest" type="number" min="0" value="0" oninput="calculateExistingCustomerTotal()"></div>
+            <div class="form-group"><label>Platform Fee</label><input id="existingCustomerFee" type="number" value="100" readonly></div>
+            <div class="form-group"><label>Total Payable</label><input id="existingCustomerTotal" type="number" readonly></div>
+            <div class="form-group"><label>Status *</label>
+                <select id="existingCustomerStatus">
+                    <option value="Approved">Approved</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Amount Cleared">Amount Cleared</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:15px;">
+            <button type="button" class="btn btn-danger" onclick="closeExistingCustomerForm()">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="saveExistingCustomer()">Save Existing Customer</button>
+        </div>
+    </div>
+</div>
 
 <!-- ================= CUSTOMER ADMIN POPUP ================= -->
 <div id="customerAdminPopup" class="vdf-popup-overlay">
@@ -3622,6 +3681,33 @@ function startVdfAdminAutoRefresh() {
             loadAdminApplications(false);
         }
     }, 5000);
+}
+
+function refreshAdminApplications() {
+    if (sessionStorage.getItem("vdfAdmin") !== "true") {
+        showPage("login");
+        return;
+    }
+
+    if (vdfAdminActionBusy) {
+        alert("Please wait for the current admin action to finish.");
+        return;
+    }
+
+    var button = document.querySelector('.admin-header button[onclick="refreshAdminApplications()"]');
+    if (button) {
+        button.disabled = true;
+        button.innerHTML = "↻ Refreshing...";
+    }
+
+    loadAdminApplications(false);
+
+    setTimeout(function() {
+        if (button) {
+            button.disabled = false;
+            button.innerHTML = "↻ Refresh";
+        }
+    }, 1200);
 }
 
 function loadAdminApplications(skipSheetRefresh) {
@@ -5087,6 +5173,121 @@ function closeHomeMenu() {
     var toggle = document.querySelector(".home-menu-toggle");
     if (menu) menu.classList.remove("open");
     if (toggle) toggle.setAttribute("aria-expanded", "false");
+}
+
+/* ================= ADD EXISTING CUSTOMER ================= */
+function openExistingCustomerForm() {
+    var modal = document.getElementById("existingCustomerModal");
+    if (!modal) return;
+    modal.style.display = "flex";
+    var id = document.getElementById("existingCustomerId");
+    if (id && !id.value) id.value = generateApplicationId();
+    var period = document.getElementById("existingCustomerPeriod");
+    if (period) period.value = "30";
+    var fee = document.getElementById("existingCustomerFee");
+    if (fee) fee.value = "100";
+    var date = document.getElementById("existingCustomerRepaymentDate");
+    if (date && !date.value) {
+        var d = new Date();
+        d.setDate(d.getDate() + 30);
+        date.value = d.toISOString().slice(0,10);
+    }
+    calculateExistingCustomerTotal();
+}
+
+function closeExistingCustomerForm() {
+    var modal = document.getElementById("existingCustomerModal");
+    if (modal) modal.style.display = "none";
+}
+
+function calculateExistingCustomerTotal() {
+    var amount = Number(document.getElementById("existingCustomerAmount")?.value || 0);
+    var interest = Number(document.getElementById("existingCustomerInterest")?.value || 0);
+    var fee = 100;
+    var total = amount + interest + fee;
+    var totalField = document.getElementById("existingCustomerTotal");
+    if (totalField) totalField.value = total;
+}
+
+function saveExistingCustomer() {
+    if (sessionStorage.getItem("vdfAdmin") !== "true") {
+        alert("Admin login required.");
+        return;
+    }
+
+    var name = document.getElementById("existingCustomerName").value.trim();
+    var mobile = document.getElementById("existingCustomerMobile").value.trim();
+    var amount = Number(document.getElementById("existingCustomerAmount").value || 0);
+    if (!name || !mobile || !amount || amount < 0) {
+        alert("Please enter Name, Mobile and Amount.");
+        return;
+    }
+
+    var id = document.getElementById("existingCustomerId").value.trim() || generateApplicationId();
+    var interest = Number(document.getElementById("existingCustomerInterest").value || 0);
+    var fee = 100;
+    var total = amount + interest + fee;
+    var repaymentDate = document.getElementById("existingCustomerRepaymentDate").value;
+    var status = document.getElementById("existingCustomerStatus").value;
+    var createdAt = new Date().toISOString();
+
+    var application = {
+        id:id,
+        name:name,
+        mobile:mobile,
+        coApplicant:document.getElementById("existingCustomerCoApplicant").value.trim(),
+        email:document.getElementById("existingCustomerEmail").value.trim(),
+        upiId:document.getElementById("existingCustomerUpi").value.trim(),
+        loanReason:document.getElementById("existingCustomerReason").value.trim(),
+        address:document.getElementById("existingCustomerAddress").value.trim(),
+        aadhaarFileName:document.getElementById("existingCustomerAadhaar").value.trim(),
+        amount:amount,
+        period:30,
+        repaymentDate:repaymentDate,
+        interest:interest,
+        fee:fee,
+        total:total,
+        status:status,
+        createdAt:createdAt,
+        lastUpdated:createdAt,
+        userAccess:true,
+        loanHistory:[{
+            amount:amount,
+            period:30,
+            repaymentDate:repaymentDate,
+            interest:interest,
+            fee:fee,
+            total:total,
+            status:status,
+            createdAt:createdAt
+        }]
+    };
+
+    var loans = getLoans();
+    var existingIndex = loans.findIndex(function(x){ return String(x.id||"").toUpperCase() === id.toUpperCase(); });
+    if (existingIndex >= 0) loans[existingIndex] = application;
+    else loans.push(application);
+    saveLoans(loans);
+
+    var button = document.querySelector('#existingCustomerModal button[onclick="saveExistingCustomer()"]');
+    if (button) { button.disabled = true; button.textContent = "Saving..."; }
+
+    fetch(GOOGLE_SHEET_WEB_APP_URL, {
+        method:"POST",
+        mode:"no-cors",
+        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify({action:"existingCustomer",application:application})
+    }).then(function(){
+        alert("Existing customer saved successfully. Application ID: " + id);
+        closeExistingCustomerForm();
+        if (button) { button.disabled = false; button.textContent = "Save Existing Customer"; }
+        loadAdminApplications(true);
+    }).catch(function(error){
+        console.error(error);
+        alert("Saved locally, but Google Sheet sync may have failed. Please check the Apps Script deployment.");
+        if (button) { button.disabled = false; button.textContent = "Save Existing Customer"; }
+        loadAdminApplications(true);
+    });
 }
 
 /* ================= INITIAL LOAD ================= */

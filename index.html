@@ -4570,7 +4570,7 @@ function getVDFTimeGreeting() {
 /* Email uses the same Apps Script Web App as Google Sheets. */
 const VDF_EMAIL_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw5DerC_6LCJMS5BRAYL5EoNnKYsCvYXj946wMY5wcieFVq8Ckm31rmS8_kt1jxjReUnQ/exec";
 
-function sendVDFEmail(application, subject, message, silent) {
+function sendVDFEmail(application, subject, message, silent, dedupeKey) {
     if (!application || !application.email) {
         if (!silent) alert("Customer email address is not available.");
         return Promise.resolve(false);
@@ -4586,7 +4586,8 @@ function sendVDFEmail(application, subject, message, silent) {
         action: "sendEmail",
         to: application.email,
         subject: subject || "VD Finance - Application Update",
-        message: message || ""
+        message: message || "",
+        dedupeKey: dedupeKey || ""
     };
 
     return fetch(VDF_EMAIL_WEB_APP_URL, {
@@ -4666,7 +4667,8 @@ function sendExistingCustomerLoanEmail(application, loanIndex) {
         "Please keep this email for your records.\n\n" +
         "Regards,\nVD Finance\nvdfinance3@gmail.com";
 
-    sendVDFEmail(application, subject, message, true);
+    var emailDedupeKey = "existing|" + String(application.id || "") + "|loan" + String(loanNumber) + "|" + String(loanDate || "");
+    sendVDFEmail(application, subject, message, true, emailDedupeKey);
 }
 
 function sendAutomaticStatusEmail(application, loanIndex, status) {
@@ -4731,7 +4733,8 @@ function sendAutomaticStatusEmail(application, loanIndex, status) {
             "Regards,\nVD Finance\nvdfinance3@gmail.com";
     }
 
-    sendVDFEmail(application, subject, message, true);
+    var emailDedupeKey = "status|" + String(application.id || "") + "|loan" + String(loanNumber) + "|" + String(status || "").trim().toLowerCase();
+    sendVDFEmail(application, subject, message, true, emailDedupeKey);
 }
 
 function sendAdminEmail(id) {
@@ -5360,8 +5363,8 @@ function changeApplicationStatus(id, loanIndex, newStatus) {
         /* Automatic customer email for Approved / Rejected. */
         sendAutomaticStatusEmail(application, loanIndex, newStatus);
 
-        /* Render the result immediately. */
-        loadAdminApplications(false);
+        /* Render the result immediately. Never fetch/replace the row during the action. */
+        loadAdminApplications(true);
     } catch (error) {
         console.error("VDF admin status action failed:", error);
         vdfAdminActionBusy = false;
@@ -5589,10 +5592,7 @@ function clearLoanAmount(id, loanIndex) {
         return;
     }
 
-    Promise.resolve(backendWrite).finally(function() {
-        vdfAdminActionBusy = false;
-        delete window.vdfPendingAdminActions[actionKey];
-    });
+    verifyAdminStatusSync(application, loanIndex, "Amount Cleared", 0);
 
     alert("Loan " + (loanIndex + 1) + " marked as Amount Cleared. Other loans remain active.");
 }

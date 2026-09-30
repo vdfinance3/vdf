@@ -3035,11 +3035,39 @@ function fetchSharedApplicationById(id) {
     })
     .then(function(data) {
         if (!data || data.success !== true) throw new Error("Invalid status response");
-        return data.application || null;
+
+        /*
+           Some older Apps Script deployments do not have the
+           getApplicationById action yet and return only the normal
+           applications response. Never fall back to stale localStorage
+           in that case. Use the shared application list instead.
+        */
+        if (data.application) return data.application;
+
+        if (Array.isArray(data.applications)) {
+            return data.applications.find(function(item) {
+                return String(item.id || "").trim().toUpperCase() === wanted;
+            }) || null;
+        }
+
+        return fetchSharedApplications().then(function(applications) {
+            if (!Array.isArray(applications)) return null;
+            return applications.find(function(item) {
+                return String(item.id || "").trim().toUpperCase() === wanted;
+            }) || null;
+        });
     })
     .catch(function(error) {
-        console.warn("Fast status lookup failed; using local cache:", error);
-        return null;
+        console.warn("Fast status lookup failed; using shared-list fallback:", error);
+        return fetchSharedApplications().then(function(applications) {
+            if (!Array.isArray(applications)) return null;
+            return applications.find(function(item) {
+                return String(item.id || "").trim().toUpperCase() === wanted;
+            }) || null;
+        }).catch(function(fallbackError) {
+            console.warn("Shared status fallback failed:", fallbackError);
+            return null;
+        });
     })
     .finally(function() {
         if (timeoutId) clearTimeout(timeoutId);
@@ -3620,13 +3648,51 @@ function closeCustomerAdminPopup() {
     }
 }
 
-/* ================= LOCAL-ONLY STATUS ================= */
+/* ================= SHARED CUSTOMER STATUS ================= */
 
-/* Google Sheet is never read by the app. Status always comes from localStorage. */
+/*
+   Customer status is shared/server-backed. localStorage is only a fast
+   cache; it must never permanently override the status stored by Admin.
+*/
 function refreshCustomerStatusFromServer() {
     var statusPage = document.getElementById("status");
-    if (!statusPage || !statusPage.classList.contains("active")) return;
-    renderStatusFromLocal();
+    var statusIdField = document.getElementById("statusId");
+    if (!statusPage || !statusPage.classList.contains("active") || !statusIdField) return;
+
+    var id = statusIdField.value.trim().toUpperCase();
+    if (!id || window.vdfStatusRefreshBusy) return;
+
+    window.vdfStatusRefreshBusy = true;
+    fetchSharedApplicationById(id)
+        .then(function(latest) {
+            if (!latest) return;
+
+            var currentLoans = getLoans();
+            var merged = currentLoans.filter(function(item) {
+                return String(item.id || "").trim().toUpperCase() !== id;
+            });
+            merged.push(latest);
+            saveLoans(merged);
+
+            var fingerprint = JSON.stringify(latest);
+            if (window.vdfLastStatusFingerprint !== fingerprint) {
+                window.vdfLastStatusFingerprint = fingerprint;
+                renderStatusFromLocal();
+            }
+        })
+        .catch(function(error) {
+            console.warn("Customer status refresh failed:", error);
+        })
+        .finally(function() {
+            window.vdfStatusRefreshBusy = false;
+        });
+}
+
+/* Keep an already-open Status page synchronized with Admin changes. */
+if (!window.vdfCustomerStatusRefreshTimer) {
+    window.vdfCustomerStatusRefreshTimer = setInterval(function() {
+        refreshCustomerStatusFromServer();
+    }, 5000);
 }
 
 /* IMPORTANT: Status is NEVER auto-rendered while the customer is typing.

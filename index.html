@@ -5285,11 +5285,18 @@ function updateAdminMonthlyDashboard() {
 
 function changeApplicationStatus(id, loanIndex, newStatus) {
 
-    if (vdfAdminActionBusy) return;
+    /* First click must always execute. The action is locked by application/loan
+       rather than by the whole Admin page, so a slow backend never makes the
+       admin click the same button repeatedly. */
+    var actionKey = String(id) + "::" + String(loanIndex) + "::" + String(newStatus);
+    window.vdfPendingAdminActions = window.vdfPendingAdminActions || {};
+    if (window.vdfPendingAdminActions[actionKey]) return;
+    window.vdfPendingAdminActions[actionKey] = true;
     vdfAdminActionBusy = true;
 
     if (sessionStorage.getItem("vdfAdmin") !== "true") {
         vdfAdminActionBusy = false;
+        delete window.vdfPendingAdminActions[actionKey];
         showPage("login");
         return;
     }
@@ -5303,6 +5310,7 @@ function changeApplicationStatus(id, loanIndex, newStatus) {
     if (index === -1) {
         alert("Application not found.");
         vdfAdminActionBusy = false;
+        delete window.vdfPendingAdminActions[actionKey];
         return;
     }
 
@@ -5312,6 +5320,7 @@ function changeApplicationStatus(id, loanIndex, newStatus) {
     if (!history[loanIndex]) {
         alert("Loan transaction not found.");
         vdfAdminActionBusy = false;
+        delete window.vdfPendingAdminActions[actionKey];
         return;
     }
 
@@ -5356,6 +5365,7 @@ function changeApplicationStatus(id, loanIndex, newStatus) {
     } catch (error) {
         console.error("VDF admin status action failed:", error);
         vdfAdminActionBusy = false;
+        delete window.vdfPendingAdminActions[actionKey];
         alert("Action could not be completed. Please try again.");
         return;
     }
@@ -5384,6 +5394,7 @@ function verifyAdminStatusSync(application, loanIndex, expectedStatus, attempt) 
 
         if (matches) {
             vdfAdminActionBusy = false;
+            delete window.vdfPendingAdminActions[String(application.id) + "::" + String(loanIndex) + "::" + String(expectedStatus)];
             return;
         }
 
@@ -5391,6 +5402,7 @@ function verifyAdminStatusSync(application, loanIndex, expectedStatus, attempt) 
             /* Keep the local result visible; the next normal refresh can retry. */
             vdfAdminActionBusy = false;
             console.warn('Admin status sync verification timed out for', application.id);
+            delete window.vdfPendingAdminActions[String(application.id) + "::" + String(loanIndex) + "::" + String(expectedStatus)];
             return;
         }
 
@@ -5500,6 +5512,10 @@ function chooseLoanForClear(id) {
 
 function clearLoanAmount(id, loanIndex) {
 
+    var actionKey = String(id) + "::" + String(loanIndex) + "::Amount Cleared";
+    window.vdfPendingAdminActions = window.vdfPendingAdminActions || {};
+    if (window.vdfPendingAdminActions[actionKey]) return;
+
     if (sessionStorage.getItem("vdfAdmin") !== "true") {
         showPage("login");
         return;
@@ -5527,7 +5543,7 @@ function clearLoanAmount(id, loanIndex) {
         return;
     }
 
-    if (vdfAdminActionBusy) return;
+    window.vdfPendingAdminActions[actionKey] = true;
     vdfAdminActionBusy = true;
 
     history[loanIndex].status = "Amount Cleared";
@@ -5568,12 +5584,14 @@ function clearLoanAmount(id, loanIndex) {
     } catch (error) {
         console.error("VDF clear action failed:", error);
         vdfAdminActionBusy = false;
+        delete window.vdfPendingAdminActions[actionKey];
         alert("Amount Cleared action could not be completed. Please try again.");
         return;
     }
 
     Promise.resolve(backendWrite).finally(function() {
         vdfAdminActionBusy = false;
+        delete window.vdfPendingAdminActions[actionKey];
     });
 
     alert("Loan " + (loanIndex + 1) + " marked as Amount Cleared. Other loans remain active.");
@@ -5625,6 +5643,10 @@ function chooseLoanForDelete(id) {
 
 function deleteLoanTransaction(id, loanIndex) {
 
+    var actionKey = String(id) + "::DELETE::" + String(loanIndex);
+    window.vdfPendingAdminActions = window.vdfPendingAdminActions || {};
+    if (window.vdfPendingAdminActions[actionKey]) return;
+
     if (sessionStorage.getItem("vdfAdmin") !== "true") {
         showPage("login");
         return;
@@ -5652,12 +5674,8 @@ function deleteLoanTransaction(id, loanIndex) {
         return;
     }
 
-    /* Delete must execute immediately on the first click.
-       Do not wait for a previous network action before deleting. */
-    if (vdfAdminActionBusy) {
-        /* A previous action may still be syncing, but deletion itself is local-first.
-           Continue instead of silently ignoring the user's click. */
-    }
+    /* Delete must execute immediately on the first click. */
+    window.vdfPendingAdminActions[actionKey] = true;
     vdfAdminActionBusy = true;
 
     history.splice(loanIndex, 1);
@@ -5690,12 +5708,12 @@ function deleteLoanTransaction(id, loanIndex) {
     var deleteWrite = syncToGoogleSheet("update", application);
     /* Render immediately; never make the user click Delete again while backend sync runs. */
     loadAdminApplications(true);
-    verifyAdminDeleteSync(application.id, false, history.length, 0);
+    verifyAdminDeleteSync(application.id, false, history.length, 0, actionKey);
 
     alert("Loan " + (loanIndex + 1) + " deleted successfully.");
 }
 
-function verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt) {
+function verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt, actionKey) {
     var maxAttempts = 8;
     var delay = 800;
 
@@ -5710,12 +5728,14 @@ function verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength,
 
         if (matches) {
             vdfAdminActionBusy = false;
+            delete window.vdfPendingAdminActions[actionKey];
             return;
         }
 
         if (attempt >= maxAttempts) {
             vdfAdminActionBusy = false;
             console.warn('Admin delete sync verification timed out for', id);
+            delete window.vdfPendingAdminActions[actionKey];
             return;
         }
 
@@ -5734,16 +5754,17 @@ function verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength,
         }
 
         setTimeout(function() {
-            verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt + 1);
+            verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt + 1, actionKey);
         }, delay);
     }).catch(function(error) {
         if (attempt >= maxAttempts) {
             vdfAdminActionBusy = false;
             console.warn('Admin delete verification failed:', error);
+            delete window.vdfPendingAdminActions[actionKey];
             return;
         }
         setTimeout(function() {
-            verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt + 1);
+            verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt + 1, actionKey);
         }, delay);
     });
 }
@@ -5752,6 +5773,10 @@ function verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength,
 /* ================= DELETE CLEARED APPLICATION ================= */
 
 function deleteClearedApplication(id) {
+
+    var actionKey = String(id) + "::DELETE_CUSTOMER";
+    window.vdfPendingAdminActions = window.vdfPendingAdminActions || {};
+    if (window.vdfPendingAdminActions[actionKey]) return;
 
     if (sessionStorage.getItem("vdfAdmin") !== "true") {
         showPage("login");
@@ -5785,14 +5810,15 @@ function deleteClearedApplication(id) {
         return;
     }
 
-    /* Delete Customer is also local-first and must respond to the first click. */
+    /* Delete Customer is local-first and must respond to the first click. */
+    window.vdfPendingAdminActions[actionKey] = true;
     vdfAdminActionBusy = true;
 
     loans.splice(index, 1);
     saveLoans(loans);
     var deleteWrite = syncToGoogleSheet("delete", application);
     loadAdminApplications(true);
-    verifyAdminDeleteSync(application.id, true, 0, 0);
+    verifyAdminDeleteSync(application.id, true, 0, 0, actionKey);
 }
 
 

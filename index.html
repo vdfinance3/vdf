@@ -2565,6 +2565,11 @@ button:disabled { cursor: not-allowed; }
 
             <div class="cards">
                 <div class="card" style="position:relative;">
+                    <h3>Active Applications</h3>
+                    <p id="activeApplicationsCount">0</p>
+                    <small>Currently approved applications</small>
+                </div>
+                <div class="card" style="position:relative;">
                     <button type="button" title="Edit dashboard amount" onclick="editDashboardMetric('loanAmount')" style="position:absolute;right:10px;top:10px;border:0;background:transparent;font-size:18px;cursor:pointer;">✏️</button>
                     <h3>Total Loan Amount</h3>
                     <p id="monthlyLoanAmount">₹0</p>
@@ -3706,22 +3711,16 @@ function checkStatus() {
 
     var id = statusIdField.value.trim().toUpperCase();
     if (!id) {
-        renderStatusFromLocal();
+        if (result) result.innerHTML = '<div class="alert error">Please enter your application ID.</div>';
         return;
     }
 
-    var localLoans = getLoans();
-    var localApplication = localLoans.find(function(item) {
-        return String(item.id || "").trim().toUpperCase() === id;
-    });
-
-    /* If this device already has the application cached, show it immediately.
-       The server refresh happens in the background and never blocks the screen. */
-    if (localApplication) {
-        renderStatusFromLocal();
-        window.vdfLastStatusFingerprint = JSON.stringify(localApplication);
-    } else if (result) {
-        result.innerHTML = '<div class="alert" style="display:block;">Checking application status...</div>';
+    /* IMPORTANT: Never display cached/local status first.
+       The customer must see the latest shared backend record only after
+       Check Status has fetched it successfully. This prevents an old
+       Pending/Approved value on one device from being shown temporarily. */
+    if (result) {
+        result.innerHTML = '<div class="alert" style="display:block;">Checking latest application status...</div>';
     }
 
     if (button) {
@@ -3732,24 +3731,23 @@ function checkStatus() {
     }
 
     fetchSharedApplicationById(id).then(function(sharedApplication) {
-        var currentLoans = getLoans();
-        var latest = sharedApplication || currentLoans.find(function(item) {
-            return String(item.id || "").trim().toUpperCase() === id;
-        });
-
-        if (!latest) {
-            if (result) result.innerHTML = '<div class="alert error">Application not found.</div>';
+        if (!sharedApplication) {
+            if (result) result.innerHTML = '<div class="alert error">Application not found or latest data is unavailable. Please try again.</div>';
             return;
         }
 
+        var currentLoans = getLoans();
         var merged = currentLoans.filter(function(item) {
             return String(item.id || "").trim().toUpperCase() !== id;
         });
-        merged.push(latest);
+        merged.push(sharedApplication);
         saveLoans(merged);
 
-        window.vdfLastStatusFingerprint = JSON.stringify(latest);
+        window.vdfLastStatusFingerprint = JSON.stringify(sharedApplication);
         renderStatusFromLocal();
+    }).catch(function(error) {
+        console.warn("Latest customer status lookup failed:", error);
+        if (result) result.innerHTML = '<div class="alert error">Latest status could not be loaded. Please try again.</div>';
     }).finally(function() {
         if (button) {
             button.disabled = false;
@@ -4229,6 +4227,24 @@ function startVdfAdminAutoRefresh() {
     }, 5000);
 }
 
+function updateActiveApplicationsCount(loans) {
+    var element = document.getElementById("activeApplicationsCount");
+    if (!element) return;
+
+    var activeCount = 0;
+
+    (Array.isArray(loans) ? loans : []).forEach(function(application) {
+        var history = ensureLoanHistory(application);
+        var hasActiveLoan = history.some(function(loan) {
+            return String(loan.status || "").trim().toLowerCase() === "approved";
+        });
+
+        if (hasActiveLoan) activeCount++;
+    });
+
+    element.textContent = String(activeCount);
+}
+
 function loadAdminApplications(skipSheetRefresh) {
 
     if (sessionStorage.getItem("vdfAdmin") !== "true") {
@@ -4240,6 +4256,7 @@ function loadAdminApplications(skipSheetRefresh) {
 
             var loans = getLoans();
 
+            updateActiveApplicationsCount(loans);
             setupAdminMonthSelector(loans);
             updateAdminMonthlyDashboard();
 

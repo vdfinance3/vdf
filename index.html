@@ -2235,6 +2235,29 @@ button:disabled { cursor: not-allowed; }
 @media(max-width:520px){.vdf-home-hero-new{padding-top:34px;}.vdf-home-copy-new h1{font-size:clamp(44px,13vw,64px);}.vdf-home-visual-new{height:385px;}.vdf-home-orb{width:315px;height:315px;}.vdf-home-money-card{width:270px;height:175px;}.vdf-money-amount{font-size:68px;}}
 
 </style>
+
+<style id="vdf-home-animation">
+/* VDF HOME PAGE ANIMATION - visual only, no layout/function changes */
+.home-active .vdf-home-hero-new{animation:vdfHomeFadeUp .75s ease both;}
+.home-active .vdf-home-eyebrow{animation:vdfHomeFadeUp .55s ease .08s both;}
+.home-active .vdf-home-time{animation:vdfHomeFadeUp .6s ease .14s both;}
+.home-active .vdf-home-copy-new h1{animation:vdfHomeFadeUp .7s ease .2s both;}
+.home-active .vdf-home-copy-new p{animation:vdfHomeFadeUp .7s ease .28s both;}
+.home-active .vdf-home-cta-row{animation:vdfHomeFadeUp .7s ease .36s both;}
+.home-active .vdf-home-trust-row{animation:vdfHomeFadeUp .7s ease .44s both;}
+.vdf-home-orb{animation:vdfOrbFloat 5s ease-in-out infinite;}
+.vdf-home-money-card{animation:vdfCardFloat 4.5s ease-in-out infinite, vdfCardGlow 3s ease-in-out infinite;}
+.vdf-home-money-card:hover{transform:translateY(-8px) rotate(-1deg) scale(1.02);transition:transform .3s ease;}
+.vdf-home-cta-main,.vdf-home-cta-second{transition:transform .25s ease,box-shadow .25s ease;}
+.vdf-home-cta-main:hover,.vdf-home-cta-second:hover{transform:translateY(-3px);}
+.vdf-home-time{animation:vdfGreetingPulse 3.2s ease-in-out infinite;}
+@keyframes vdfHomeFadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes vdfOrbFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-14px,0) scale(1.035)}}
+@keyframes vdfCardFloat{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(0,-10px,0) rotate(1.2deg)}}
+@keyframes vdfCardGlow{0%,100%{filter:drop-shadow(0 16px 35px rgba(0,0,0,.28))}50%{filter:drop-shadow(0 22px 48px rgba(212,169,65,.24))}}
+@keyframes vdfGreetingPulse{0%,100%{opacity:.88}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.home-active .vdf-home-hero-new,.home-active .vdf-home-eyebrow,.home-active .vdf-home-time,.home-active .vdf-home-copy-new h1,.home-active .vdf-home-copy-new p,.home-active .vdf-home-cta-row,.home-active .vdf-home-trust-row,.vdf-home-orb,.vdf-home-money-card,.vdf-home-time{animation:none!important}}
+</style>
 </head>
 
 <body class="home-active">
@@ -2261,7 +2284,7 @@ button:disabled { cursor: not-allowed; }
         <div class="vdf-home-topbar">
             <div class="vdf-home-branding">
                 <button type="button" class="vdf-home-menu" onclick="toggleHomeMenu()" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-                <div class="vdf-home-logo"><b>VDF</b> <span>FINANCE</span></div>
+                <div class="vdf-home-logo"><b>VD</b> <span>FINANCE</span></div>
             </div>
             <div class="vdf-home-mini-links">
                 <button type="button" onclick="showPage('calculator')">Calculator</button>
@@ -2281,8 +2304,8 @@ button:disabled { cursor: not-allowed; }
 
         <div class="vdf-home-hero-new">
             <div class="vdf-home-copy-new">
-                <div class="vdf-home-eyebrow" id="homeGreeting">WELCOME TO VDF FAMILY</div>
-                <div class="vdf-home-time" id="homeTimeGreeting">Good Evening</div>
+                <div class="vdf-home-eyebrow" id="homeGreeting">WELCOME TO VD FAMILY</div>
+                <div class="vdf-home-time" id="homeTimeGreeting">Hello, Good Evening</div>
                 <h1>Financial support.<br><span>Made simple.</span></h1>
                 <p>Apply for your loan, check your application status and understand your repayment amount — all in one simple place.</p>
                 <div class="vdf-home-cta-row">
@@ -2298,10 +2321,10 @@ button:disabled { cursor: not-allowed; }
             <div class="vdf-home-visual-new">
                 <div class="vdf-home-orb"></div>
                 <div class="vdf-home-money-card">
-                    <div class="vdf-money-card-top"><span>VDF FINANCE</span><b>₹</b></div>
+                    <div class="vdf-money-card-top"><span>VD FINANCE</span><b>₹</b></div>
                     <div class="vdf-money-amount">₹</div>
                     <div class="vdf-money-lines"><i></i><i></i><i></i></div>
-                    <div class="vdf-money-card-bottom"><span>SMART LOAN</span><span>VDF</span></div>
+                    <div class="vdf-money-card-bottom"><span>SMART LOAN</span><span>VD</span></div>
                 </div>
                 <div class="vdf-float-card vdf-float-one"><b>✓</b><span><strong>Simple Apply</strong><small>Easy application process</small></span></div>
                 <div class="vdf-float-card vdf-float-two"><b>₹</b><span><strong>Clear Details</strong><small>Know your repayment</small></span></div>
@@ -2317,11 +2340,11 @@ button:disabled { cursor: not-allowed; }
         </div>
 
         <div class="vdf-home-reviews-new">
-            <div class="vdf-reviews-heading"><span>VDF EXPERIENCE</span><h2>Built around clarity.</h2><p>A simple digital experience for managing your loan information.</p></div>
+            <div class="vdf-reviews-heading"><span>VD EXPERIENCE</span><h2>Built around clarity.</h2><p>A simple digital experience for managing your loan information.</p></div>
             <div class="vdf-review-grid-new">
-                <div class="vdf-review-new"><div>★★★★★</div><p>“Simple application process and clear repayment details.”</p><strong>VDF Customer</strong></div>
-                <div class="vdf-review-new"><div>★★★★★</div><p>“Checking the application status was straightforward.”</p><strong>VDF Customer</strong></div>
-                <div class="vdf-review-new"><div>★★★★★</div><p>“The total payable amount is easy to understand.”</p><strong>VDF Customer</strong></div>
+                <div class="vdf-review-new"><div>★★★★★</div><p>“Simple application process and clear repayment details.”</p><strong>VD Customer</strong></div>
+                <div class="vdf-review-new"><div>★★★★★</div><p>“Checking the application status was straightforward.”</p><strong>VD Customer</strong></div>
+                <div class="vdf-review-new"><div>★★★★★</div><p>“The total payable amount is easy to understand.”</p><strong>VD Customer</strong></div>
             </div>
         </div>
 
@@ -2544,7 +2567,7 @@ button:disabled { cursor: not-allowed; }
 
         <div class="section-title">
             <h2>Application Status</h2>
-            <p>Enter your VDF application ID.</p>
+            <p>Enter your VD application ID.</p>
         </div>
 
         <div class="status-box">
@@ -2556,7 +2579,7 @@ button:disabled { cursor: not-allowed; }
                 <input
                     type="text"
                     id="statusId"
-                    placeholder="Example: VDF-123456"
+                    placeholder="Example: VD-123456"
                     autocomplete="off"
                 >
             </div>
@@ -2894,7 +2917,7 @@ function getIndiaTimeGreeting() {
 function updateHomeGreeting() {
     var el = document.getElementById("homeTimeGreeting");
     if (!el) return;
-    el.textContent = getIndiaTimeGreeting();
+    el.textContent = "Hello, " + getIndiaTimeGreeting();
 }
 
 function updateStatusTimeGreeting(name) {
@@ -2905,9 +2928,9 @@ function updateStatusTimeGreeting(name) {
         return;
     }
     var cleanName = escapeHTML(name);
+    var statusWish = getIndiaTimeGreeting().replace(/^\S+\s+/, "");
     greeting.innerHTML =
-        '<div style="font-size:22px;font-weight:800;line-height:1.3;">' + getIndiaTimeGreeting() + '</div>' +
-        '<div style="font-size:20px;font-weight:700;margin-top:6px;line-height:1.3;">' + cleanName + '</div>';
+        '<div style="font-size:22px;font-weight:800;line-height:1.3;">Hello, ' + statusWish + ' ' + cleanName + '</div>';
 }
 
 /* ================= PAGE NAVIGATION ================= */
@@ -3143,6 +3166,64 @@ function syncToGoogleSheet(action, application) {
 
 /* ================= SHARED BACKEND DATA ================= */
 
+function mergeVdfLoanHistory(localApplication, serverApplication) {
+    var localHistory = localApplication && Array.isArray(localApplication.loanHistory)
+        ? localApplication.loanHistory : [];
+    var serverHistory = serverApplication && Array.isArray(serverApplication.loanHistory)
+        ? serverApplication.loanHistory : [];
+
+    /* Never let a partial/older backend response erase locally stored loans. */
+    var source = localHistory.length >= serverHistory.length ? localHistory : serverHistory;
+    var other = source === localHistory ? serverHistory : localHistory;
+    var merged = source.map(function(loan, index) {
+        return Object.assign({}, loan, { loanNumber: index + 1 });
+    });
+
+    other.forEach(function(loan) {
+        var key = String(loan.createdAt || loan.repaymentDate || '') + '|' +
+                  String(Number(loan.amount) || 0) + '|' +
+                  String(Number(loan.total) || 0);
+        var exists = merged.some(function(existing) {
+            var existingKey = String(existing.createdAt || existing.repaymentDate || '') + '|' +
+                              String(Number(existing.amount) || 0) + '|' +
+                              String(Number(existing.total) || 0);
+            return existingKey === key;
+        });
+        if (!exists) merged.push(Object.assign({}, loan, { loanNumber: merged.length + 1 }));
+    });
+
+    return merged;
+}
+
+function mergeVdfApplicationWithLocalHistory(serverApplication) {
+    if (!serverApplication) return null;
+    var localLoans = getLoans();
+    var localApplication = localLoans.find(function(item) {
+        return String(item.id || '').trim().toUpperCase() ===
+               String(serverApplication.id || '').trim().toUpperCase();
+    });
+    if (!localApplication) return serverApplication;
+
+    var mergedHistory = mergeVdfLoanHistory(localApplication, serverApplication);
+    return Object.assign({}, serverApplication, {
+        loanHistory: mergedHistory
+    });
+}
+
+function mergeVdfApplicationListWithLocalHistory(serverApplications) {
+    var localLoans = getLoans();
+    return (Array.isArray(serverApplications) ? serverApplications : []).map(function(serverApplication) {
+        var localApplication = localLoans.find(function(item) {
+            return String(item.id || '').trim().toUpperCase() ===
+                   String(serverApplication.id || '').trim().toUpperCase();
+        });
+        if (!localApplication) return serverApplication;
+        return Object.assign({}, serverApplication, {
+            loanHistory: mergeVdfLoanHistory(localApplication, serverApplication)
+        });
+    });
+}
+
 function fetchSharedApplications() {
     if (!GOOGLE_SHEET_WEB_APP_URL) return Promise.resolve(null);
 
@@ -3159,13 +3240,14 @@ function fetchSharedApplications() {
                 throw new Error("Invalid backend response");
             }
 
-            saveLoans(data.applications);
+            var mergedApplications = mergeVdfApplicationListWithLocalHistory(data.applications);
+            saveLoans(mergedApplications);
 
             if (data.dashboardData && typeof data.dashboardData === "object") {
                 saveDashboardData(data.dashboardData);
             }
 
-            return data.applications;
+            return mergedApplications;
         })
         .catch(function(error) {
             console.warn("Shared VDF data fetch failed; using local cache:", error);
@@ -3201,28 +3283,31 @@ function fetchSharedApplicationById(id) {
            applications response. Never fall back to stale localStorage
            in that case. Use the shared application list instead.
         */
-        if (data.application) return data.application;
+        if (data.application) return mergeVdfApplicationWithLocalHistory(data.application);
 
         if (Array.isArray(data.applications)) {
-            return data.applications.find(function(item) {
+            var foundApplication = data.applications.find(function(item) {
                 return String(item.id || "").trim().toUpperCase() === wanted;
             }) || null;
+            return mergeVdfApplicationWithLocalHistory(foundApplication);
         }
 
         return fetchSharedApplications().then(function(applications) {
             if (!Array.isArray(applications)) return null;
-            return applications.find(function(item) {
+            var fallbackApplication = applications.find(function(item) {
                 return String(item.id || "").trim().toUpperCase() === wanted;
             }) || null;
+            return mergeVdfApplicationWithLocalHistory(fallbackApplication);
         });
     })
     .catch(function(error) {
         console.warn("Fast status lookup failed; using shared-list fallback:", error);
         return fetchSharedApplications().then(function(applications) {
             if (!Array.isArray(applications)) return null;
-            return applications.find(function(item) {
+            var fallbackApplication = applications.find(function(item) {
                 return String(item.id || "").trim().toUpperCase() === wanted;
             }) || null;
+            return mergeVdfApplicationWithLocalHistory(fallbackApplication);
         }).catch(function(fallbackError) {
             console.warn("Shared status fallback failed:", fallbackError);
             return null;
@@ -3313,7 +3398,7 @@ function generateApplicationId() {
 
     var randomNumber = Math.floor(100000 + Math.random() * 900000);
 
-    return "VDF-" + randomNumber;
+    return "VD-" + randomNumber;
 }
 
 
@@ -4334,7 +4419,7 @@ function downloadCustomerStatementPDF() {
     }, 0);
 
     /* Portrait + vertically stacked sections. The structure follows the supplied
-       statement reference, while keeping only the fields already used by VDF. */
+       statement reference, while keeping only the fields already used by VD. */
     var pdf = new window.jspdf.jsPDF({orientation:"portrait", unit:"mm", format:"a4"});
     var pageWidth = pdf.internal.pageSize.getWidth();
     var pageHeight = pdf.internal.pageSize.getHeight();
@@ -4598,7 +4683,7 @@ function openExistingCustomerForm() {
                     <input id="ecLoanDate" required type="date" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:8px;border:1px solid #555;background:#222;color:#fff;">
                 </label>
                 <label style="display:block;color:#f4d47d;font-weight:700;">Repayment / Due Date
-                    <input id="ecRepaymentDate" type="date" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:8px;border:1px solid #555;background:#222;color:#fff;">
+                    <input id="ecRepaymentDate" type="date" readonly style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:8px;border:1px solid #555;background:#222;color:#fff;">
                 </label>
                 <label style="display:block;color:#f4d47d;font-weight:700;">Interest (30%)
                     <input id="ecInterest" type="number" readonly style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:8px;border:1px solid #555;background:#333;color:#fff;">
@@ -4627,11 +4712,29 @@ function openExistingCustomerForm() {
     var today = new Date();
     var todayValue = today.toISOString().slice(0,10);
     var loanDateField = document.getElementById("ecLoanDate");
-    if (loanDateField) loanDateField.value = todayValue;
+    if (loanDateField) {
+        loanDateField.value = todayValue;
+        loanDateField.addEventListener("change", function () {
+            var dueField = document.getElementById("ecRepaymentDate");
+            if (dueField) dueField.value = calculateExistingCustomerRepaymentDate(this.value);
+        });
+    }
 
-    var due = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
     var dueField = document.getElementById("ecRepaymentDate");
-    if (dueField) dueField.value = due.toISOString().slice(0,10);
+    if (dueField) dueField.value = calculateExistingCustomerRepaymentDate(todayValue);
+}
+
+function calculateExistingCustomerRepaymentDate(dateValue) {
+    if (!dateValue) return "";
+    var parts = String(dateValue).split("-").map(Number);
+    if (parts.length !== 3 || parts.some(function (n) { return !Number.isFinite(n); })) return "";
+    var d = new Date(parts[0], parts[1] - 1, parts[2]);
+    if (isNaN(d.getTime())) return "";
+    d.setDate(d.getDate() + 30);
+    var y = d.getFullYear();
+    var m = String(d.getMonth() + 1).padStart(2, "0");
+    var day = String(d.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + day;
 }
 
 function updateExistingCustomerTotal() {
@@ -4667,60 +4770,18 @@ function saveExistingCustomer(event) {
     var fee = 100;
     var total = amount + interest + fee;
     var loanTakenDate = document.getElementById("ecLoanDate").value;
-    var repaymentDate = document.getElementById("ecRepaymentDate").value;
+    var repaymentDate = calculateExistingCustomerRepaymentDate(loanTakenDate);
+    var repaymentField = document.getElementById("ecRepaymentDate");
+    if (repaymentField) repaymentField.value = repaymentDate;
     var status = document.getElementById("ecStatus").value;
 
     if (!loanTakenDate) { alert("Please enter the old loan taken date."); return; }
 
-    /* Keep the historical loan date instead of using today's date. */
     var loanDateObj = new Date(loanTakenDate + "T12:00:00");
     var createdAt = isNaN(loanDateObj.getTime()) ? new Date().toISOString() : loanDateObj.toISOString();
 
-    var application = {
-        id: id,
-        name: name,
-        mobile: mobile,
-        coApplicant: coApplicant,
-        email: document.getElementById("ecEmail").value.trim(),
-        upiId: document.getElementById("ecUpi").value.trim(),
-        loanReason: document.getElementById("ecReason").value.trim(),
-        address: document.getElementById("ecAddress").value.trim(),
-        aadhaarFileName: document.getElementById("ecAadhaar").value.trim(),
-        amount: amount,
-        period: period,
-        repaymentDate: repaymentDate,
-        interest: interest,
-        fee: fee,
-        total: total,
-        status: status,
-        userAccess: status !== "Amount Cleared",
-        createdAt: createdAt,
-        lastUpdated: createdAt
-    };
-
-    application.loanHistory = [{
-        loanNumber: 1,
-        amount: amount,
-        period: period,
-        interest: interest,
-        fee: fee,
-        total: total,
-        repaymentDate: repaymentDate,
-        status: status,
-        createdAt: createdAt
-    }];
-
     var loans = getLoans();
 
-    /*
-       EXISTING CUSTOMER ID RULE:
-       - If Admin enters an existing Application ID, keep that ID.
-       - Otherwise, the customer must have the SAME NAME AND SAME MOBILE
-         number as an existing customer to reuse the old Application ID.
-       - If the mobile number is changed, create a NEW Application ID,
-         even when the name is the same.
-       - The new loan is appended as Loan 2, Loan 3, etc. under the old ID.
-    */
     function normalizeExistingCustomerName(value) {
         return String(value || "")
             .toLowerCase()
@@ -4744,8 +4805,7 @@ function saveExistingCustomer(event) {
         matchedExistingIndex = loans.findIndex(function(item) {
             var savedName = normalizeExistingCustomerName(item.name);
             var savedMobile = String(item.mobile || "").replace(/\D/g, "");
-            return normalizedExistingName &&
-                   normalizedExistingMobile &&
+            return normalizedExistingName && normalizedExistingMobile &&
                    savedName === normalizedExistingName &&
                    savedMobile === normalizedExistingMobile;
         });
@@ -4756,10 +4816,22 @@ function saveExistingCustomer(event) {
         ? String(existingApplication.id || "").trim().toUpperCase()
         : (enteredId || generateApplicationId());
 
+    var transaction;
+
     if (existingApplication) {
-        /* Keep the same customer ID and append this as the next loan. */
-        var history = ensureLoanHistory(existingApplication);
-        var transaction = {
+        /* IMPORTANT: Never replace an old loan. Keep every loan as its own object. */
+        var history = ensureLoanHistory(existingApplication).map(function(oldLoan, index) {
+            var copy = Object.assign({}, oldLoan);
+            copy.loanNumber = Number(copy.loanNumber) > 0 ? Number(copy.loanNumber) : (index + 1);
+            if (!copy.repaymentDate) {
+                copy.repaymentDate = calculateExistingCustomerRepaymentDate(
+                    copy.createdAt || existingApplication.createdAt || ""
+                );
+            }
+            return copy;
+        });
+
+        transaction = {
             loanNumber: history.length + 1,
             amount: amount,
             period: period,
@@ -4771,38 +4843,87 @@ function saveExistingCustomer(event) {
             createdAt: createdAt
         };
         history.push(transaction);
-        existingApplication.loanHistory = history;
 
-        application.id = id;
-        application.loanHistory = history;
-        application.status = status;
-        application.loanNumber = transaction.loanNumber;
-        application.createdAt = createdAt;
+        /* Preserve the customer's identity/details, but keep the COMPLETE loan history. */
+        var updatedApplication = Object.assign({}, existingApplication, {
+            id: id,
+            name: name,
+            mobile: mobile,
+            coApplicant: coApplicant,
+            email: document.getElementById("ecEmail").value.trim() || existingApplication.email || "",
+            upiId: document.getElementById("ecUpi").value.trim() || existingApplication.upiId || "",
+            loanReason: document.getElementById("ecReason").value.trim() || existingApplication.loanReason || "",
+            address: document.getElementById("ecAddress").value.trim() || existingApplication.address || "",
+            aadhaarFileName: document.getElementById("ecAadhaar").value.trim() || existingApplication.aadhaarFileName || "",
+            /* These summary fields represent the newly added loan only. */
+            amount: amount,
+            period: period,
+            interest: interest,
+            fee: fee,
+            total: total,
+            repaymentDate: repaymentDate,
+            status: status,
+            userAccess: history.some(function(loan) { return loan.status !== "Amount Cleared"; }),
+            createdAt: existingApplication.createdAt || createdAt,
+            lastUpdated: new Date().toISOString(),
+            loanNumber: transaction.loanNumber,
+            loanHistory: history
+        });
 
-        /* Preserve the same Application ID while updating the customer's latest details. */
-        loans[matchedExistingIndex] = Object.assign({}, existingApplication, application);
-        application = loans[matchedExistingIndex];
+        loans[matchedExistingIndex] = updatedApplication;
     } else {
-        application.id = id;
-        application.loanHistory[0].loanNumber = 1;
-        loans.push(application);
+        transaction = {
+            loanNumber: 1,
+            amount: amount,
+            period: period,
+            interest: interest,
+            fee: fee,
+            total: total,
+            repaymentDate: repaymentDate,
+            status: status,
+            createdAt: createdAt
+        };
+
+        loans.push({
+            id: id,
+            name: name,
+            mobile: mobile,
+            coApplicant: coApplicant,
+            email: document.getElementById("ecEmail").value.trim(),
+            upiId: document.getElementById("ecUpi").value.trim(),
+            loanReason: document.getElementById("ecReason").value.trim(),
+            address: document.getElementById("ecAddress").value.trim(),
+            aadhaarFileName: document.getElementById("ecAadhaar").value.trim(),
+            amount: amount,
+            period: period,
+            interest: interest,
+            fee: fee,
+            total: total,
+            repaymentDate: repaymentDate,
+            status: status,
+            userAccess: status !== "Amount Cleared",
+            createdAt: createdAt,
+            lastUpdated: new Date().toISOString(),
+            loanNumber: 1,
+            loanHistory: [transaction]
+        });
+        matchedExistingIndex = loans.length - 1;
     }
 
-    /* Tell Apps Script to send the existing-customer confirmation email as part of the same save request. */
-    application.sendExistingCustomerEmail = true;
+    var application = loans[matchedExistingIndex];
 
     saveLoans(loans);
-    /* Dashboard updates only when this existing loan is already Approved/Cleared. */
-    recordDashboardStatusChange(application.loanHistory[0], status);
+    recordDashboardStatusChange(transaction, status);
     syncToGoogleSheet("existingCustomer", application);
 
-    /* Existing-customer email is now sent by the same Apps Script request
-       that saves the customer. This prevents the save/email requests from
-       racing each other and guarantees one server-side email attempt. */
+    /* Send the email for THIS newly created loan only. Never use the latest
+       top-level summary fields to decide the loan number or amount. */
+    var newLoanIndex = application.loanHistory.length - 1;
+    sendExistingCustomerLoanEmail(application, newLoanIndex);
 
     closeExistingCustomerForm();
     loadAdminApplications(false);
-    alert("Existing customer saved successfully. Application ID: " + id);
+    alert("Existing customer saved successfully. Application ID: " + id + " | Loan " + transaction.loanNumber);
 }
 
 var vdfAdminRefreshTimer = null;
@@ -5203,7 +5324,7 @@ function sendApplicationReceivedEmail(application, loan) {
     var amount = Number(loan && loan.amount || application.amount || 0);
 
     var history = ensureLoanHistory(application);
-    var loanNumber = history.indexOf(loan) + 1;
+    var loanNumber = Number(loan && loan.loanNumber) || (history.indexOf(loan) + 1);
     if (loanNumber < 1) loanNumber = history.length || 1;
 
     var subject = "VD Finance - Application Received " + (application.id || "");
@@ -5698,7 +5819,7 @@ function recordDashboardStatusChange(loan, status) {
 
     var entryId = String(loan.dashboardEntryId || "");
     if (!entryId) {
-        entryId = "VDF-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
+        entryId = "VD-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
         loan.dashboardEntryId = entryId;
     }
 
@@ -6790,7 +6911,7 @@ window.addEventListener("DOMContentLoaded", function() {
     font-size:31px;
     letter-spacing:1.5px;
 }
-#home .clean-logo:before { content:"VDF "; color:#fff; }
+#home .clean-logo:before { content:"VD "; color:#fff; }
 #home .clean-logo { font-size:0; }
 #home .clean-logo span { font-size:31px;color:#e53935 !important; }
 #home .clean-home-hero {

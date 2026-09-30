@@ -940,13 +940,40 @@
         position: fixed;
         right: 25px;
         bottom: 95px;
-        width: 330px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 8px 35px rgba(0,0,0,0.2);
+        width: 360px;
+        max-height: 560px;
+        background: #0b1220;
+        color: #ffffff;
+        border: 1px solid #d9a928;
+        border-radius: 14px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.55);
         overflow: hidden;
         display: none;
-        z-index: 1999;
+        z-index: 99999;
+    }
+
+    .chat-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 12px 15px 10px;
+        background: #111b2d;
+    }
+
+    .chat-option {
+        border: 1px solid #d9a928;
+        background: #1a263b;
+        color: #ffffff;
+        border-radius: 8px;
+        padding: 10px 8px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .chat-option:hover {
+        background: #d9a928;
+        color: #071b3a;
     }
 
     .chat-header {
@@ -957,10 +984,10 @@
     }
 
     .messages {
-        height: 300px;
+        height: 250px;
         overflow-y: auto;
         padding: 15px;
-        background: #f6f8fb;
+        background: #0b1220;
     }
 
     .message {
@@ -972,8 +999,9 @@
     }
 
     .bot {
-        background: white;
-        border: 1px solid #e0e4ea;
+        background: #1a263b;
+        color: #ffffff;
+        border: 1px solid #33445f;
     }
 
     .user {
@@ -984,7 +1012,8 @@
 
     .chat-input {
         display: flex;
-        border-top: 1px solid #ddd;
+        border-top: 1px solid #33445f;
+        background: #0b1220;
     }
 
     .chat-input input {
@@ -992,6 +1021,12 @@
         border: none;
         padding: 12px;
         outline: none;
+        background: #111b2d;
+        color: #ffffff;
+    }
+
+    .chat-input input::placeholder {
+        color: #aeb9ca;
     }
 
     .chat-input button {
@@ -1514,6 +1549,16 @@
     display:inline-block!important;padding:6px 10px;border-radius:10px;background:rgba(255,77,87,.13);
     border:1px solid rgba(255,77,87,.55);color:#ff5d68!important;font-weight:900
 }
+
+#status .loan-due-date,#status .loan-due-in{
+    visibility:visible!important;
+    opacity:1!important;
+    white-space:nowrap;
+}
+#status .loan-history-item p .loan-due-date{
+    min-width:90px;
+    text-align:center;
+}
 #status .status{display:inline-block!important;padding:6px 11px;border-radius:999px;border:1px solid;font-weight:900}
 #status .status.approved{background:rgba(59,130,246,.16);color:#4d9dff;border-color:#327cf0}
 #status .status.rejected{background:rgba(255,65,83,.14);color:#ff5360;border-color:#ff5360}
@@ -1975,6 +2020,17 @@ input:focus, select:focus, textarea:focus {
 
 </style>
 </style>
+
+<style id="vdf-button-stability-fix">
+#status .btn-primary:disabled { opacity: .72; cursor: wait; pointer-events: none; }
+.status-tabs button { cursor: pointer; }
+.status-tabs button:focus-visible { outline: 2px solid #d4af37; outline-offset: 2px; }
+</style>
+<style id="vdf-button-click-fix">
+button { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled) { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+</style>
 </head>
 
 <body class="home-active">
@@ -1985,12 +2041,12 @@ input:focus, select:focus, textarea:focus {
     <div class="logo">VD Finance</div>
 
     <nav>
-        <button onclick="showPage('home')">Home</button>
-        <button onclick="showPage('calculator')">Calculator</button>
-        <button onclick="showPage('apply')">Apply Loan</button>
-        <button onclick="showPage('status')">Status</button>
-        <button onclick="showPage('contact')">Contact</button>
-        <button class="admin-btn" onclick="showPage('login')">Admin Login</button>
+        <button type="button" onclick="showPage('home')">Home</button>
+        <button type="button" onclick="showPage('calculator')">Calculator</button>
+        <button type="button" onclick="showPage('apply')">Apply Loan</button>
+        <button type="button" onclick="showPage('status')">Status</button>
+        <button type="button" onclick="showPage('contact')">Contact</button>
+        <button type="button" class="admin-btn" onclick="showPage('login')">Admin Login</button>
     </nav>
 </header>
 
@@ -2041,13 +2097,13 @@ input:focus, select:focus, textarea:focus {
         </div>
     </div>
         <div class="reference-nav">
-            <button class="ref-home" onclick="showPage('home')" aria-label="Home"></button>
-            <button class="ref-apply" onclick="showPage('apply')" aria-label="Apply Loan"></button>
-            <button class="ref-status" onclick="showPage('status')" aria-label="Status"></button>
-            <button class="ref-calc" onclick="showPage('calculator')" aria-label="Calculator"></button>
-            <button class="ref-admin" onclick="showPage('login')" aria-label="Admin Login"></button>
-            <button class="ref-apply-hero" onclick="showPage('apply')" aria-label="Apply Now"></button>
-            <button class="ref-calc-hero" onclick="showPage('calculator')" aria-label="Calculate Loan"></button>
+            <button type="button" class="ref-home" onclick="showPage('home')" aria-label="Home"></button>
+            <button type="button" class="ref-apply" onclick="showPage('apply')" aria-label="Apply Loan"></button>
+            <button type="button" class="ref-status" onclick="showPage('status')" aria-label="Status"></button>
+            <button type="button" class="ref-calc" onclick="showPage('calculator')" aria-label="Calculator"></button>
+            <button type="button" class="ref-admin" onclick="showPage('login')" aria-label="Admin Login"></button>
+            <button type="button" class="ref-apply-hero" onclick="showPage('apply')" aria-label="Apply Now"></button>
+            <button type="button" class="ref-calc-hero" onclick="showPage('calculator')" aria-label="Calculate Loan"></button>
         </div>
     </div>
 
@@ -2132,7 +2188,7 @@ input:focus, select:focus, textarea:focus {
 
             <br>
 
-            <button class="btn btn-primary" onclick="calculateLoan()">
+            <button type="button" class="btn btn-primary" onclick="calculateLoan()">
                 Calculate
             </button>
 
@@ -2141,7 +2197,7 @@ input:focus, select:focus, textarea:focus {
             </div>
 
             <div style="margin-top:14px; text-align:center;">
-                <button class="btn btn-primary" onclick="applyFromCalculator()" id="calcApplyButton" style="display:none;">
+                <button type="button" class="btn btn-primary" onclick="applyFromCalculator()" id="calcApplyButton" style="display:none;">
                     Apply With This Amount
                 </button>
             </div>
@@ -2272,7 +2328,7 @@ input:focus, select:focus, textarea:focus {
                 </label>
             </div>
 
-            <button class="btn-submit-green" onclick="submitLoan()">
+            <button type="button" class="btn-submit-green" onclick="submitLoan()">
                 Submit Application
             </button>
 
@@ -2310,7 +2366,7 @@ input:focus, select:focus, textarea:focus {
                 >
             </div>
 
-            <button class="btn btn-primary" onclick="checkStatus()">
+            <button type="button" class="btn btn-primary" onclick="checkStatus()">
                 Check Status
             </button>
 
@@ -2395,7 +2451,7 @@ input:focus, select:focus, textarea:focus {
                 >
             </div>
 
-            <button class="btn btn-primary" onclick="adminLogin()">
+            <button type="button" class="btn btn-primary" onclick="adminLogin()">
                 Login
             </button>
 
@@ -2437,7 +2493,7 @@ input:focus, select:focus, textarea:focus {
                 <button type="button" class="btn btn-primary" onclick="setAdminPopupFromTopDashboard()">
                     Popup / Note
                 </button>
-                <button class="btn btn-danger" onclick="adminLogout()">
+                <button type="button" class="btn btn-danger" onclick="adminLogout()">
                     Logout
                 </button>
             </div>
@@ -2541,7 +2597,7 @@ input:focus, select:focus, textarea:focus {
 
 <!-- ================= CHATBOT ================= -->
 
-<button class="chat-button" onclick="toggleChat()">🤖</button>
+<button type="button" class="chat-button" onclick="toggleChat()">🤖</button>
 
 <div class="chat-box" id="chatBox">
 
@@ -2549,13 +2605,9 @@ input:focus, select:focus, textarea:focus {
         VD Finance Assistant
     </div>
 
-    <div class="messages" id="messages">
+    <div class="messages" id="messages"></div>
 
-        <div class="message bot">
-            Hello! 👋 How can I help you?
-        </div>
-
-    </div>
+    <div class="chat-options" id="chatOptions"></div>
 
     <div class="chat-input">
 
@@ -2566,7 +2618,7 @@ input:focus, select:focus, textarea:focus {
             onkeydown="if(event.key==='Enter') sendChat()"
         >
 
-        <button onclick="sendChat()">Send</button>
+        <button type="button" onclick="sendChat()">Send</button>
 
     </div>
 
@@ -2626,7 +2678,9 @@ function updateStatusTimeGreeting(name) {
         return;
     }
     var cleanName = escapeHTML(name);
-    greeting.innerHTML = getIndiaTimeGreeting() + ", " + cleanName + "! 👋 Welcome to VD Finance.";
+    greeting.innerHTML =
+        '<div style="font-size:22px;font-weight:800;line-height:1.3;">' + getIndiaTimeGreeting() + '</div>' +
+        '<div style="font-size:20px;font-weight:700;margin-top:6px;line-height:1.3;">' + cleanName + '</div>';
 }
 
 /* ================= PAGE NAVIGATION ================= */
@@ -2874,45 +2928,7 @@ function saveLoans(loans) {
 
 }
 
-/* Merge fresh backend data without replacing local records that are already
-   visible in the admin/customer page. This prevents refresh from making data
-   disappear while the backend remains the shared source for status updates. */
-function mergeFreshLoans(serverLoans) {
-
-    if (!Array.isArray(serverLoans)) return getLoans();
-
-    var localLoans = getLoans();
-    var byId = {};
-
-    localLoans.forEach(function(item) {
-        if (item && item.id) byId[String(item.id).trim().toUpperCase()] = item;
-    });
-
-    serverLoans.forEach(function(item) {
-        if (!item || !item.id) return;
-        var key = String(item.id).trim().toUpperCase();
-        var old = byId[key];
-
-        if (!old) {
-            byId[key] = item;
-            return;
-        }
-
-        var merged = Object.assign({}, old, item);
-        if (Array.isArray(old.loanHistory) && old.loanHistory.length &&
-            (!Array.isArray(item.loanHistory) || item.loanHistory.length === 0)) {
-            merged.loanHistory = old.loanHistory;
-        }
-        if (old.statusPopup && !item.statusPopup) merged.statusPopup = old.statusPopup;
-        if (old.adminNote && !item.adminNote) merged.adminNote = old.adminNote;
-        byId[key] = merged;
-    });
-
-    var result = Object.keys(byId).map(function(key) { return byId[key]; });
-    saveLoans(result);
-    return result;
-}
-
+/* Google Sheet is WRITE-ONLY. App/localStorage is the source of truth. */
 
 /* ================= APPLICATION ID ================= */
 
@@ -2969,7 +2985,12 @@ function submitLoan() {
         return;
     }
 
-    if (upiId && !/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+$/.test(upiId)) {
+    if (!upiId) {
+        showMessage(message, "Please enter your UPI ID.", "error");
+        return;
+    }
+
+    if (!/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+$/.test(upiId)) {
         showMessage(message, "Please enter a valid UPI ID.", "error");
         return;
     }
@@ -2999,8 +3020,8 @@ function submitLoan() {
         return;
     }
 
-    if (![30, 60, 90].includes(period)) {
-        showMessage(message, "Please select a valid loan period.", "error");
+    if (period !== 30) {
+        showMessage(message, "Loan period is fixed at 30 days.", "error");
         return;
     }
 
@@ -3246,6 +3267,49 @@ function showMessage(element, text, type) {
 
 /* ================= STATUS CHECK ================= */
 
+function formatVdfDate(value) {
+    if (value === null || value === undefined || value === "") return "Not set";
+
+    if (Object.prototype.toString.call(value) === "[object Date]") {
+        if (isNaN(value.getTime())) return "Not set";
+        return String(value.getDate()).padStart(2, "0") + "/" +
+               String(value.getMonth() + 1).padStart(2, "0") + "/" +
+               value.getFullYear();
+    }
+
+    var text = String(value).trim();
+
+    /* Already in DD/MM/YYYY format. */
+    var match = text.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (match) {
+        return String(match[1]).padStart(2, "0") + "/" +
+               String(match[2]).padStart(2, "0") + "/" +
+               match[3];
+    }
+
+    /*
+     * Convert Date strings such as:
+     * Fri Oct 30 2026 00:00:00 GMT+0530 (India Standard Time)
+     * to date-only. The timezone name is never displayed.
+     */
+    var d = new Date(text);
+    if (!isNaN(d.getTime())) {
+        return String(d.getDate()).padStart(2, "0") + "/" +
+               String(d.getMonth() + 1).padStart(2, "0") + "/" +
+               d.getFullYear();
+    }
+
+    /* Fallback for ISO-like date text. */
+    var iso = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (iso) {
+        return String(iso[3]).padStart(2, "0") + "/" +
+               String(iso[2]).padStart(2, "0") + "/" +
+               iso[1];
+    }
+
+    return "Not set";
+}
+
 function getRepaymentDateFromCreatedAt(createdAt) {
 
     var created = new Date(createdAt);
@@ -3306,7 +3370,11 @@ function ensureLoanHistory(application) {
 
 function getLoanDueText(repaymentDate) {
 
-    var days = getDaysUntilDue(repaymentDate);
+    var formattedDate = formatVdfDate(repaymentDate);
+
+    if (formattedDate === "Not set") return "Due date not available";
+
+    var days = getDaysUntilDue(formattedDate);
 
     if (days === null) return "Due date not available";
 
@@ -3362,34 +3430,22 @@ function closeCustomerAdminPopup() {
     }
 }
 
+/* ================= LOCAL-ONLY STATUS ================= */
+
+/* Google Sheet is never read by the app. Status always comes from localStorage. */
 function refreshCustomerStatusFromServer() {
     var statusPage = document.getElementById("status");
-    var statusIdField = document.getElementById("statusId");
-    if (!statusPage || !statusPage.classList.contains("active") || !statusIdField) return;
-
-    var id = statusIdField.value.trim().toUpperCase();
-    if (!id || !GOOGLE_SHEET_WEB_APP_URL) return;
-
-    fetch(GOOGLE_SHEET_WEB_APP_URL + "?action=getApplications&t=" + Date.now(), { cache: "no-store" })
-        .then(function(response) { return response.json(); })
-        .then(function(data) {
-            if (!data || !data.success || !Array.isArray(data.applications)) return;
-            mergeFreshLoans(data.applications);
-            var latest = data.applications.find(function(item) {
-                return String(item.id || "").trim().toUpperCase() === id;
-            });
-            if (latest) renderStatusFromLocal();
-        })
-        .catch(function(error) {
-            console.warn("Customer status refresh failed:", error);
-        });
+    if (!statusPage || !statusPage.classList.contains("active")) return;
+    renderStatusFromLocal();
 }
 
-setInterval(refreshCustomerStatusFromServer, 5000);
+/* IMPORTANT: Status is NEVER auto-rendered while the customer is typing.
+   Details appear only after the customer presses Check Status. */
 
 function checkStatus() {
-
     var statusIdField = document.getElementById("statusId");
+    var result = document.getElementById("statusResult");
+    var button = document.querySelector('#status .btn-primary');
     if (!statusIdField) return;
 
     var id = statusIdField.value.trim().toUpperCase();
@@ -3398,25 +3454,31 @@ function checkStatus() {
         return;
     }
 
-    /* Always read the latest status from Google Sheets first.
-       This is important when the customer checks the ID from another phone/device. */
-    if (GOOGLE_SHEET_WEB_APP_URL) {
-        fetch(GOOGLE_SHEET_WEB_APP_URL + "?action=getApplications&t=" + Date.now(), { cache: "no-store" })
-            .then(function(response) { return response.json(); })
-            .then(function(data) {
-                if (data && data.success && Array.isArray(data.applications)) {
-                    mergeFreshLoans(data.applications);
-                }
-                renderStatusFromLocal();
-            })
-            .catch(function(error) {
-                console.warn("Status server read failed; using local data:", error);
-                renderStatusFromLocal();
-            });
+    var localLoans = getLoans();
+    var localApplication = localLoans.find(function(item) {
+        return String(item.id || "").trim().toUpperCase() === id;
+    });
+
+    if (!localApplication) {
+        if (result) result.innerHTML = '<div class="alert error">Application not found.</div>';
         return;
     }
 
+    if (button) {
+        button.disabled = true;
+        button.setAttribute("aria-busy", "true");
+        button.dataset.originalText = button.dataset.originalText || button.textContent;
+        button.textContent = "Checking...";
+    }
+
+    window.vdfLastStatusFingerprint = JSON.stringify(localApplication);
     renderStatusFromLocal();
+
+    if (button) {
+        button.disabled = false;
+        button.removeAttribute("aria-busy");
+        button.textContent = button.dataset.originalText || "Check Status";
+    }
 }
 
 
@@ -3471,7 +3533,10 @@ function renderStatusFromLocal() {
 
     var historyHtml = history.map(function(loan, index) {
 
-        var dueDate = loan.repaymentDate || getRepaymentDateFromCreatedAt(loan.createdAt);
+        var isApproved = String(loan.status || "").trim().toLowerCase() === "approved";
+        var dueDate = isApproved
+            ? formatVdfDate(loan.repaymentDate || getRepaymentDateFromCreatedAt(loan.createdAt))
+            : "";
 
         return `
             <div class="loan-history-item">
@@ -3483,12 +3548,13 @@ function renderStatusFromLocal() {
                 <p><strong>Interest:</strong> ${money(loan.interest)}</p>
                 <p><strong>Platform Fee:</strong> ${money(loan.fee)}</p>
                 <p><strong>Total Payable:</strong> ${money(loan.total)}</p>
+                ${isApproved ? `
                 <p><strong>Due Date:</strong>
                     <span class="loan-due-date">${escapeHTML(dueDate)}</span>
                 </p>
                 <p><strong>Due Date In:</strong>
                     <span class="loan-due-in">${escapeHTML(getLoanDueText(dueDate))}</span>
-                </p>
+                </p>` : ""}
                 <p><strong>Status:</strong>
                     <span class="status ${getLoanStatusClass(loan.status)}">
                         ${escapeHTML(getLoanStatusDisplay(loan.status))}
@@ -3501,7 +3567,10 @@ function renderStatusFromLocal() {
     var firstLetter = String(application.name || "C").trim().charAt(0).toUpperCase() || "C";
     var activeCount = activeLoans.length;
     var nextLoan = activeLoans.length ? activeLoans[activeLoans.length - 1] : null;
-    var nextDueDate = nextLoan ? (nextLoan.repaymentDate || getRepaymentDateFromCreatedAt(nextLoan.createdAt)) : "";
+    /* Due information is shown only for loans that are actually Approved.
+       Rejected, Pending and Amount Cleared loans must never show due date/due countdown. */
+    var latestLoanForDue = activeLoans.length ? activeLoans[activeLoans.length - 1] : null;
+    var nextDueDate = latestLoanForDue ? formatVdfDate(latestLoanForDue.repaymentDate || getRepaymentDateFromCreatedAt(latestLoanForDue.createdAt)) : "";
     var nextDueText = nextDueDate ? getLoanDueText(nextDueDate) : "No active due";
     var latestStatus = history.length ? (history[history.length - 1].status || "Pending") : "Pending";
     var overallStatus = latestStatus;
@@ -3542,14 +3611,14 @@ function renderStatusFromLocal() {
                 <div class="metric-card metric-blue">
                     <div class="metric-label">Next Due</div>
                     <div class="metric-value">${escapeHTML(nextDueText)}</div>
-                    <div class="metric-sub">${nextDueDate ? "Next repayment date: " + escapeHTML(nextDueDate) : "No active repayment due"}</div>
+                    <div class="metric-sub">${nextDueDate ? "Repayment date: " + escapeHTML(nextDueDate) : "Repayment date not available"}</div>
                 </div>
             </div>
 
             ${nextDueDate ? `
                 <div class="reminder-box">
                     <h4>🔔 Reminder</h4>
-                    <p>Your next repayment is due on <strong>${escapeHTML(nextDueDate)}</strong>.</p>
+                    <p>Your repayment due date is <strong>${escapeHTML(nextDueDate)}</strong>.</p>
                 </div>
             ` : ""}
 
@@ -3577,12 +3646,13 @@ function renderStatusFromLocal() {
                 <div class="transaction-section">
                     <div class="loan-section-title">🧾 Transaction / Payment History</div>
                     ${history.map(function(loan, index) {
-                        var dueDate = loan.repaymentDate || getRepaymentDateFromCreatedAt(loan.createdAt);
+                        var isApproved = String(loan.status || "").trim().toLowerCase() === "approved";
+                        var dueDate = isApproved ? formatVdfDate(loan.repaymentDate || getRepaymentDateFromCreatedAt(loan.createdAt)) : "";
                         return `
                             <div class="transaction-item">
                                 <div class="transaction-main">
                                     <div class="transaction-title">Loan ${index + 1} • ${escapeHTML(loan.status || "Pending")}</div>
-                                    <div class="transaction-sub">Opened: ${escapeHTML(loan.createdAt || "Date not available")} • Due: ${escapeHTML(dueDate || "Not set")}</div>
+                                    <div class="transaction-sub">Opened: ${escapeHTML(loan.createdAt || "Date not available")}${isApproved ? " • Due: " + escapeHTML(dueDate || "Not set") : ""}</div>
                                 </div>
                                 <div class="transaction-amount">${money(loan.total)}</div>
                             </div>
@@ -3610,8 +3680,13 @@ function switchCustomerStatusTab(tabName) {
     var allowed = ["overview", "accounts", "history"];
     if (allowed.indexOf(tabName) === -1) tabName = "overview";
 
+    /* Remember the selected tab so backend polling can never reset it. */
+    window.vdfSelectedStatusTab = tabName;
+
     result.querySelectorAll("[data-status-tab]").forEach(function(button) {
-        button.classList.toggle("active", button.getAttribute("data-status-tab") === tabName);
+        var active = button.getAttribute("data-status-tab") === tabName;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
     });
 
     result.querySelectorAll("[data-status-panel]").forEach(function(panel) {
@@ -3620,7 +3695,6 @@ function switchCustomerStatusTab(tabName) {
 }
 
 
-/* ================= ADMIN LOGIN ================= */
 
 function adminLogin() {
 
@@ -3658,9 +3732,9 @@ function refreshAdminDashboard() {
         return;
     }
 
-    /* Manual Refresh must be allowed to read the Google Sheet. */
+    /* Manual Refresh only redraws the local app data. Google Sheet is write-only. */
     if (vdfAdminActionBusy) return;
-    loadAdminApplications(false);
+    loadAdminApplications(true);
 }
 
 function closeExistingCustomerForm() {
@@ -3839,6 +3913,8 @@ function saveExistingCustomer(event) {
     }
 
     saveLoans(loans);
+    /* Dashboard updates only when this existing loan is already Approved/Cleared. */
+    recordDashboardStatusChange(application.loanHistory[0], status);
     syncToGoogleSheet("existingCustomer", application);
     closeExistingCustomerForm();
     loadAdminApplications(true);
@@ -3852,7 +3928,7 @@ function startVdfAdminAutoRefresh() {
     if (vdfAdminRefreshTimer) return;
     vdfAdminRefreshTimer = setInterval(function() {
         if (sessionStorage.getItem("vdfAdmin") === "true" && !vdfAdminActionBusy) {
-            loadAdminApplications(false);
+            loadAdminApplications(true);
         }
     }, 5000);
 }
@@ -3864,22 +3940,7 @@ function loadAdminApplications(skipSheetRefresh) {
         return;
     }
 
-    /* Refresh from backend without replacing the existing local admin queue. */
-    if (!skipSheetRefresh && GOOGLE_SHEET_WEB_APP_URL && !vdfAdminActionBusy) {
-        fetch(GOOGLE_SHEET_WEB_APP_URL + "?action=getApplications&t=" + Date.now(), { cache: "no-store" })
-            .then(function(response) { return response.json(); })
-            .then(function(data) {
-                if (data && data.success && Array.isArray(data.applications)) {
-                    mergeFreshLoans(data.applications);
-                }
-                loadAdminApplications(true);
-            })
-            .catch(function(error) {
-                console.warn("Admin backend read failed; keeping existing data:", error);
-                loadAdminApplications(true);
-            });
-        return;
-    }
+    /* Admin dashboard is rendered only from localStorage. Google Sheet is write-only. */
 
     var loans = getLoans();
 
@@ -4058,9 +4119,6 @@ function chooseApplicationIdForAdmin(actionLabel, callback) {
         callback(id);
     });
 
-    select.addEventListener("dblclick", function() {
-        selectBtn.click();
-    });
 
     buttons.appendChild(cancel);
     buttons.appendChild(selectBtn);
@@ -4592,53 +4650,42 @@ function setupAdminMonthSelector(loans) {
     var currentValue = select.value;
     var months = {};
 
+    /* Dashboard months are persistent and independent of customer records. */
+    var dashboardData = getDashboardData();
+    Object.keys(dashboardData).forEach(function(key) {
+        months[key] = true;
+    });
+
+    /* Include months from current loans only when the dashboard has not yet
+       created a permanent record for that month. */
     loans.forEach(function(application) {
-
         var history = ensureLoanHistory(application);
-
         history.forEach(function(loan) {
-
             var date = new Date(loan.createdAt);
-
             if (isNaN(date.getTime()) && loan.createdAt) {
                 var match = String(loan.createdAt).match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
                 if (match) {
                     date = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
                 }
             }
-
             if (!isNaN(date.getTime())) {
-                var key = date.getFullYear() + "-" +
-                    String(date.getMonth() + 1).padStart(2, "0");
+                var key = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0");
                 months[key] = true;
             }
         });
     });
 
     var now = new Date();
-    var currentKey = now.getFullYear() + "-" +
-        String(now.getMonth() + 1).padStart(2, "0");
-
+    var currentKey = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0");
     months[currentKey] = true;
 
     var keys = Object.keys(months).sort().reverse();
 
     select.innerHTML = keys.map(function(key) {
         var parts = key.split("-");
-        var date = new Date(
-            Number(parts[0]),
-            Number(parts[1]) - 1,
-            1
-        );
-
-        var label = date.toLocaleString("en-IN", {
-            month: "long",
-            year: "numeric"
-        });
-
-        return '<option value="' + key + '">' +
-            label +
-            '</option>';
+        var date = new Date(Number(parts[0]), Number(parts[1]) - 1, 1);
+        var label = date.toLocaleString("en-IN", { month: "long", year: "numeric" });
+        return '<option value="' + key + '">' + label + '</option>';
     }).join("");
 
     if (currentValue && keys.includes(currentValue)) {
@@ -4659,6 +4706,128 @@ function getDashboardOverrides() {
 
 function saveDashboardOverrides(overrides) {
     localStorage.setItem("vdfDashboardOverrides", JSON.stringify(overrides));
+}
+
+/*
+   Dashboard is intentionally independent from customer/application data.
+   Once a month's values are captured here, deleting/rejecting/clearing a
+   customer cannot recalculate or reduce the dashboard numbers.
+   Only editDashboardMetric() can change these saved values afterwards.
+*/
+function recordDashboardStatusChange(loan, status) {
+    if (!loan) return;
+
+    var normalized = String(status || loan.status || "Pending").trim().toLowerCase();
+    if (normalized !== "approved" && normalized !== "amount cleared" && normalized !== "cleared") {
+        return;
+    }
+
+    var createdAt = new Date(loan.createdAt || new Date());
+    if (isNaN(createdAt.getTime()) && loan.createdAt) {
+        var match = String(loan.createdAt).match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+        if (match) {
+            createdAt = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
+        }
+    }
+    if (isNaN(createdAt.getTime())) createdAt = new Date();
+
+    var monthKey = createdAt.getFullYear() + "-" + String(createdAt.getMonth() + 1).padStart(2, "0");
+    var data = getDashboardData();
+    if (!data[monthKey]) {
+        data[monthKey] = { loanAmount: 0, interest: 0, fee: 0, total: 0, profit: 0, _entries: [] };
+    }
+    if (!Array.isArray(data[monthKey]._entries)) data[monthKey]._entries = [];
+
+    var entryId = String(loan.dashboardEntryId || "");
+    if (!entryId) {
+        entryId = "VDF-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
+        loan.dashboardEntryId = entryId;
+    }
+
+    var entry = data[monthKey]._entries.find(function(item) {
+        return String(item.id) === entryId;
+    });
+    if (!entry) {
+        entry = { id: entryId, approvedRecorded: false, profitRecorded: false };
+        data[monthKey]._entries.push(entry);
+    }
+
+    /* APPROVED: record the loan figures once. Never subtract them later. */
+    if ((normalized === "approved" || normalized === "amount cleared" || normalized === "cleared") && !entry.approvedRecorded) {
+        data[monthKey].loanAmount += Number(loan.amount) || 0;
+        data[monthKey].interest += Number(loan.interest) || 0;
+        data[monthKey].fee += Number(loan.fee) || 0;
+        data[monthKey].total += Number(loan.total) || 0;
+        entry.approvedRecorded = true;
+    }
+
+    /* AMOUNT CLEARED: profit is recorded only now, once. */
+    if ((normalized === "amount cleared" || normalized === "cleared") && !entry.profitRecorded) {
+        data[monthKey].profit += (Number(loan.interest) || 0) + (Number(loan.fee) || 0);
+        entry.profitRecorded = true;
+    }
+
+    saveDashboardData(data);
+}
+
+function getDashboardData() {
+    try {
+        return JSON.parse(localStorage.getItem("vdfDashboardData") || "{}");
+    } catch (error) {
+        return {};
+    }
+}
+
+function saveDashboardData(data) {
+    localStorage.setItem("vdfDashboardData", JSON.stringify(data));
+}
+
+function calculateDashboardMonthFromLoans(loans, selectedMonth) {
+    var totalAmount = 0;
+    var totalInterest = 0;
+    var totalFee = 0;
+    var totalPayable = 0;
+    var totalProfit = 0;
+
+    loans.forEach(function(application) {
+        var history = ensureLoanHistory(application);
+        history.forEach(function(loan) {
+            var date = new Date(loan.createdAt);
+
+            if (isNaN(date.getTime()) && loan.createdAt) {
+                var match = String(loan.createdAt).match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+                if (match) {
+                    date = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
+                }
+            }
+
+            if (isNaN(date.getTime())) return;
+
+            var key = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0");
+            if (key !== selectedMonth || String(loan.status || "").trim().toLowerCase() === "rejected") return;
+
+            var status = String(loan.status || "").trim().toLowerCase();
+
+            if (status === "approved" || status === "amount cleared" || status === "cleared") {
+                totalAmount += Number(loan.amount) || 0;
+                totalInterest += Number(loan.interest) || 0;
+                totalFee += Number(loan.fee) || 0;
+                totalPayable += Number(loan.total) || 0;
+            }
+
+            if (status === "amount cleared" || status === "cleared") {
+                totalProfit += (Number(loan.interest) || 0) + (Number(loan.fee) || 0);
+            }
+        });
+    });
+
+    return {
+        loanAmount: totalAmount,
+        interest: totalInterest,
+        fee: totalFee,
+        total: totalPayable,
+        profit: totalProfit
+    };
 }
 
 function editDashboardMetric(metric) {
@@ -4689,124 +4858,64 @@ function editDashboardMetric(metric) {
         profit: "monthlyProfit"
     };
 
-    var overrides = getDashboardOverrides();
+    var data = getDashboardData();
     var monthKey = select.value;
-    if (!overrides[monthKey]) overrides[monthKey] = {};
 
-    var currentText = document.getElementById(elementIds[metric]).textContent.replace(/[^0-9.]/g, "");
-    var currentValue = Number(currentText) || 0;
+    if (!data[monthKey]) {
+        data[monthKey] = calculateDashboardMonthFromLoans(getLoans(), monthKey);
+        saveDashboardData(data);
+    }
 
+    var currentValue = Number(data[monthKey][metric]) || 0;
     var value = prompt(
-        "Edit " + labels[metric] + " for " + monthKey + ":\nEnter the corrected amount. This is a manual dashboard correction.",
-        String(overrides[monthKey][metric] !== undefined ? overrides[monthKey][metric] : currentValue)
+        "Edit " + labels[metric] + " for " + monthKey + ":\nEnter the corrected amount. Dashboard changes only when you edit it manually.",
+        String(currentValue)
     );
 
     if (value === null) return;
 
     value = Number(String(value).replace(/,/g, "").trim());
-
     if (!Number.isFinite(value) || value < 0) {
         alert("Please enter a valid amount.");
         return;
     }
 
-    overrides[monthKey][metric] = value;
-    saveDashboardOverrides(overrides);
+    data[monthKey][metric] = value;
+    saveDashboardData(data);
     updateAdminMonthlyDashboard();
 }
 
-
 function updateAdminMonthlyDashboard() {
-
     var select = document.getElementById("adminMonth");
     if (!select) return;
 
     var selectedMonth = select.value;
-    var loans = getLoans();
+    if (!selectedMonth) return;
 
-    var totalAmount = 0;
-    var totalInterest = 0;
-    var totalFee = 0;
-    var totalPayable = 0;
-    var totalProfit = 0;
+    var data = getDashboardData();
 
-    loans.forEach(function(application) {
-
-        var history = ensureLoanHistory(application);
-
-        history.forEach(function(loan) {
-
-            var date = new Date(loan.createdAt);
-
-            if (isNaN(date.getTime()) && loan.createdAt) {
-                var match = String(loan.createdAt).match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
-                if (match) {
-                    date = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
-                }
-            }
-
-            if (isNaN(date.getTime())) return;
-
-            var key = date.getFullYear() + "-" +
-                String(date.getMonth() + 1).padStart(2, "0");
-
-            if (key === selectedMonth && loan.status !== "Rejected") {
-                var loanStatus = String(loan.status || "").trim().toLowerCase();
-
-                /* Dashboard Loan Amount: count only loans that are approved/active or cleared. */
-                if (loanStatus === "approved" || loanStatus === "amount cleared" || loanStatus === "cleared") {
-                    totalAmount += Number(loan.amount) || 0;
-                }
-
-                totalInterest += Number(loan.interest) || 0;
-                totalFee += Number(loan.fee) || 0;
-                totalPayable += Number(loan.total) || 0;
-
-                /* Profit is shown only after the loan amount is cleared. */
-                if (loanStatus === "amount cleared" || loanStatus === "cleared") {
-                    totalProfit += (Number(loan.interest) || 0) + (Number(loan.fee) || 0);
-                }
-            }
-        });
-    });
-
-    var overrides = getDashboardOverrides()[selectedMonth] || {};
-    if (overrides.loanAmount !== undefined) totalAmount = Number(overrides.loanAmount) || 0;
-    if (overrides.interest !== undefined) totalInterest = Number(overrides.interest) || 0;
-    if (overrides.fee !== undefined) totalFee = Number(overrides.fee) || 0;
-    if (overrides.total !== undefined) totalPayable = Number(overrides.total) || 0;
-
-    /* Manual profit value is allowed only when at least one loan is Amount Cleared. */
-    var hasClearedLoan = loans.some(function(application) {
-        return ensureLoanHistory(application).some(function(loan) {
-            var status = String(loan.status || "").trim().toLowerCase();
-            var date = new Date(loan.createdAt);
-            if (isNaN(date.getTime()) && loan.createdAt) {
-                var match = String(loan.createdAt).match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
-                if (match) {
-                    date = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]));
-                }
-            }
-            if (isNaN(date.getTime())) return false;
-
-            var loanMonth = date.getFullYear() + "-" +
-                String(date.getMonth() + 1).padStart(2, "0");
-
-            return loanMonth === selectedMonth &&
-                (status === "amount cleared" || status === "cleared");
-        });
-    });
-
-    if (hasClearedLoan && overrides.profit !== undefined) {
-        totalProfit = Number(overrides.profit) || 0;
+    /* First time only: capture the current application totals. After this,
+       the saved dashboard record becomes independent of customer deletion. */
+    if (!data[selectedMonth]) {
+        data[selectedMonth] = calculateDashboardMonthFromLoans(getLoans(), selectedMonth);
+        saveDashboardData(data);
     }
 
-    document.getElementById("monthlyLoanAmount").textContent = money(totalAmount);
-    document.getElementById("monthlyInterest").textContent = money(totalInterest);
-    document.getElementById("monthlyFee").textContent = money(totalFee);
-    document.getElementById("monthlyTotal").textContent = money(totalPayable);
+    var values = data[selectedMonth] || {
+        loanAmount: 0,
+        interest: 0,
+        fee: 0,
+        total: 0,
+        profit: 0
+    };
+
+    document.getElementById("monthlyLoanAmount").textContent = money(Number(values.loanAmount) || 0);
+    document.getElementById("monthlyInterest").textContent = money(Number(values.interest) || 0);
+    document.getElementById("monthlyFee").textContent = money(Number(values.fee) || 0);
+    document.getElementById("monthlyTotal").textContent = money(Number(values.total) || 0);
+
     var profitElement = document.getElementById("monthlyProfit");
-    if (profitElement) profitElement.textContent = money(totalProfit);
+    if (profitElement) profitElement.textContent = money(Number(values.profit) || 0);
 }
 
 
@@ -4868,23 +4977,21 @@ function changeApplicationStatus(id, loanIndex, newStatus) {
     });
 
     saveLoans(loans);
-    syncToGoogleSheet("update", application);
+
+    /* Dashboard is event-based: Approved records the loan figures;
+       Rejected/Pending do nothing; Amount Cleared records profit. */
+    recordDashboardStatusChange(history[loanIndex], newStatus);
+
+    var backendWrite = syncToGoogleSheet("update", application);
 
     /* Automatic customer email for Approved / Rejected. */
     sendAutomaticStatusEmail(application, loanIndex, newStatus);
 
-    /* Keep the just-applied status visible immediately, then re-read the backend
-       so the shared Google Sheet status becomes authoritative for every device. */
+    /* Save locally first. Google Sheet receives a write-only backup update. */
     loadAdminApplications(true);
-    setTimeout(function() {
+    Promise.resolve(backendWrite).finally(function() {
         vdfAdminActionBusy = false;
-        loadAdminApplications(false);
-    }, 1500);
-    setTimeout(function() {
-        if (sessionStorage.getItem("vdfAdmin") === "true") {
-            loadAdminApplications(false);
-        }
-    }, 3500);
+    });
 }
 
 
@@ -4908,16 +5015,18 @@ function chooseLoanForStatus(id, newStatus) {
     }
 
     var history = ensureLoanHistory(application);
-    var options = history.map(function(loan, index) {
-        return "Loan " + (index + 1) + " - " + money(loan.amount) + " - " + (loan.status || "Pending");
-    }).join("\n");
+    var loanIndex = 0;
 
-    var actionText = newStatus === "Approved" ? "approve" : "reject";
-    var choice = prompt("Which loan do you want to " + actionText + "? Enter Loan Number (1, 2, 3...):\n\n" + options);
+    if (history.length > 1) {
+        var options = history.map(function(loan, index) {
+            return "Loan " + (index + 1) + " - " + money(loan.amount) + " - " + (loan.status || "Pending");
+        }).join("\n");
 
-    if (choice === null) return;
-
-    var loanIndex = Number(choice.trim()) - 1;
+        var actionText = newStatus === "Approved" ? "approve" : "reject";
+        var choice = prompt("Which loan do you want to " + actionText + "? Enter Loan Number (1, 2, 3...):\n\n" + options);
+        if (choice === null) return;
+        loanIndex = Number(choice.trim()) - 1;
+    }
 
     if (!Number.isInteger(loanIndex) || loanIndex < 0 || loanIndex >= history.length) {
         alert("Please enter a valid loan number.");
@@ -4948,15 +5057,17 @@ function chooseLoanForClear(id) {
     }
 
     var history = ensureLoanHistory(application);
-    var options = history.map(function(loan, index) {
-        return "Loan " + (index + 1) + " - " + money(loan.amount) + " - " + (loan.status || "Pending");
-    }).join("\n");
+    var loanIndex = 0;
 
-    var choice = prompt("Which loan amount is cleared? Enter Loan Number (1, 2, 3...):\n\n" + options);
+    if (history.length > 1) {
+        var options = history.map(function(loan, index) {
+            return "Loan " + (index + 1) + " - " + money(loan.amount) + " - " + (loan.status || "Pending");
+        }).join("\n");
 
-    if (choice === null) return;
-
-    var loanIndex = Number(choice.trim()) - 1;
+        var choice = prompt("Which loan amount is cleared? Enter Loan Number (1, 2, 3...):\n\n" + options);
+        if (choice === null) return;
+        loanIndex = Number(choice.trim()) - 1;
+    }
 
     if (!Number.isInteger(loanIndex) || loanIndex < 0 || loanIndex >= history.length) {
         alert("Please enter a valid loan number.");
@@ -5020,12 +5131,20 @@ function clearLoanAmount(id, loanIndex) {
     application.repaymentDate = latest.repaymentDate;
 
     saveLoans(loans);
-    syncToGoogleSheet("update", application);
+
+    /* Amount Cleared records only the profit. The loan amount was already
+       recorded when Admin approved this loan. Nothing is ever subtracted. */
+    recordDashboardStatusChange(history[loanIndex], "Amount Cleared");
+
+    var backendWrite = syncToGoogleSheet("update", application);
 
     /* Automatic customer email for Amount Cleared. */
     sendAutomaticStatusEmail(application, loanIndex, "Amount Cleared");
 
     loadAdminApplications(true);
+    Promise.resolve(backendWrite).finally(function() {
+        vdfAdminActionBusy = false;
+    });
 
     alert("Loan " + (loanIndex + 1) + " marked as Amount Cleared. Other loans remain active.");
 }
@@ -5051,15 +5170,17 @@ function chooseLoanForDelete(id) {
     }
 
     var history = ensureLoanHistory(application);
-    var loanOptions = history.map(function(loan, index) {
-        return "Loan " + (index + 1) + " - " + money(loan.amount) + " - " + (loan.status || "Pending");
-    }).join("\n");
+    var loanIndex = 0;
 
-    var choice = prompt("Which loan do you want to delete? Enter Loan Number (1, 2, 3...):\n\n" + loanOptions);
+    if (history.length > 1) {
+        var loanOptions = history.map(function(loan, index) {
+            return "Loan " + (index + 1) + " - " + money(loan.amount) + " - " + (loan.status || "Pending");
+        }).join("\n");
 
-    if (choice === null) return;
-
-    var loanIndex = Number(choice.trim()) - 1;
+        var choice = prompt("Which loan do you want to delete? Enter Loan Number (1, 2, 3...):\n\n" + loanOptions);
+        if (choice === null) return;
+        loanIndex = Number(choice.trim()) - 1;
+    }
 
     if (!Number.isInteger(loanIndex) || loanIndex < 0 || loanIndex >= history.length) {
         alert("Please enter a valid loan number.");
@@ -5192,37 +5313,152 @@ function adminLogout() {
 function toggleChat() {
 
     var chat = document.getElementById("chatBox");
+    if (!chat) return;
 
-    if (chat.style.display === "block") {
+    var isOpen = chat.style.display === "block";
+
+    if (isOpen) {
         chat.style.display = "none";
-    } else {
-        chat.style.display = "block";
+        return;
     }
+
+    chat.style.display = "block";
+    showCustomerTypeOptions();
 
 }
 
+function clearChatOptions() {
+    var options = document.getElementById("chatOptions");
+    if (options) options.innerHTML = "";
+}
+
+function addChatOption(label, value, extraClass) {
+    var options = document.getElementById("chatOptions");
+    if (!options) return;
+
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "chat-option" + (extraClass ? " " + extraClass : "");
+    button.textContent = label;
+    button.onclick = function() { handleChatOption(value, label); };
+    options.appendChild(button);
+}
+
+function showCustomerTypeOptions() {
+    var messages = document.getElementById("messages");
+    if (messages && messages.children.length === 0) {
+        addChatMessage("Hello! 👋 How can I help you?", "bot");
+    } else if (messages) {
+        messages.innerHTML = "";
+        addChatMessage("Hello! 👋 Are you a new customer or an existing customer?", "bot");
+    }
+
+    clearChatOptions();
+    addChatOption("New Customer", "new_customer");
+    addChatOption("Existing Customer", "existing_customer");
+}
+
+function showNewCustomerOptions() {
+    addChatMessage("Great! I can help you with a new loan application. Please select what you need:", "bot");
+    clearChatOptions();
+    addChatOption("Loan Amount", "new_amount");
+    addChatOption("Calculate Loan", "new_calculate");
+    addChatOption("Apply Loan", "new_apply");
+    addChatOption("Loan Period", "new_period");
+    addChatOption("Platform Fee", "new_fee");
+    addChatOption("⬅ Back", "back");
+}
+
+function showExistingCustomerOptions() {
+    addChatMessage("Welcome back! Please select what you need help with:", "bot");
+    clearChatOptions();
+    addChatOption("Check Status", "existing_status");
+    addChatOption("Due Date / Repayment", "existing_due");
+    addChatOption("Loan Details", "existing_details");
+    addChatOption("Loan History", "existing_history");
+    addChatOption("⬅ Back", "back");
+}
+
+function handleChatOption(value, label) {
+    if (value === "new_customer") {
+        addChatMessage(label, "user");
+        showNewCustomerOptions();
+        return;
+    }
+
+    if (value === "existing_customer") {
+        addChatMessage(label, "user");
+        showExistingCustomerOptions();
+        return;
+    }
+
+    if (value === "back") {
+        showCustomerTypeOptions();
+        return;
+    }
+
+    addChatMessage(label, "user");
+    clearChatOptions();
+
+    var reply = "";
+
+    if (value === "new_amount") {
+        reply = "VD Finance loan amount is from ₹100 to ₹50,000.";
+    } else if (value === "new_calculate") {
+        reply = "Please use the Calculator to calculate your loan amount, interest and total payable.";
+        setTimeout(function() { showPage("calculator"); }, 350);
+    } else if (value === "new_apply") {
+        reply = "Opening the Apply Loan page. Please enter your details and submit the application.";
+        setTimeout(function() { showPage("apply"); }, 350);
+    } else if (value === "new_period") {
+        reply = "The available loan period is fixed at 30 days.";
+    } else if (value === "new_fee") {
+        reply = "The platform fee is a fixed ₹100.";
+    } else if (value === "existing_status") {
+        reply = "Opening Status. Enter your application ID to check your current loan status.";
+        setTimeout(function() { showPage("status"); }, 350);
+    } else if (value === "existing_due") {
+        reply = "Opening Status. After entering your application ID, you can see your repayment date and due date.";
+        setTimeout(function() { showPage("status"); }, 350);
+    } else if (value === "existing_details") {
+        reply = "Opening Status. Your active loan amount, interest, platform fee and total payable are shown there.";
+        setTimeout(function() { showPage("status"); }, 350);
+    } else if (value === "existing_history") {
+        reply = "Opening Status. Your loan history is available in the History section after entering your application ID.";
+        setTimeout(function() { showPage("status"); }, 350);
+    }
+
+    addChatMessage(reply, "bot");
+
+    setTimeout(function() {
+        if (value.indexOf("new_") === 0) {
+            showNewCustomerOptions();
+        } else if (value.indexOf("existing_") === 0) {
+            showExistingCustomerOptions();
+        }
+    }, 500);
+}
 
 function sendChat() {
 
     var input = document.getElementById("chatInput");
     var text = input.value.trim();
 
-    if (!text) {
-        return;
-    }
+    if (!text) return;
 
     addChatMessage(text, "user");
-
     input.value = "";
+    clearChatOptions();
 
     setTimeout(function() {
+        addChatMessage(getBotReply(text), "bot");
+        showCustomerTypeOptions();
+    }, 250);
 
-        var reply = getBotReply(text);
+}
 
-        addChatMessage(reply, "bot");
-
-    }, 300);
-
+function sendChatOption(option) {
+    handleChatOption(option.toLowerCase().replace(/\s+/g, "_"), option);
 }
 
 
@@ -5259,7 +5495,7 @@ function getBotReply(text) {
         message.includes("interest") ||
         message.includes("rate")
     ) {
-        return "The displayed loan calculation uses 30% interest.";
+        return "Please use Calculate Loan to check the interest amount.";
     }
 
     if (
@@ -5331,6 +5567,29 @@ function closeHomeMenu() {
     if (toggle) toggle.setAttribute("aria-expanded", "false");
 }
 
+/* ================= GLOBAL BUTTON CLICK FIX ================= */
+/*
+   Keep every VDF button as a normal one-click button.
+   Do NOT lock the first click with a timer: that can interfere with
+   inline onclick handlers, dynamically-created Admin buttons, forms,
+   and modal buttons.  Only block a genuine double-click (event.detail > 1).
+   All normal single clicks are allowed through immediately.
+*/
+(function installVdfButtonClickFix() {
+    document.addEventListener("click", function(event) {
+        var button = event.target && event.target.closest
+            ? event.target.closest("button")
+            : null;
+
+        if (!button) return;
+
+        if (event.detail && event.detail > 1) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, true);
+})();
+
 /* ================= INITIAL LOAD ================= */
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -5338,6 +5597,19 @@ window.addEventListener("DOMContentLoaded", function() {
     calculateLoan();
 
     resetApplicationForm();
+
+    /* Status page: entering/changing an ID must NEVER auto-load details.
+       The result is cleared immediately and is shown only after Check Status. */
+    var statusIdField = document.getElementById("statusId");
+    var statusResult = document.getElementById("statusResult");
+    if (statusIdField) {
+        statusIdField.addEventListener("input", function() {
+            if (statusResult) statusResult.innerHTML = "";
+            updateStatusTimeGreeting("");
+            window.vdfLastStatusFingerprint = null;
+            window.vdfSelectedStatusTab = "overview";
+        });
+    }
 
     if (sessionStorage.getItem("vdfAdmin") === "true") {
         // Admin session remains available in this browser tab.

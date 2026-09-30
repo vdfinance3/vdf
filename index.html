@@ -5343,8 +5343,55 @@ function changeApplicationStatus(id, loanIndex, newStatus) {
         return;
     }
 
-    Promise.resolve(backendWrite).finally(function() {
+    /* no-cors POST resolves when the browser sends the request, not when
+       Google Apps Script has finished updating the Sheet. Keep the admin
+       action locked until the server really contains the new status. */
+    verifyAdminStatusSync(application, loanIndex, newStatus, 0);
+}
+
+function verifyAdminStatusSync(application, loanIndex, expectedStatus, attempt) {
+    var maxAttempts = 8;
+    var delay = 800;
+
+    if (!application || !application.id) {
         vdfAdminActionBusy = false;
+        return;
+    }
+
+    fetchSharedApplicationById(application.id).then(function(serverApplication) {
+        var history = serverApplication ? ensureLoanHistory(serverApplication) : [];
+        var serverLoan = history[loanIndex];
+        var matches = serverLoan &&
+            String(serverLoan.status || '').trim().toLowerCase() ===
+            String(expectedStatus || '').trim().toLowerCase();
+
+        if (matches) {
+            vdfAdminActionBusy = false;
+            return;
+        }
+
+        if (attempt >= maxAttempts) {
+            /* Keep the local result visible; the next normal refresh can retry. */
+            vdfAdminActionBusy = false;
+            console.warn('Admin status sync verification timed out for', application.id);
+            return;
+        }
+
+        /* Re-send the update before checking again. This handles slow Apps
+           Script/Google Sheet writes without asking the admin to click again. */
+        syncToGoogleSheet('update', application);
+        setTimeout(function() {
+            verifyAdminStatusSync(application, loanIndex, expectedStatus, attempt + 1);
+        }, delay);
+    }).catch(function(error) {
+        if (attempt >= maxAttempts) {
+            vdfAdminActionBusy = false;
+            console.warn('Admin status verification failed:', error);
+            return;
+        }
+        setTimeout(function() {
+            verifyAdminStatusSync(application, loanIndex, expectedStatus, attempt + 1);
+        }, delay);
     });
 }
 
@@ -5604,11 +5651,7 @@ function deleteLoanTransaction(id, loanIndex) {
         var deleteWrite = syncToGoogleSheet("delete", application);
         /* Render immediately from the updated local data. Backend sync is background only. */
         loadAdminApplications(true);
-        Promise.resolve(deleteWrite).catch(function(error) {
-            console.warn("Delete backend sync failed:", error);
-        }).finally(function() {
-            vdfAdminActionBusy = false;
-        });
+        verifyAdminDeleteSync(application.id, true, 0);
         return;
     }
 
@@ -5630,13 +5673,62 @@ function deleteLoanTransaction(id, loanIndex) {
     var deleteWrite = syncToGoogleSheet("update", application);
     /* Render immediately; never make the user click Delete again while backend sync runs. */
     loadAdminApplications(true);
-    Promise.resolve(deleteWrite).catch(function(error) {
-        console.warn("Delete backend sync failed:", error);
-    }).finally(function() {
-        vdfAdminActionBusy = false;
-    });
+    verifyAdminDeleteSync(application.id, false, history.length, 0);
 
     alert("Loan " + (loanIndex + 1) + " deleted successfully.");
+}
+
+function verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt) {
+    var maxAttempts = 8;
+    var delay = 800;
+
+    fetchSharedApplicationById(id).then(function(serverApplication) {
+        var historyLength = serverApplication && Array.isArray(serverApplication.loanHistory)
+            ? serverApplication.loanHistory.length
+            : (serverApplication ? 1 : 0);
+
+        var matches = expectApplicationGone
+            ? !serverApplication
+            : !!serverApplication && historyLength === Number(expectedHistoryLength);
+
+        if (matches) {
+            vdfAdminActionBusy = false;
+            return;
+        }
+
+        if (attempt >= maxAttempts) {
+            vdfAdminActionBusy = false;
+            console.warn('Admin delete sync verification timed out for', id);
+            return;
+        }
+
+        /* The initial no-cors request may still be processing. Re-send the
+           exact local state/delete after a short delay instead of requiring
+           repeated manual clicks. */
+        var localLoans = getLoans();
+        var localApplication = localLoans.find(function(item) {
+            return String(item.id || '').trim().toUpperCase() === String(id || '').trim().toUpperCase();
+        });
+
+        if (expectApplicationGone) {
+            if (localApplication) syncToGoogleSheet('delete', localApplication);
+        } else if (localApplication) {
+            syncToGoogleSheet('update', localApplication);
+        }
+
+        setTimeout(function() {
+            verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt + 1);
+        }, delay);
+    }).catch(function(error) {
+        if (attempt >= maxAttempts) {
+            vdfAdminActionBusy = false;
+            console.warn('Admin delete verification failed:', error);
+            return;
+        }
+        setTimeout(function() {
+            verifyAdminDeleteSync(id, expectApplicationGone, expectedHistoryLength, attempt + 1);
+        }, delay);
+    });
 }
 
 
@@ -5683,11 +5775,7 @@ function deleteClearedApplication(id) {
     saveLoans(loans);
     var deleteWrite = syncToGoogleSheet("delete", application);
     loadAdminApplications(true);
-    Promise.resolve(deleteWrite).catch(function(error) {
-        console.warn("Customer delete backend sync failed:", error);
-    }).finally(function() {
-        vdfAdminActionBusy = false;
-    });
+    verifyAdminDeleteSync(application.id, true, 0, 0);
 }
 
 

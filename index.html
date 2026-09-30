@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VD Finance | Fast & Simple Loans</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
     * {
@@ -549,13 +550,23 @@
     }
 
     .form-group input,
-    .form-group select {
+    .form-group select,
+    .form-group textarea {
         width: 100%;
         padding: 12px;
         border: 1px solid #ccd4df;
         border-radius: 7px;
         outline: none;
         background: white;
+        box-sizing: border-box;
+    }
+
+    .form-group textarea {
+        min-height: 105px;
+        height: 105px;
+        resize: vertical;
+        line-height: 1.45;
+        font-family: inherit;
     }
 
     .form-group input:focus,
@@ -1537,8 +1548,8 @@
 #status .loan-section-title{margin:0 0 15px;color:#fff;font-size:19px;font-weight:900}
 #status .loan-history-box{margin-top:0}
 #status .loan-history-item{
-    padding:18px;margin-top:12px;border-radius:19px;background:linear-gradient(145deg,#171e29,#111720);
-    border:1px solid rgba(255,255,255,.08);border-left:4px solid #f1c75b
+    padding:14px 0;margin-top:12px;border-radius:0;background:transparent;
+    border:0;border-bottom:1px solid rgba(255,255,255,.10);
 }
 #status .loan-history-item .loan-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
 #status .loan-history-item .loan-title{font-size:19px;font-weight:900;color:#fff}
@@ -1560,7 +1571,7 @@
     text-align:center;
 }
 #status .status{display:inline-block!important;padding:6px 11px;border-radius:999px;border:1px solid;font-weight:900}
-#status .status.approved{background:rgba(59,130,246,.16);color:#4d9dff;border-color:#327cf0}
+#status .status.approved{background:rgba(37,211,102,.13);color:#25d366;border-color:#25d366}
 #status .status.rejected{background:rgba(255,65,83,.14);color:#ff5360;border-color:#ff5360}
 #status .status.amount-cleared{background:rgba(37,211,102,.13);color:#25d366;border-color:#25d366}
 #status .status.pending{background:rgba(245,195,70,.13);color:#f5d36a;border-color:#d5ae45}
@@ -2018,6 +2029,140 @@ input:focus, select:focus, textarea:focus {
     to { opacity: 1; transform: translateY(0); }
 }
 
+
+
+/* ================= STATUS NUMBER ANIMATION ================= */
+#status .status-card {
+    animation: statusCardReveal .75s cubic-bezier(.16,1,.3,1) both;
+}
+#status .status-card .customer-profile,
+#status .status-card .loan-history-item,
+#status .status-card .reminder-box {
+    animation: statusCardReveal .65s cubic-bezier(.16,1,.3,1) both;
+}
+
+#status .metric-card {
+    position: relative;
+    overflow: hidden;
+    transform: translateY(18px) scale(.97);
+    opacity: 0;
+    animation: statusMetricReveal .6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+#status .metric-card:nth-child(1){animation-delay:.08s}
+#status .metric-card:nth-child(2){animation-delay:.16s}
+#status .metric-card:nth-child(3){animation-delay:.24s}
+#status .metric-card:nth-child(4){animation-delay:.32s}
+
+#status .metric-card::after {
+    content:"";
+    position:absolute;
+    top:0; left:-120%;
+    width:70%; height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);
+    transform:skewX(-18deg);
+    animation:metricShine 1.05s ease .45s both;
+    pointer-events:none;
+}
+
+#status .metric-value {
+    font-variant-numeric: tabular-nums;
+    letter-spacing:-.5px;
+}
+
+.status-number-pop {
+    display:inline-block;
+    animation:statusNumberPop .42s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes statusCardReveal {
+    from{opacity:0;transform:translateY(24px)}
+    to{opacity:1;transform:translateY(0)}
+}
+@keyframes statusMetricReveal {
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes metricShine {
+    from{left:-120%}
+    to{left:150%}
+}
+@keyframes statusNumberPop {
+    0%{opacity:.15;transform:scale(.72);filter:blur(2px)}
+    55%{opacity:1;transform:scale(1.10);filter:blur(0)}
+    100%{opacity:1;transform:scale(1);filter:blur(0)}
+}
+
+/* ================= HOME OPEN ANIMATION ================= */
+#home.home-animate .hero-copy > *,
+#home.home-animate .hero-visual > *,
+#home.home-animate .benefit,
+#home.home-animate .why-card,
+#home.home-animate .clean-home-copy > *,
+#home.home-animate .clean-home-visual > *,
+#home.home-animate .home-extra-card,
+#home.home-animate .home-review-card {
+    animation-play-state:running;
+}
+
+#home .hero-copy > *,
+#home .hero-visual > *,
+#home .benefit,
+#home .why-card,
+#home .clean-home-copy > *,
+#home .clean-home-visual > *,
+#home .home-extra-card,
+#home .home-review-card {
+    opacity:0;
+    transform:translateY(24px);
+    animation:homeElementIn .7s cubic-bezier(.2,.8,.2,1) both;
+}
+#home .hero-copy > *:nth-child(1){animation-delay:.05s}
+#home .hero-copy > *:nth-child(2){animation-delay:.14s}
+#home .hero-copy > *:nth-child(3){animation-delay:.23s}
+#home .hero-copy > *:nth-child(4){animation-delay:.32s}
+#home .hero-visual > *:nth-child(1){animation-delay:.10s}
+#home .hero-visual > *:nth-child(2){animation-delay:.20s}
+#home .hero-visual > *:nth-child(3){animation-delay:.30s}
+#home .hero-visual > *:nth-child(4){animation-delay:.40s}
+#home .benefit:nth-child(1){animation-delay:.10s}
+#home .benefit:nth-child(2){animation-delay:.18s}
+#home .benefit:nth-child(3){animation-delay:.26s}
+#home .benefit:nth-child(4){animation-delay:.34s}
+#home .why-card:nth-child(1){animation-delay:.12s}
+#home .why-card:nth-child(2){animation-delay:.20s}
+#home .why-card:nth-child(3){animation-delay:.28s}
+#home .why-card:nth-child(4){animation-delay:.36s}
+
+#home .clean-home-copy > *:nth-child(1){animation-delay:.05s}
+#home .clean-home-copy > *:nth-child(2){animation-delay:.12s}
+#home .clean-home-copy > *:nth-child(3){animation-delay:.20s}
+#home .clean-home-copy > *:nth-child(4){animation-delay:.28s}
+#home .clean-home-copy > *:nth-child(5){animation-delay:.36s}
+#home .clean-home-visual > *:nth-child(1){animation-delay:.14s}
+#home .clean-home-visual > *:nth-child(2){animation-delay:.24s}
+#home .clean-home-visual > *:nth-child(3){animation-delay:.34s}
+#home .home-extra-card:nth-child(1){animation-delay:.10s}
+#home .home-extra-card:nth-child(2){animation-delay:.18s}
+#home .home-extra-card:nth-child(3){animation-delay:.26s}
+#home .home-extra-card:nth-child(4){animation-delay:.34s}
+#home .home-review-card:nth-child(1){animation-delay:.12s}
+#home .home-review-card:nth-child(2){animation-delay:.20s}
+#home .home-review-card:nth-child(3){animation-delay:.28s}
+
+@keyframes homeElementIn {
+    from{opacity:0;transform:translateY(24px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+#home .hero-glow {animation:homeGlow 2.2s ease-in-out infinite alternate}
+@keyframes homeGlow {from{transform:scale(.94);opacity:.72}to{transform:scale(1.05);opacity:1}}
+
+@media (prefers-reduced-motion: reduce) {
+    #status .status-card,#status .metric-card,#home .hero-copy > *,#home .hero-visual > *,#home .benefit,#home .why-card {
+        animation:none !important; opacity:1 !important; transform:none !important;
+    }
+}
+
 </style>
 </style>
 
@@ -2238,7 +2383,7 @@ button:disabled { cursor: not-allowed; }
 
             <br>
 
-            <button type="button" class="btn btn-primary" onclick="calculateLoan()">
+            <button type="button" class="btn btn-primary" onclick="calculateLoan(true)">
                 Calculate
             </button>
 
@@ -2782,6 +2927,12 @@ function showPage(pageId) {
     if (selectedPage) {
         selectedPage.classList.add("active");
         window.scrollTo(0, 0);
+
+        if (pageId === "home") {
+            selectedPage.classList.remove("home-animate");
+            void selectedPage.offsetWidth;
+            selectedPage.classList.add("home-animate");
+        }
     }
 
     /*
@@ -2852,12 +3003,14 @@ function getRepaymentDate() {
 
 /* ================= CALCULATOR ================= */
 
-function calculateLoan() {
+function calculateLoan(userInitiated) {
 
     var amount = Number(document.getElementById("calcAmount").value);
 
     if (!amount || amount < 100 || amount > 50000) {
-        alert("Please enter a loan amount between ₹100 and ₹50,000.");
+        if (userInitiated === true) {
+            alert("Please enter a loan amount between ₹100 and ₹50,000.");
+        }
         return;
     }
 
@@ -2968,7 +3121,8 @@ function syncToGoogleSheet(action, application) {
             status: application.status || "",
             userAccess: application.userAccess !== false,
             createdAt: application.createdAt || "",
-            lastUpdated: new Date().toISOString()
+            lastUpdated: new Date().toISOString(),
+            sendExistingCustomerEmail: action === "existingCustomer"
         }
     };
 
@@ -3274,20 +3428,18 @@ function submitLoan() {
     var normalizedMobile = String(mobile || "").replace(/\D/g, "");
 
     /*
-       CUSTOMER MATCH RULE (ONLY):
-       Same normalized name + same mobile number = SAME CUSTOMER / SAME APPLICATION ID.
-       Email and address are ignored for customer matching.
-       If the name OR mobile number is different = NEW APPLICATION ID.
-
-       Name word order is ignored, so these are the same customer:
-       "Jaya Prakash Gantasala"
-       "Gantasala Jaya Prakash"
+       CUSTOMER MATCH RULE:
+       Same mobile number = SAME CUSTOMER / SAME APPLICATION ID.
+       If the same mobile applies again, keep the same Application ID
+       and create the next loan number (Loan 2, Loan 3, ...).
+       Name, email and address are not required for the match.
     */
-    var existingIndex = loans.findIndex(function(item) {
-        var savedMobile = String(item.mobile || "").replace(/\D/g, "");
-        var savedName = normalizeCustomerName(item.name);
-        return savedMobile === normalizedMobile && savedName === normalizedName;
-    });
+    var existingIndex = normalizedMobile
+        ? loans.findIndex(function(item) {
+            var savedMobile = String(item.mobile || "").replace(/\D/g, "");
+            return savedMobile === normalizedMobile;
+        })
+        : -1;
 
     var existingApplication = existingIndex >= 0 ? loans[existingIndex] : null;
 
@@ -3591,6 +3743,34 @@ function ensureLoanHistory(application) {
     return application.loanHistory;
 }
 
+function formatAdminRepaymentDate(value) {
+    if (!value) return "";
+
+    var text = String(value).trim();
+
+    // Keep an already stored DD/MM/YYYY value exactly as a date only.
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(text)) {
+        var parts = text.split("/");
+        return String(parts[0]).padStart(2, "0") + "/" +
+               String(parts[1]).padStart(2, "0") + "/" + parts[2];
+    }
+
+    // If a Date/time value reaches the Admin table, deliberately display
+    // only the Indian date; never show IST/GMT/time text.
+    var date = new Date(text);
+    if (!isNaN(date.getTime())) {
+        return new Intl.DateTimeFormat("en-IN", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            timeZone: "Asia/Kolkata"
+        }).format(date);
+    }
+
+    // Remove any accidental time/timezone suffix as a safe fallback.
+    return text.split(/\s+(?:at|GMT|IST|\+\d{2}:?\d{2})/i)[0].trim();
+}
+
 function getLoanDueText(repaymentDate) {
 
     var formattedDate = formatVdfDate(repaymentDate);
@@ -3619,15 +3799,37 @@ function getLoanStatusDisplay(status) {
 
 function showCustomerAdminPopup(note) {
 
+    note = String(note || "").trim();
     if (!note) return;
 
     var overlay = document.getElementById("customerAdminPopup");
     var text = document.getElementById("customerAdminPopupText");
 
-    if (!overlay || !text) return;
+    /* The popup must be visible on the customer's device even when the
+       Status result was just replaced by the latest backend response. */
+    if (!overlay || !text) {
+        console.warn("VD Finance customer popup elements are not available yet.");
+        return;
+    }
 
     text.textContent = note;
     overlay.style.display = "flex";
+    overlay.style.visibility = "visible";
+    overlay.style.opacity = "1";
+    overlay.setAttribute("aria-hidden", "false");
+
+    /* Bring it above every Status-page element after the page has rendered. */
+    if (overlay.parentNode !== document.body) {
+        document.body.appendChild(overlay);
+    }
+
+    if (window.requestAnimationFrame) {
+        requestAnimationFrame(function() {
+            overlay.style.display = "flex";
+            overlay.style.visibility = "visible";
+            overlay.style.opacity = "1";
+        });
+    }
 }
 
 function closeCustomerAdminPopup() {
@@ -3757,6 +3959,34 @@ function checkStatus() {
     });
 }
 
+function animateStatusNumbers(root) {
+    root = root || document;
+    var nodes = root.querySelectorAll ? root.querySelectorAll(".status-animated-number") : [];
+    nodes.forEach(function(node) {
+        var target = Number(node.getAttribute("data-number") || 0);
+        var prefix = node.getAttribute("data-prefix") || "";
+        var format = node.getAttribute("data-format") || "integer";
+        var duration = Math.min(2600, Math.max(1500, 1500 + Math.abs(target) * 0.035));
+        var start = performance.now();
+        function ease(t){ return 1 - Math.pow(1 - t, 3); }
+        function frame(now){
+            var progress = Math.min(1, (now - start) / duration);
+            var value = target * ease(progress);
+            if (format === "money") value = Math.round(value).toLocaleString("en-IN");
+            else value = Math.round(value).toLocaleString("en-IN");
+            node.textContent = prefix + value;
+            if (progress < 1) requestAnimationFrame(frame);
+            else {
+                node.textContent = prefix + (format === "money" ? Math.round(target).toLocaleString("en-IN") : Math.round(target).toLocaleString("en-IN"));
+                node.classList.remove("status-number-pop");
+                void node.offsetWidth;
+                node.classList.add("status-number-pop");
+            }
+        }
+        requestAnimationFrame(frame);
+    });
+}
+
 function renderStatusFromLocal() {
 
     var id = document.getElementById("statusId").value.trim().toUpperCase();
@@ -3787,6 +4017,9 @@ function renderStatusFromLocal() {
     }
 
     var history = ensureLoanHistory(application);
+
+    /* Keep the latest backend-verified customer record available for the statement PDF. */
+    window.vdfCurrentStatementApplication = application;
 
     updateStatusGreeting(application.name);
 
@@ -3819,10 +4052,10 @@ function renderStatusFromLocal() {
                     <div class="loan-title">💳 Loan ${index + 1}</div>
                     <span class="status ${getLoanStatusClass(loan.status)}">${escapeHTML(getLoanStatusDisplay(loan.status))}</span>
                 </div>
-                <p><strong>Amount:</strong> ${money(loan.amount)}</p>
-                <p><strong>Interest:</strong> ${money(loan.interest)}</p>
-                <p><strong>Platform Fee:</strong> ${money(loan.fee)}</p>
-                <p><strong>Total Payable:</strong> ${money(loan.total)}</p>
+                <p><strong>Amount:</strong> <span class="status-animated-number" data-number="${Number(loan.amount)||0}" data-prefix="₹" data-format="money">₹0</span></p>
+                <p><strong>Interest:</strong> <span class="status-animated-number" data-number="${Number(loan.interest)||0}" data-prefix="₹" data-format="money">₹0</span></p>
+                <p><strong>Platform Fee:</strong> <span class="status-animated-number" data-number="${Number(loan.fee)||0}" data-prefix="₹" data-format="money">₹0</span></p>
+                <p><strong>Total Payable:</strong> <span class="status-animated-number" data-number="${Number(loan.total)||0}" data-prefix="₹" data-format="money">₹0</span></p>
                 ${isApproved ? `
                 <p><strong>Due Date:</strong>
                     <span class="loan-due-date">${escapeHTML(dueDate)}</span>
@@ -3830,11 +4063,7 @@ function renderStatusFromLocal() {
                 <p><strong>Due Date In:</strong>
                     <span class="loan-due-in">${escapeHTML(getLoanDueText(dueDate))}</span>
                 </p>` : ""}
-                <p><strong>Status:</strong>
-                    <span class="status ${getLoanStatusClass(loan.status)}">
-                        ${escapeHTML(getLoanStatusDisplay(loan.status))}
-                    </span>
-                </p>
+
             </div>
         `;
     }).join("");
@@ -3861,21 +4090,21 @@ function renderStatusFromLocal() {
                     </div>
                 </div>
                 <div class="customer-actions">
-                    <button type="button" class="pay" onclick="alert('For payment support, please contact VD Finance.')">💳 Make Payment</button>
-                    <button type="button" onclick="alert('Password changes are available through VD Finance support.')">🔐 Change Password</button>
+                    <button type="button" class="statement-btn" onclick="openCustomerStatement()">🧾 Statement</button>
                     <button type="button" class="history-btn" onclick="document.getElementById('customerLoanHistory').scrollIntoView({behavior:'smooth',block:'start'})">View History ↓</button>
+                    <button type="button" onclick="logoutCustomerStatus()">↪ Logout</button>
                 </div>
             </div>
 
             <div class="dashboard-grid">
                 <div class="metric-card metric-red">
                     <div class="metric-label">Total Payable</div>
-                    <div class="metric-value">${money(outstanding)}</div>
+                    <div class="metric-value status-animated-number" data-number="${Number(outstanding)||0}" data-prefix="₹" data-format="money">₹0</div>
                     <div class="metric-sub">All active loan accounts</div>
                 </div>
                 <div class="metric-card metric-gold">
                     <div class="metric-label">Active Accounts</div>
-                    <div class="metric-value">${activeCount}</div>
+                    <div class="metric-value status-animated-number" data-number="${Number(activeCount)||0}" data-format="integer">0</div>
                     <div class="metric-sub">Open loan accounts</div>
                 </div>
                 <div class="metric-card metric-green">
@@ -3938,13 +4167,304 @@ function renderStatusFromLocal() {
         </div>
     `;
 
-    /* Show an automatic one-time popup after admin changes a loan status. */
-    if (application.statusPopup) {
-        showCustomerAdminPopup(application.statusPopup);
-    } else if (application.adminNote) {
-        /* Admin-created popup/note remains available until admin removes it. */
-        showCustomerAdminPopup(application.adminNote);
+
+    animateStatusNumbers(result);
+    /* Customer popup / Admin Note.
+       This is deliberately triggered AFTER the Status page has been rendered,
+       so the popup cannot get hidden behind the newly-rendered Status content. */
+    var customerPopupMessage = String(
+        application.statusPopup || application.adminNote || ""
+    ).trim();
+
+    if (customerPopupMessage) {
+        showCustomerAdminPopup(customerPopupMessage);
     }
+}
+
+
+/* ================= CUSTOMER STATEMENT / LOGOUT ================= */
+function getStatementOpenDate(loan, application) {
+    var raw = (loan && (loan.createdAt || loan.applicationDate || loan.loanDate || loan.appliedAt)) ||
+              (application && (application.createdAt || application.applicationDate || application.loanDate || application.appliedAt)) ||
+              "";
+
+    /*
+       The backend may not carry createdAt on every historical loan row.
+       Since every VDF loan has a fixed 30-day tenure, the repayment date
+       is a reliable fallback for the original loan/application date.
+    */
+    if (!raw && loan && loan.repaymentDate) {
+        var dueText = String(loan.repaymentDate).trim();
+        var m = dueText.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        var due = m
+            ? new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]))
+            : new Date(dueText);
+        if (!isNaN(due.getTime())) {
+            due.setDate(due.getDate() - 30);
+            raw = due;
+        }
+    }
+
+    if (!raw) return "—";
+
+    var text = formatVdfDate(raw);
+    var parts = text.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (!parts) return text;
+
+    var monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    return parts[1] + " " + monthNames[Number(parts[2]) - 1] + " " + parts[3];
+}
+
+function openCustomerStatement() {
+    var application = window.vdfCurrentStatementApplication;
+    if (!application) {
+        alert("Please check your application status first.");
+        return;
+    }
+
+    var history = ensureLoanHistory(application);
+    var approvedLoans = history.filter(function(loan) {
+        return String(loan.status || "").trim().toLowerCase() === "approved";
+    });
+
+    var payableTotal = approvedLoans.reduce(function(sum, loan) {
+        return sum + (Number(loan.total) || 0);
+    }, 0);
+
+    var firstLetter = String(application.name || "C").trim().charAt(0).toUpperCase() || "C";
+    var rows = history.map(function(loan, index) {
+        var approved = String(loan.status || "").trim().toLowerCase() === "approved";
+        var dueDate = approved
+            ? formatVdfDate(loan.repaymentDate || getRepaymentDateFromCreatedAt(loan.createdAt))
+            : "—";
+        var period = loan.period ? String(loan.period) + " Days" : "30 Days";
+        var openDate = getStatementOpenDate(loan, application);
+        return '<tr>' +
+            '<td>Loan ' + (index + 1) + '</td>' +
+            '<td>' + escapeHTML(openDate) + '</td>' +
+            '<td>' + escapeHTML(money(loan.amount)) + '</td>' +
+            '<td>' + escapeHTML(period) + '</td>' +
+            '<td>' + escapeHTML(dueDate) + '</td>' +
+            '<td>' + escapeHTML(money(loan.total)) + '</td>' +
+            '<td>' + escapeHTML(getLoanStatusDisplay(loan.status)) + '</td>' +
+            '</tr>';
+    }).join("");
+
+    var generated = new Intl.DateTimeFormat("en-IN", {
+        day: "2-digit", month: "2-digit", year: "numeric",
+        hour: "2-digit", minute: "2-digit", hour12: true,
+        timeZone: "Asia/Kolkata"
+    }).format(new Date());
+
+    var paper = document.getElementById("vdfStatementPaper");
+    if (!paper) return;
+
+    paper.innerHTML =
+        '<div class="vdf-statement-brand">VD FINANCE</div>' +
+        '<div class="vdf-statement-subtitle">Loan Account Statement</div>' +
+        '<div class="vdf-statement-meta">' +
+            '<div><strong>Customer ID:</strong> ' + escapeHTML(application.id || "—") + '</div>' +
+            '<div><strong>Customer:</strong> ' + escapeHTML(application.name || "Customer") + '</div>' +
+            '<div><strong>Accounts:</strong> ' + history.length + '</div>' +
+            '<div><strong>Generated:</strong> ' + escapeHTML(generated) + '</div>' +
+        '</div>' +
+        '<div class="vdf-statement-total">' +
+            '<div class="vdf-statement-total-label">Total Payable</div>' +
+            '<div class="vdf-statement-total-value">' + escapeHTML(money(payableTotal)) + '</div>' +
+        '</div>' +
+        '<div class="vdf-statement-table-wrap">' +
+            '<table class="vdf-statement-table"><thead><tr>' +
+                '<th>Account</th><th>Open Date</th><th>Amount</th><th>Tenure</th><th>Due Date</th><th>Total Payable</th><th>Status</th>' +
+            '</tr></thead><tbody>' + rows + '</tbody></table>' +
+        '</div>' +
+        '<div class="vdf-statement-footer">VD Finance customer statement • For records and reference.</div>';
+
+    var overlay = document.getElementById("vdfStatementOverlay");
+    if (overlay) {
+        overlay.classList.add("show");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+}
+
+function closeCustomerStatement() {
+    var overlay = document.getElementById("vdfStatementOverlay");
+    if (overlay) {
+        overlay.classList.remove("show");
+        overlay.setAttribute("aria-hidden", "true");
+    }
+    document.body.style.overflow = "";
+}
+
+function logoutCustomerStatus() {
+    closeCustomerStatement();
+    window.vdfCurrentStatementApplication = null;
+    window.vdfLastStatusFingerprint = null;
+    window.vdfSelectedStatusTab = "overview";
+
+    var statusIdField = document.getElementById("statusId");
+    var statusResult = document.getElementById("statusResult");
+    if (statusIdField) statusIdField.value = "";
+    if (statusResult) statusResult.innerHTML = "";
+    updateStatusTimeGreeting("");
+    showPage("home");
+}
+
+function downloadCustomerStatementPDF() {
+    var application = window.vdfCurrentStatementApplication;
+    if (!application) {
+        alert("Please check your application status first.");
+        return;
+    }
+
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+        alert("PDF service is still loading. Please tap Download PDF again.");
+        return;
+    }
+
+    var history = ensureLoanHistory(application);
+    var approvedLoans = history.filter(function(loan) {
+        return String(loan.status || "").trim().toLowerCase() === "approved";
+    });
+    var payableTotal = approvedLoans.reduce(function(sum, loan) {
+        return sum + (Number(loan.total) || 0);
+    }, 0);
+
+    /* Portrait + vertically stacked sections. The structure follows the supplied
+       statement reference, while keeping only the fields already used by VDF. */
+    var pdf = new window.jspdf.jsPDF({orientation:"portrait", unit:"mm", format:"a4"});
+    var pageWidth = pdf.internal.pageSize.getWidth();
+    var pageHeight = pdf.internal.pageSize.getHeight();
+    var margin = 16;
+    var contentWidth = pageWidth - margin * 2;
+    var y = 18;
+
+    function ensureSpace(height) {
+        if (y + height > pageHeight - 18) {
+            pdf.addPage("a4", "portrait");
+            y = 18;
+        }
+    }
+
+    function labelValue(label, value) {
+        ensureSpace(7);
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(10);
+        pdf.setTextColor(70,70,70);
+        pdf.text(String(label), margin, y);
+        pdf.setFont("helvetica", "normal");
+        pdf.setTextColor(25,25,25);
+        pdf.text(String(value), margin + 38, y);
+        y += 7;
+    }
+
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(21);
+    pdf.setTextColor(25,25,25);
+    pdf.text("VD FINANCE", margin, y);
+    y += 8;
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(11);
+    pdf.setTextColor(105,105,105);
+    pdf.text("Loan Account Statement", margin, y);
+    y += 7;
+    pdf.setDrawColor(210,180,91);
+    pdf.setLineWidth(.7);
+    pdf.line(margin, y, pageWidth - margin, y);
+    y += 9;
+
+    labelValue("Customer ID:", application.id || "-");
+    labelValue("Customer:", application.name || "Customer");
+    labelValue("Accounts:", history.length);
+    y += 2;
+
+    ensureSpace(24);
+    pdf.setFillColor(248,248,248);
+    pdf.setDrawColor(220,220,220);
+    pdf.roundedRect(margin, y, contentWidth, 20, 3, 3, "FD");
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(9);
+    pdf.setTextColor(105,105,105);
+    pdf.text("TOTAL PAYABLE", margin + 7, y + 7);
+    pdf.setFontSize(17);
+    pdf.setTextColor(25,25,25);
+    pdf.text("Rs. " + payableTotal.toLocaleString("en-IN"), margin + 7, y + 15);
+    y += 28;
+
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(14);
+    pdf.setTextColor(25,25,25);
+    pdf.text("Account Details", margin, y);
+    y += 8;
+
+    history.forEach(function(loan, index) {
+        var approved = String(loan.status || "").trim().toLowerCase() === "approved";
+        var due = approved ? formatVdfDate(loan.repaymentDate || getRepaymentDateFromCreatedAt(loan.createdAt)) : "-";
+        var openDate = getStatementOpenDate(loan, application);
+        var period = loan.period ? String(loan.period) + " Days" : "30 Days";
+        var total = "Rs. " + Number(loan.total || 0).toLocaleString("en-IN");
+        var amount = "Rs. " + Number(loan.amount || 0).toLocaleString("en-IN");
+        var status = String(getLoanStatusDisplay(loan.status) || "-");
+        var cardHeight = 56;
+        ensureSpace(cardHeight + 5);
+        pdf.setFillColor(250,250,250);
+        pdf.setDrawColor(220,220,220);
+        pdf.roundedRect(margin, y, contentWidth, cardHeight, 3, 3, "FD");
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(12);
+        pdf.setTextColor(25,25,25);
+        pdf.text("L" + (index + 1), margin + 6, y + 7);
+
+        var yy = y + 15;
+        pdf.setFontSize(9);
+        function row(label, value) {
+            pdf.setFont("helvetica", "bold");
+            pdf.setTextColor(95,95,95);
+            pdf.text(label, margin + 6, yy);
+            pdf.setFont("helvetica", "normal");
+            pdf.setTextColor(25,25,25);
+            pdf.text(String(value), margin + 42, yy);
+            yy += 7;
+        }
+        row("Open Date", openDate);
+        row("Amount", amount);
+        row("Tenure", period);
+        row("Due Date", due);
+        row("Total Payable", total);
+        row("Status", status);
+        y += cardHeight + 7;
+    });
+
+    ensureSpace(28);
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(14);
+    pdf.setTextColor(25,25,25);
+    pdf.text("Transaction / Payment History", margin, y);
+    y += 8;
+    history.forEach(function(loan, index) {
+        var dateText = getStatementOpenDate(loan, application);
+        ensureSpace(9);
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(9);
+        pdf.setTextColor(55,55,55);
+        pdf.text((index + 1) + ". L" + (index + 1) + " - Opened on " + dateText, margin, y);
+        y += 7;
+    });
+
+    ensureSpace(12);
+    pdf.setDrawColor(225,225,225);
+    pdf.line(margin, y, pageWidth - margin, y);
+    y += 6;
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(8);
+    pdf.setTextColor(110,110,110);
+    pdf.text("VD Finance customer statement - For records and reference.", margin, y);
+
+    var safeId = String(application.id || "customer").replace(/[^A-Za-z0-9_-]/g, "_");
+    pdf.save("VD_Finance_Statement_" + safeId + ".pdf");
 }
 
 
@@ -4142,7 +4662,7 @@ function saveExistingCustomer(event) {
     if (coApplicant && !/^[0-9]{10}$/.test(coApplicant)) { alert("Co-applicant number must be exactly 10 digits."); return; }
     if (!amount || amount < 100) { alert("Amount must be at least ₹100."); return; }
 
-    var id = document.getElementById("ecId").value.trim().toUpperCase() || generateApplicationId();
+    var enteredId = document.getElementById("ecId").value.trim().toUpperCase();
     var interest = amount * 0.30;
     var fee = 100;
     var total = amount + interest + fee;
@@ -4191,24 +4711,94 @@ function saveExistingCustomer(event) {
     }];
 
     var loans = getLoans();
-    var existingIndex = loans.findIndex(function(item) { return String(item.id).toUpperCase() === id; });
-    if (existingIndex >= 0) {
-        if (!confirm("Application ID " + id + " already exists. Replace that customer record?")) return;
-        loans[existingIndex] = application;
+
+    /*
+       EXISTING CUSTOMER ID RULE:
+       - If Admin enters an existing Application ID, keep that ID.
+       - Otherwise, the customer must have the SAME NAME AND SAME MOBILE
+         number as an existing customer to reuse the old Application ID.
+       - If the mobile number is changed, create a NEW Application ID,
+         even when the name is the same.
+       - The new loan is appended as Loan 2, Loan 3, etc. under the old ID.
+    */
+    function normalizeExistingCustomerName(value) {
+        return String(value || "")
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, " ")
+            .split(" ")
+            .filter(Boolean)
+            .sort()
+            .join(" ");
+    }
+
+    var normalizedExistingName = normalizeExistingCustomerName(name);
+    var normalizedExistingMobile = String(mobile || "").replace(/\D/g, "");
+
+    var matchedExistingIndex = -1;
+    if (enteredId) {
+        matchedExistingIndex = loans.findIndex(function(item) {
+            return String(item.id || "").trim().toUpperCase() === enteredId;
+        });
     } else {
+        matchedExistingIndex = loans.findIndex(function(item) {
+            var savedName = normalizeExistingCustomerName(item.name);
+            var savedMobile = String(item.mobile || "").replace(/\D/g, "");
+            return normalizedExistingName &&
+                   normalizedExistingMobile &&
+                   savedName === normalizedExistingName &&
+                   savedMobile === normalizedExistingMobile;
+        });
+    }
+
+    var existingApplication = matchedExistingIndex >= 0 ? loans[matchedExistingIndex] : null;
+    var id = existingApplication
+        ? String(existingApplication.id || "").trim().toUpperCase()
+        : (enteredId || generateApplicationId());
+
+    if (existingApplication) {
+        /* Keep the same customer ID and append this as the next loan. */
+        var history = ensureLoanHistory(existingApplication);
+        var transaction = {
+            loanNumber: history.length + 1,
+            amount: amount,
+            period: period,
+            interest: interest,
+            fee: fee,
+            total: total,
+            repaymentDate: repaymentDate,
+            status: status,
+            createdAt: createdAt
+        };
+        history.push(transaction);
+        existingApplication.loanHistory = history;
+
+        application.id = id;
+        application.loanHistory = history;
+        application.status = status;
+        application.loanNumber = transaction.loanNumber;
+        application.createdAt = createdAt;
+
+        /* Preserve the same Application ID while updating the customer's latest details. */
+        loans[matchedExistingIndex] = Object.assign({}, existingApplication, application);
+        application = loans[matchedExistingIndex];
+    } else {
+        application.id = id;
+        application.loanHistory[0].loanNumber = 1;
         loans.push(application);
     }
+
+    /* Tell Apps Script to send the existing-customer confirmation email as part of the same save request. */
+    application.sendExistingCustomerEmail = true;
 
     saveLoans(loans);
     /* Dashboard updates only when this existing loan is already Approved/Cleared. */
     recordDashboardStatusChange(application.loanHistory[0], status);
     syncToGoogleSheet("existingCustomer", application);
 
-    /* Automatically send exactly one status email when Admin manually adds
-       an existing customer. */
-    if (application.email) {
-        sendExistingCustomerLoanEmail(application, 0);
-    }
+    /* Existing-customer email is now sent by the same Apps Script request
+       that saves the customer. This prevents the save/email requests from
+       racing each other and guarantees one server-side email attempt. */
 
     closeExistingCustomerForm();
     loadAdminApplications(false);
@@ -4344,7 +4934,7 @@ function loadAdminApplications(skipSheetRefresh) {
                     </td>
                     <td>${money(latest.amount)}</td>
                     <td>${latest.period} Days</td>
-                    <td>${escapeHTML(latest.repaymentDate || getRepaymentDateFromCreatedAt(latest.createdAt))}</td>
+                    <td>${escapeHTML(formatAdminRepaymentDate(latest.repaymentDate || getRepaymentDateFromCreatedAt(latest.createdAt)))}</td>
                     <td>${money(latest.interest)}</td>
                     <td>${money(latest.fee)}</td>
                     <td>${money(latest.total)}</td>
@@ -6103,8 +6693,14 @@ function closeHomeMenu() {
 
 window.addEventListener("DOMContentLoaded", function() {
 
-    calculateLoan();
+    var homePage = document.getElementById("home");
+    if (homePage) {
+        homePage.classList.add("home-animate");
+    }
 
+    /* Do not run the calculator automatically on site load.
+       A blank calculator must not show the amount validation alert.
+       Validation runs only when the user clicks Calculate/Apply. */
     resetApplicationForm();
 
     /* Status page: entering/changing an ID must NEVER auto-load details.
@@ -6127,6 +6723,23 @@ window.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
+
+
+
+<!-- ================= CUSTOMER STATEMENT MODAL ================= -->
+<div id="vdfStatementOverlay" aria-hidden="true">
+    <div class="vdf-statement-shell" role="dialog" aria-modal="true" aria-labelledby="vdfStatementTitle">
+        <div class="vdf-statement-top">
+            <h3 id="vdfStatementTitle">Customer Statement</h3>
+            <p>Preview • Download PDF</p>
+        </div>
+        <div id="vdfStatementPaper" class="vdf-statement-paper"></div>
+        <div class="vdf-statement-actions">
+            <button type="button" class="vdf-statement-close" onclick="closeCustomerStatement()">Close</button>
+            <button type="button" class="vdf-statement-download" onclick="downloadCustomerStatementPDF()">Download PDF</button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
@@ -6317,4 +6930,80 @@ window.addEventListener("DOMContentLoaded", function() {
     #home .home-extra-cards { width:100%;grid-template-columns:1fr; }
     #home .home-reviews { width:100%; }
 }
+
+
+/* ================= CUSTOMER STATEMENT ================= */
+#vdfStatementOverlay{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:none;
+    background:rgba(0,0,0,.72);
+    padding:18px;
+    overflow:auto;
+}
+#vdfStatementOverlay.show{display:block}
+.vdf-statement-shell{
+    width:min(920px,100%);
+    margin:0 auto;
+    background:#fff;
+    color:#171717;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.vdf-statement-top{
+    background:#17181d;
+    color:#fff;
+    padding:18px 20px 16px;
+}
+.vdf-statement-top h3{margin:0;font-size:23px;font-weight:900}
+.vdf-statement-top p{margin:4px 0 0;color:#b9bec8;font-size:13px}
+.vdf-statement-actions{
+    display:flex;
+    gap:10px;
+    padding:14px 18px;
+    background:#17181d;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+.vdf-statement-actions button{
+    flex:1;
+    min-height:48px;
+    border:0;
+    border-radius:12px;
+    font-weight:900;
+}
+.vdf-statement-close{background:#202127;color:#fff;border:1px solid #34363d!important}
+.vdf-statement-download{background:#e7bd59;color:#17120a}
+.vdf-statement-paper{padding:28px 24px 30px}
+.vdf-statement-brand{font-size:27px;font-weight:950;letter-spacing:.3px}
+.vdf-statement-subtitle{font-size:16px;color:#6f7279;margin-top:2px}
+.vdf-statement-meta{display:grid;grid-template-columns:1fr;gap:8px;margin-top:18px;padding-bottom:16px;border-bottom:2px solid #d2b45b}
+.vdf-statement-meta div{font-size:15px}
+.vdf-statement-meta strong{font-weight:900}
+.vdf-statement-total{margin-top:18px;padding:18px;border:1px solid #ddd;border-radius:14px;background:#fafafa}
+.vdf-statement-total-label{font-size:14px;color:#6f7279}
+.vdf-statement-total-value{font-size:30px;font-weight:950;margin-top:3px}
+.vdf-statement-table-wrap{margin-top:22px;border:1px solid #ddd;border-radius:12px;overflow-x:auto;overflow-y:hidden}
+.vdf-statement-table{width:100%;min-width:780px;border-collapse:collapse}
+.vdf-statement-table th,.vdf-statement-table td{padding:11px;text-align:left;border-bottom:1px solid #e5e5e5;font-size:13px;white-space:nowrap;color:#26344d}
+.vdf-statement-table th{background:#f3f3f3;color:#26344d;font-weight:900;text-align:left}
+.vdf-statement-table tr:last-child td{border-bottom:0}
+.vdf-statement-table thead{display:table-header-group}
+.vdf-statement-table tr{display:table-row;padding:0;border-bottom:0}
+.vdf-statement-table td{display:table-cell;border-bottom:1px solid #e5e5e5}
+.vdf-statement-table td:last-child{border-bottom:1px solid #e5e5e5}
+.vdf-statement-table td::before{content:none!important}
+.vdf-statement-footer{margin-top:22px;padding-top:14px;border-top:1px solid #ddd;color:#73777f;font-size:12px}
+@media(max-width:600px){
+    #vdfStatementOverlay{padding:0}
+    .vdf-statement-shell{min-height:100%;border-radius:0}
+    .vdf-statement-paper{padding:22px 16px 26px}
+    .vdf-statement-meta{grid-template-columns:1fr}
+    .vdf-statement-actions{position:sticky;bottom:0}
+    .vdf-statement-top{position:sticky;top:0;z-index:2}
+}
+
+#status .customer-actions .statement-btn{background:linear-gradient(135deg,#e7bd59,#d7a934);color:#17120a}
+#status .customer-actions .logout-btn{background:#20242d;color:#fff}
 </style>

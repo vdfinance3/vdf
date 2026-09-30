@@ -2031,6 +2031,65 @@ button { -webkit-tap-highlight-color: transparent; }
 button:not(:disabled) { cursor: pointer; }
 button:disabled { cursor: not-allowed; }
 </style>
+
+<style id="vdf-home-final-design">
+/* ================= VDF FINAL HOME DESIGN ================= */
+#home{background:#08090b!important;color:#f7f3e8!important;padding:0!important;min-height:100vh;}
+.vdf-home-new{min-height:100vh;background:radial-gradient(circle at 80% 15%,rgba(233,197,106,.10),transparent 28%),radial-gradient(circle at 15% 40%,rgba(145,35,35,.13),transparent 30%),#08090b;overflow:hidden;}
+.vdf-home-topbar{width:min(1240px,92%);margin:auto;padding:20px 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);position:relative;z-index:20;}
+.vdf-home-branding{display:flex;align-items:center;gap:12px;}
+.vdf-home-menu{width:42px;height:42px;border:1px solid rgba(233,197,106,.35);border-radius:12px;background:#111214;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;}
+.vdf-home-menu span{width:19px;height:2px;background:#e9c56a;border-radius:2px;}
+.vdf-home-logo{font-size:21px;letter-spacing:2px;font-weight:900;color:#fff;}
+.vdf-home-logo b{color:#fff;}.vdf-home-logo span{color:#e34b4b;}
+.vdf-home-mini-links{display:flex;gap:8px;align-items:center;}
+.vdf-home-mini-links button{border:0;background:transparent;color:#bdb9b0;font-weight:800;padding:10px 13px;border-radius:9px;cursor:pointer;}
+.vdf-home-mini-links button:hover{color:#fff;background:rgba(255,255,255,.06);}.vdf-home-mini-links .vdf-home-admin{border:1px solid rgba(233,197,106,.35);color:#e9c56a;}
+.vdf-home-menu-panel{display:none;position:absolute;z-index:50;top:75px;left:4%;width:210px;padding:10px;background:#141416;border:1px solid rgba(233,197,106,.25);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.5);flex-direction:column;gap:5px;}
+.vdf-home-menu-panel.open{display:flex;}.vdf-home-menu-panel button{text-align:left;border:0;background:transparent;color:#f5f1e8;padding:12px 14px;border-radius:9px;font-weight:800;cursor:pointer;}.vdf-home-menu-panel button:hover{background:rgba(233,197,106,.10);color:#e9c56a;}
+.vdf-home-hero-new{width:min(1240px,92%);margin:auto;min-height:650px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:30px;padding:55px 0 45px;}
+.vdf-home-copy-new{max-width:690px;}.vdf-home-eyebrow{display:inline-flex;padding:8px 13px;border:1px solid rgba(233,197,106,.30);border-radius:999px;background:rgba(233,197,106,.07);color:#e9c56a;font-size:12px;font-weight:900;letter-spacing:1.7px;}
+.vdf-home-time{margin-top:16px;color:#9f9b94;font-weight:800;font-size:15px;}.vdf-home-copy-new h1{font-size:clamp(48px,6.2vw,82px);line-height:.96;letter-spacing:-3px;margin:14px 0 22px;color:#fff;font-weight:950;}.vdf-home-copy-new h1 span{color:#e9c56a;}.vdf-home-copy-new>p{max-width:600px;color:#aaa7a0;font-size:17px;line-height:1.7;margin:0 0 28px;}
+.vdf-home-cta-row{display:flex;gap:12px;flex-wrap:wrap;}.vdf-home-cta-row button{min-height:50px;padding:0 20px;border-radius:11px;font-weight:900;cursor:pointer;transition:.2s;}.vdf-home-cta-main{border:0;background:#e9c56a;color:#15120b;box-shadow:0 10px 30px rgba(233,197,106,.18);}.vdf-home-cta-main span{font-size:20px;margin-left:8px;}.vdf-home-cta-main:hover{transform:translateY(-2px);}.vdf-home-cta-second{border:1px solid rgba(255,255,255,.13);background:#151619;color:#f3efe6;}.vdf-home-cta-second:hover{border-color:#e9c56a;color:#e9c56a;}
+.vdf-home-trust-row{display:flex;gap:0;margin-top:42px;border-top:1px solid rgba(255,255,255,.08);padding-top:20px;}.vdf-home-trust-row div{padding:0 28px;border-left:1px solid rgba(255,255,255,.08);}.vdf-home-trust-row div:first-child{padding-left:0;border-left:0;}.vdf-home-trust-row strong{display:block;color:#f5f1e8;font-size:18px;}.vdf-home-trust-row span{display:block;margin-top:4px;color:#77736c;font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+.vdf-home-visual-new{height:520px;position:relative;display:flex;align-items:center;justify-content:center;}.vdf-home-orb{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(233,197,106,.13),rgba(233,197,106,.025) 48%,transparent 70%);border:1px solid rgba(233,197,106,.10);}.vdf-home-money-card{position:relative;width:340px;height:215px;padding:23px;border-radius:22px;background:linear-gradient(145deg,#22231f,#111214);border:1px solid rgba(233,197,106,.45);box-shadow:0 35px 80px rgba(0,0,0,.55),inset 0 0 40px rgba(233,197,106,.04);transform:rotate(-7deg);z-index:3;}.vdf-money-card-top,.vdf-money-card-bottom{display:flex;justify-content:space-between;align-items:center;color:#b6b1a7;font-size:11px;font-weight:900;letter-spacing:1.5px;}.vdf-money-card-top b{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(233,197,106,.5);color:#e9c56a;font-size:18px;}.vdf-money-amount{font-size:92px;font-weight:950;color:#e9c56a;text-align:center;line-height:1;margin-top:20px;text-shadow:0 8px 25px rgba(233,197,106,.18);}.vdf-money-lines{display:flex;gap:7px;margin-top:10px;}.vdf-money-lines i{height:3px;flex:1;background:#706b60;border-radius:10px;opacity:.55;}.vdf-money-card-bottom{position:absolute;bottom:20px;left:23px;right:23px;}
+.vdf-float-card{position:absolute;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 15px;border:1px solid rgba(255,255,255,.12);background:rgba(18,19,21,.92);backdrop-filter:blur(10px);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.35);}.vdf-float-card b{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(233,197,106,.13);color:#e9c56a;}.vdf-float-card strong,.vdf-float-card small{display:block;}.vdf-float-card strong{font-size:12px;color:#fff;}.vdf-float-card small{font-size:10px;color:#89857d;margin-top:3px;}.vdf-float-one{top:105px;left:3%;}.vdf-float-two{bottom:105px;right:1%;}.vdf-visual-caption{position:absolute;bottom:48px;color:#706c64;font-size:10px;font-weight:900;letter-spacing:2px;z-index:2;}.vdf-visual-caption span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#e9c56a;margin-right:8px;}
+.vdf-home-services{width:min(1240px,92%);margin:0 auto;padding:22px 0 55px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.08);}.vdf-service{display:flex;gap:14px;padding:18px 24px;border-left:1px solid rgba(255,255,255,.08);}.vdf-service:first-child{border-left:0;padding-left:0;}.vdf-service>b{color:#e9c56a;font-size:11px;letter-spacing:1px;}.vdf-service h3{font-size:14px;margin:0 0 6px;color:#f5f1e8;}.vdf-service p{font-size:12px;line-height:1.5;color:#77736c;margin:0;}
+.vdf-home-reviews-new{width:min(1240px,92%);margin:auto;padding:75px 0;border-top:1px solid rgba(255,255,255,.08);}.vdf-reviews-heading span{color:#e9c56a;font-size:11px;font-weight:900;letter-spacing:2px;}.vdf-reviews-heading h2{font-size:38px;margin:8px 0;color:#fff;letter-spacing:-1px;}.vdf-reviews-heading p{color:#77736c;margin:0 0 28px;}.vdf-review-grid-new{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}.vdf-review-new{padding:24px;background:#111214;border:1px solid rgba(255,255,255,.08);border-radius:16px;}.vdf-review-new>div{color:#e9c56a;letter-spacing:3px;font-size:12px;}.vdf-review-new p{color:#c2beb6;line-height:1.6;font-size:14px;margin:14px 0 18px;}.vdf-review-new strong{font-size:11px;color:#77736c;text-transform:uppercase;letter-spacing:1px;}
+.vdf-home-bottom-cta{width:min(1240px,92%);margin:0 auto;padding:35px 0 55px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:20px;}.vdf-home-bottom-cta span{font-size:10px;color:#e9c56a;font-weight:900;letter-spacing:2px;}.vdf-home-bottom-cta h2{margin:8px 0 0;font-size:28px;color:#fff;}.vdf-home-bottom-cta button{border:0;background:#e9c56a;color:#15120b;padding:14px 22px;border-radius:10px;font-weight:900;cursor:pointer;}.vdf-home-bottom-cta button span{color:#15120b;font-size:18px;letter-spacing:0;}
+@media(max-width:850px){.vdf-home-mini-links button:not(.vdf-home-admin){display:none;}.vdf-home-hero-new{grid-template-columns:1fr;min-height:auto;padding:45px 0 30px;}.vdf-home-copy-new{max-width:none;}.vdf-home-copy-new h1{font-size:clamp(46px,12vw,68px);}.vdf-home-visual-new{height:450px;}.vdf-home-services{grid-template-columns:1fr 1fr;}.vdf-service{border-left:0;padding:18px 10px;border-bottom:1px solid rgba(255,255,255,.06);}.vdf-service:first-child{padding-left:10px;}.vdf-review-grid-new{grid-template-columns:1fr;}.vdf-home-bottom-cta{align-items:flex-start;flex-direction:column;}.vdf-home-bottom-cta button{width:100%;}.vdf-float-one{left:0;top:55px;}.vdf-float-two{right:0;bottom:65px;}.vdf-home-money-card{width:300px;height:190px;}.vdf-money-amount{font-size:78px;}}
+@media(max-width:520px){.vdf-home-topbar{padding:14px 0;}.vdf-home-logo{font-size:17px;}.vdf-home-menu{width:38px;height:38px;}.vdf-home-hero-new{padding-top:35px;}.vdf-home-copy-new h1{letter-spacing:-2px;}.vdf-home-copy-new>p{font-size:15px;}.vdf-home-trust-row{gap:10px;}.vdf-home-trust-row div{padding:0 10px;}.vdf-home-trust-row strong{font-size:15px;}.vdf-home-trust-row span{font-size:9px;}.vdf-home-visual-new{height:390px;}.vdf-home-orb{width:320px;height:320px;}.vdf-home-money-card{width:265px;height:170px;padding:18px;}.vdf-money-amount{font-size:68px;margin-top:13px;}.vdf-float-card{padding:9px 10px;}.vdf-float-one{top:38px;}.vdf-float-two{bottom:40px;}.vdf-home-services{grid-template-columns:1fr;}.vdf-home-reviews-new{padding:55px 0;}.vdf-reviews-heading h2{font-size:30px;}.vdf-home-menu-panel{left:4%;top:67px;}}
+/* ================= PREMIUM HOME POLISH ================= */
+.vdf-home-new{background:
+ radial-gradient(900px 500px at 88% 8%,rgba(233,197,106,.13),transparent 62%),
+ radial-gradient(700px 500px at 5% 45%,rgba(170,30,30,.10),transparent 60%),
+ linear-gradient(180deg,#07080a 0%,#0b0c0f 52%,#08090b 100%);}
+.vdf-home-topbar{padding:18px 0;border-bottom-color:rgba(233,197,106,.12);}
+.vdf-home-logo{font-size:23px;letter-spacing:2.5px;}
+.vdf-home-logo span{color:#e9c56a;}
+.vdf-home-hero-new{min-height:610px;padding:62px 0 54px;gap:55px;}
+.vdf-home-eyebrow{background:linear-gradient(90deg,rgba(233,197,106,.12),rgba(233,197,106,.04));box-shadow:inset 0 0 20px rgba(233,197,106,.03);}
+.vdf-home-time{color:#b8b3a9;font-size:14px;letter-spacing:.3px;}
+.vdf-home-copy-new h1{font-size:clamp(52px,6vw,80px);line-height:.98;text-shadow:0 18px 45px rgba(0,0,0,.38);}
+.vdf-home-copy-new h1 span{background:linear-gradient(90deg,#f4d987,#c99b3a);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.vdf-home-copy-new>p{color:#b9b5ad;max-width:570px;font-size:16px;line-height:1.8;}
+.vdf-home-cta-row{gap:13px;}
+.vdf-home-cta-row button{min-height:52px;padding:0 23px;border-radius:12px;}
+.vdf-home-cta-main{background:linear-gradient(135deg,#f1d47d,#c99b3a);box-shadow:0 12px 32px rgba(233,197,106,.14);}
+.vdf-home-cta-second{background:rgba(255,255,255,.025);border-color:rgba(233,197,106,.28);}
+.vdf-home-visual-new{height:500px;}
+.vdf-home-orb{width:455px;height:455px;background:radial-gradient(circle,rgba(233,197,106,.12),rgba(233,197,106,.025) 45%,transparent 69%);border-color:rgba(233,197,106,.14);}
+.vdf-home-money-card{width:360px;height:225px;background:linear-gradient(145deg,#292a25 0%,#151619 52%,#0e0f11 100%);border-color:rgba(233,197,106,.52);box-shadow:0 40px 90px rgba(0,0,0,.62),inset 0 0 45px rgba(233,197,106,.045);}
+.vdf-money-amount{font-size:98px;}
+.vdf-float-card{background:rgba(13,14,16,.94);border-color:rgba(233,197,106,.16);}
+.vdf-home-services{padding:20px 0 52px;border-top-color:rgba(233,197,106,.10);}
+.vdf-service{border-left-color:rgba(255,255,255,.07);}
+.vdf-home-reviews-new{padding:68px 0 70px;border-top-color:rgba(233,197,106,.10);}
+.vdf-review-new{background:linear-gradient(145deg,#121417,#0e0f11);border-color:rgba(233,197,106,.12);box-shadow:0 18px 45px rgba(0,0,0,.18);}
+@media(max-width:850px){.vdf-home-hero-new{padding-top:45px;gap:20px;}.vdf-home-visual-new{height:440px;}}
+@media(max-width:520px){.vdf-home-hero-new{padding-top:34px;}.vdf-home-copy-new h1{font-size:clamp(44px,13vw,64px);}.vdf-home-visual-new{height:385px;}.vdf-home-orb{width:315px;height:315px;}.vdf-home-money-card{width:270px;height:175px;}.vdf-money-amount{font-size:68px;}}
+
+</style>
 </head>
 
 <body class="home-active">
@@ -2053,83 +2112,74 @@ button:disabled { cursor: not-allowed; }
 
 <!-- ================= HOME ================= -->
 <section id="home" class="page active">
-    <div class="reference-home">
-        <div class="reference-home-clean">
-        <div class="clean-home-nav">
-            <div class="clean-home-brand">
-                <button type="button" class="home-menu-toggle" onclick="toggleHomeMenu()" aria-label="Open home menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-                <div class="clean-logo">VD <span>Finance</span></div>
-                
+    <div class="vdf-home-new">
+        <div class="vdf-home-topbar">
+            <div class="vdf-home-branding">
+                <button type="button" class="vdf-home-menu" onclick="toggleHomeMenu()" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+                <div class="vdf-home-logo"><b>VDF</b> <span>FINANCE</span></div>
             </div>
-            <div class="clean-nav-links" id="homeNavLinks">
-                <button type="button" onclick="showPage('home');closeHomeMenu()">Home</button>
-                <button type="button" onclick="showPage('apply');closeHomeMenu()">Apply Loan</button>
-                <button type="button" onclick="showPage('status');closeHomeMenu()">Status</button>
-                <button type="button" onclick="showPage('calculator');closeHomeMenu()">Calculator</button>
-                <button type="button" onclick="showPage('login');closeHomeMenu()">Admin Login</button>
+            <div class="vdf-home-mini-links">
+                <button type="button" onclick="showPage('calculator')">Calculator</button>
+                <button type="button" onclick="showPage('status')">Check Status</button>
+                <button type="button" class="vdf-home-admin" onclick="showPage('login')">Admin</button>
             </div>
-        </div>
-        <div class="clean-home-hero">
-            <div class="clean-home-copy">
-                <div class="clean-home-badge" id="homeGreeting">WELCOME TO VDF FAMILY</div>
-                <div class="home-time-greeting" id="homeTimeGreeting">Good Evening</div>
-                <h1>Simple, Fast &amp; Transparent <span>Loans</span></h1>
-                <p>Get the financial support you need with a simple application and clear repayment details.</p>
-                <div class="clean-home-actions">
-                    <button type="button" class="btn btn-primary" onclick="showPage('apply')">Apply Now</button>
-                    <button type="button" class="btn btn-light" onclick="showPage('calculator')">Calculate Loan</button>
-                </div>
-            </div>
-            <div class="clean-home-card money-visual-card" aria-label="Money illustration">
-                <div class="vdf-home-mark" aria-hidden="true"><span>V</span><span>D</span><span>F</span></div>
-                <div class="money-image money-image-main">
-                    <div class="money-bill"><span>₹</span><b>VD</b></div>
-                    <div class="money-coin coin-one">₹</div>
-                    <div class="money-coin coin-two">₹</div>
-                    <div class="money-coin coin-three">₹</div>
-                </div>
-                <h3>Smart Money Support</h3>
-                <p>Simple and transparent loan management</p>
-                <div class="clean-card-lines"><span></span><span></span><span></span></div>
-            </div>
-        </div>
-    </div>
-        <div class="reference-nav">
-            <button type="button" class="ref-home" onclick="showPage('home')" aria-label="Home"></button>
-            <button type="button" class="ref-apply" onclick="showPage('apply')" aria-label="Apply Loan"></button>
-            <button type="button" class="ref-status" onclick="showPage('status')" aria-label="Status"></button>
-            <button type="button" class="ref-calc" onclick="showPage('calculator')" aria-label="Calculator"></button>
-            <button type="button" class="ref-admin" onclick="showPage('login')" aria-label="Admin Login"></button>
-            <button type="button" class="ref-apply-hero" onclick="showPage('apply')" aria-label="Apply Now"></button>
-            <button type="button" class="ref-calc-hero" onclick="showPage('calculator')" aria-label="Calculate Loan"></button>
-        </div>
-    </div>
-
-    <div class="home-extra-content">
-        <div class="home-extra-title">
-            <h2>Why VD Finance?</h2>
-            <p>Simple process designed for easy loan management.</p>
-        </div>
-        <div class="home-extra-cards">
-            <div class="home-extra-card"><h3>₹100 – ₹50,000</h3><p>Choose a loan amount according to your requirement.</p></div>
-            <div class="home-extra-card"><h3>Simple Process</h3><p>Submit your application with basic information.</p></div>
-            <div class="home-extra-card"><h3>Application Tracking</h3><p>Use your application ID to check your current status.</p></div>
-            <div class="home-extra-card"><h3>Transparent Calculation</h3><p>View interest and platform fee before applying.</p></div>
         </div>
 
-        <div class="home-reviews">
-            <div class="home-extra-title review-title">
-                <h2>Customer Reviews</h2>
-                <p>What customers say about their VD Finance experience.</p>
+        <div class="vdf-home-menu-panel" id="homeNavLinks">
+            <button type="button" onclick="showPage('home');closeHomeMenu()">Home</button>
+            <button type="button" onclick="showPage('apply');closeHomeMenu()">Apply Loan</button>
+            <button type="button" onclick="showPage('status');closeHomeMenu()">Status</button>
+            <button type="button" onclick="showPage('calculator');closeHomeMenu()">Calculator</button>
+            <button type="button" onclick="showPage('contact');closeHomeMenu()">Contact</button>
+            <button type="button" onclick="showPage('login');closeHomeMenu()">Admin Login</button>
+        </div>
+
+        <div class="vdf-home-hero-new">
+            <div class="vdf-home-copy-new">
+                <div class="vdf-home-eyebrow" id="homeGreeting">WELCOME TO VDF FAMILY</div>
+                <div class="vdf-home-time" id="homeTimeGreeting">Good Evening</div>
+                <h1>Financial support.<br><span>Made simple.</span></h1>
+                <p>Apply for your loan, check your application status and understand your repayment amount — all in one simple place.</p>
+                <div class="vdf-home-cta-row">
+                    <button type="button" class="vdf-home-cta-main" onclick="showPage('apply')">Apply for a Loan <span>→</span></button>
+                    <button type="button" class="vdf-home-cta-second" onclick="showPage('calculator')">Calculate Loan</button>
+                </div>
+                <div class="vdf-home-trust-row">
+                    <div><strong>30 Days</strong><span>Loan period</span></div>
+                    <div><strong>24/7</strong><span>Status access</span></div>
+                </div>
             </div>
-            <div class="home-review-grid">
-                <div class="home-review-card"><div class="review-stars">★★★★★</div><p>“Simple application process and clear repayment details.”</p><strong>VD Customer</strong></div>
-                <div class="home-review-card"><div class="review-stars">★★★★★</div><p>“The loan status was easy to check with the application ID.”</p><strong>VD Customer</strong></div>
-                <div class="home-review-card"><div class="review-stars">★★★★★</div><p>“Easy to understand the amount, interest and total payable.”</p><strong>VD Customer</strong></div>
+
+            <div class="vdf-home-visual-new">
+                <div class="vdf-home-orb"></div>
+                <div class="vdf-home-money-card">
+                    <div class="vdf-money-card-top"><span>VDF FINANCE</span><b>₹</b></div>
+                    <div class="vdf-money-amount">₹</div>
+                    <div class="vdf-money-lines"><i></i><i></i><i></i></div>
+                    <div class="vdf-money-card-bottom"><span>SMART LOAN</span><span>VDF</span></div>
+                </div>
+                <div class="vdf-float-card vdf-float-one"><b>✓</b><span><strong>Simple Apply</strong><small>Easy application process</small></span></div>
+                <div class="vdf-float-card vdf-float-two"><b>₹</b><span><strong>Clear Details</strong><small>Know your repayment</small></span></div>
+                <div class="vdf-visual-caption"><span></span> SIMPLE • CLEAR • RESPONSIBLE</div>
             </div>
         </div>
+
+        <div class="vdf-home-services">
+            <div class="vdf-service"><b>01</b><div><h3>Apply Easily</h3><p>Complete your loan application with the required details.</p></div></div>
+            <div class="vdf-service"><b>02</b><div><h3>Track Status</h3><p>Use your application ID to view the latest status.</p></div></div>
+            <div class="vdf-service"><b>03</b><div><h3>Know Your Amount</h3><p>See interest, fee and total repayment clearly.</p></div></div>
+            <div class="vdf-service"><b>04</b><div><h3>Stay Updated</h3><p>Keep your loan information organised in one place.</p></div></div>
+        </div>
+
+        <div class="vdf-home-reviews-new">
+            <div class="vdf-reviews-heading"><span>VDF EXPERIENCE</span><h2>Built around clarity.</h2><p>A simple digital experience for managing your loan information.</p></div>
+            <div class="vdf-review-grid-new">
+                <div class="vdf-review-new"><div>★★★★★</div><p>“Simple application process and clear repayment details.”</p><strong>VDF Customer</strong></div>
+                <div class="vdf-review-new"><div>★★★★★</div><p>“Checking the application status was straightforward.”</p><strong>VDF Customer</strong></div>
+                <div class="vdf-review-new"><div>★★★★★</div><p>“The total payable amount is easy to understand.”</p><strong>VDF Customer</strong></div>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -2634,6 +2684,33 @@ button:disabled { cursor: not-allowed; }
 
 
 <script>
+/* ================= VDF SINGLE-CLICK BUTTON SAFETY =================
+   First click always reaches the original handler. A very fast accidental
+   second click is ignored so the same action cannot be queued twice.
+   This guard never waits for network/API responses and never requires a
+   second click to make an action happen. */
+(function installVdfSingleClickSafety() {
+    var lastClick = new WeakMap();
+    document.addEventListener("click", function (event) {
+        var button = event.target && event.target.closest ? event.target.closest("button") : null;
+        if (!button || button.disabled) return;
+
+        var now = Date.now();
+        var previous = lastClick.get(button) || 0;
+
+        /* Ignore only an accidental rapid repeat on the SAME button. */
+        if (now - previous < 500) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return;
+        }
+
+        /* Store the click after deciding it is valid. The original inline
+           onclick / listener still runs normally on this very first click. */
+        lastClick.set(button, now);
+    }, true);
+})();
+
 
 /* =====================================================
    VD FINANCE JAVASCRIPT
@@ -2903,6 +2980,119 @@ function syncToGoogleSheet(action, application) {
     });
 }
 
+
+
+/* ================= SHARED BACKEND DATA ================= */
+
+function fetchSharedApplications() {
+    if (!GOOGLE_SHEET_WEB_APP_URL) return Promise.resolve(null);
+
+    var url = GOOGLE_SHEET_WEB_APP_URL +
+        "?action=getApplications&_=" + Date.now();
+
+    return fetch(url, { method: "GET", cache: "no-store" })
+        .then(function(response) {
+            if (!response.ok) throw new Error("Backend HTTP " + response.status);
+            return response.json();
+        })
+        .then(function(data) {
+            if (!data || data.success !== true || !Array.isArray(data.applications)) {
+                throw new Error("Invalid backend response");
+            }
+
+            saveLoans(data.applications);
+
+            if (data.dashboardData && typeof data.dashboardData === "object") {
+                saveDashboardData(data.dashboardData);
+            }
+
+            return data.applications;
+        })
+        .catch(function(error) {
+            console.warn("Shared VDF data fetch failed; using local cache:", error);
+            return null;
+        });
+}
+
+function fetchSharedApplicationById(id) {
+    var wanted = String(id || "").trim().toUpperCase();
+    if (!wanted || !GOOGLE_SHEET_WEB_APP_URL) return Promise.resolve(null);
+
+    var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timeoutId = controller ? setTimeout(function() { controller.abort(); }, 8000) : null;
+    var url = GOOGLE_SHEET_WEB_APP_URL +
+        "?action=getApplicationById&id=" + encodeURIComponent(wanted) +
+        "&_ts=" + Date.now();
+
+    return fetch(url, {
+        method: "GET",
+        cache: "no-store",
+        signal: controller ? controller.signal : undefined
+    })
+    .then(function(response) {
+        if (!response.ok) throw new Error("Backend HTTP " + response.status);
+        return response.json();
+    })
+    .then(function(data) {
+        if (!data || data.success !== true) throw new Error("Invalid status response");
+        return data.application || null;
+    })
+    .catch(function(error) {
+        console.warn("Fast status lookup failed; using local cache:", error);
+        return null;
+    })
+    .finally(function() {
+        if (timeoutId) clearTimeout(timeoutId);
+    });
+}
+
+function syncDashboardEventToBackend(loan, status) {
+    if (!loan || !GOOGLE_SHEET_WEB_APP_URL) return Promise.resolve(false);
+
+    var payload = {
+        action: "dashboardEvent",
+        loan: {
+            dashboardEntryId: loan.dashboardEntryId || "",
+            amount: Number(loan.amount) || 0,
+            interest: Number(loan.interest) || 0,
+            fee: Number(loan.fee) || 0,
+            total: Number(loan.total) || 0,
+            createdAt: loan.createdAt || ""
+        },
+        status: status || loan.status || ""
+    };
+
+    return fetch(GOOGLE_SHEET_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+    }).then(function() { return true; })
+      .catch(function(error) {
+          console.warn("Dashboard backend sync failed:", error);
+          return false;
+      });
+}
+
+function syncDashboardEditToBackend(monthKey, metric, value) {
+    if (!GOOGLE_SHEET_WEB_APP_URL) return Promise.resolve(false);
+
+    return fetch(GOOGLE_SHEET_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+            action: "dashboardEdit",
+            monthKey: monthKey,
+            metric: metric,
+            value: Number(value) || 0
+        })
+    }).then(function() { return true; })
+      .catch(function(error) {
+          console.warn("Dashboard edit sync failed:", error);
+          return false;
+      });
+}
 
 /* ================= STORAGE ================= */
 
@@ -3459,9 +3649,13 @@ function checkStatus() {
         return String(item.id || "").trim().toUpperCase() === id;
     });
 
-    if (!localApplication) {
-        if (result) result.innerHTML = '<div class="alert error">Application not found.</div>';
-        return;
+    /* If this device already has the application cached, show it immediately.
+       The server refresh happens in the background and never blocks the screen. */
+    if (localApplication) {
+        renderStatusFromLocal();
+        window.vdfLastStatusFingerprint = JSON.stringify(localApplication);
+    } else if (result) {
+        result.innerHTML = '<div class="alert" style="display:block;">Checking application status...</div>';
     }
 
     if (button) {
@@ -3471,16 +3665,33 @@ function checkStatus() {
         button.textContent = "Checking...";
     }
 
-    window.vdfLastStatusFingerprint = JSON.stringify(localApplication);
-    renderStatusFromLocal();
+    fetchSharedApplicationById(id).then(function(sharedApplication) {
+        var currentLoans = getLoans();
+        var latest = sharedApplication || currentLoans.find(function(item) {
+            return String(item.id || "").trim().toUpperCase() === id;
+        });
 
-    if (button) {
-        button.disabled = false;
-        button.removeAttribute("aria-busy");
-        button.textContent = button.dataset.originalText || "Check Status";
-    }
+        if (!latest) {
+            if (result) result.innerHTML = '<div class="alert error">Application not found.</div>';
+            return;
+        }
+
+        var merged = currentLoans.filter(function(item) {
+            return String(item.id || "").trim().toUpperCase() !== id;
+        });
+        merged.push(latest);
+        saveLoans(merged);
+
+        window.vdfLastStatusFingerprint = JSON.stringify(latest);
+        renderStatusFromLocal();
+    }).finally(function() {
+        if (button) {
+            button.disabled = false;
+            button.removeAttribute("aria-busy");
+            button.textContent = button.dataset.originalText || "Check Status";
+        }
+    });
 }
-
 
 function renderStatusFromLocal() {
 
@@ -3732,9 +3943,8 @@ function refreshAdminDashboard() {
         return;
     }
 
-    /* Manual Refresh only redraws the local app data. Google Sheet is write-only. */
     if (vdfAdminActionBusy) return;
-    loadAdminApplications(true);
+    loadAdminApplications(false);
 }
 
 function closeExistingCustomerForm() {
@@ -3800,7 +4010,10 @@ function openExistingCustomerForm() {
                 <label style="display:block;color:#f4d47d;font-weight:700;">Period
                     <input id="ecPeriod" type="number" value="30" readonly style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:8px;border:1px solid #555;background:#333;color:#fff;">
                 </label>
-                <label style="display:block;color:#f4d47d;font-weight:700;">Repayment Date
+                <label style="display:block;color:#f4d47d;font-weight:700;">Loan Taken Date *
+                    <input id="ecLoanDate" required type="date" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:8px;border:1px solid #555;background:#222;color:#fff;">
+                </label>
+                <label style="display:block;color:#f4d47d;font-weight:700;">Repayment / Due Date
                     <input id="ecRepaymentDate" type="date" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:8px;border:1px solid #555;background:#222;color:#fff;">
                 </label>
                 <label style="display:block;color:#f4d47d;font-weight:700;">Interest (30%)
@@ -3828,6 +4041,10 @@ function openExistingCustomerForm() {
     document.body.appendChild(modal);
 
     var today = new Date();
+    var todayValue = today.toISOString().slice(0,10);
+    var loanDateField = document.getElementById("ecLoanDate");
+    if (loanDateField) loanDateField.value = todayValue;
+
     var due = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
     var dueField = document.getElementById("ecRepaymentDate");
     if (dueField) dueField.value = due.toISOString().slice(0,10);
@@ -3865,9 +4082,15 @@ function saveExistingCustomer(event) {
     var interest = amount * 0.30;
     var fee = 100;
     var total = amount + interest + fee;
+    var loanTakenDate = document.getElementById("ecLoanDate").value;
     var repaymentDate = document.getElementById("ecRepaymentDate").value;
     var status = document.getElementById("ecStatus").value;
-    var createdAt = new Date().toISOString();
+
+    if (!loanTakenDate) { alert("Please enter the old loan taken date."); return; }
+
+    /* Keep the historical loan date instead of using today's date. */
+    var loanDateObj = new Date(loanTakenDate + "T12:00:00");
+    var createdAt = isNaN(loanDateObj.getTime()) ? new Date().toISOString() : loanDateObj.toISOString();
 
     var application = {
         id: id,
@@ -3916,8 +4139,15 @@ function saveExistingCustomer(event) {
     /* Dashboard updates only when this existing loan is already Approved/Cleared. */
     recordDashboardStatusChange(application.loanHistory[0], status);
     syncToGoogleSheet("existingCustomer", application);
+
+    /* Automatically send exactly one status email when Admin manually adds
+       an existing customer. */
+    if (application.email) {
+        sendExistingCustomerLoanEmail(application, 0);
+    }
+
     closeExistingCustomerForm();
-    loadAdminApplications(true);
+    loadAdminApplications(false);
     alert("Existing customer saved successfully. Application ID: " + id);
 }
 
@@ -3928,7 +4158,7 @@ function startVdfAdminAutoRefresh() {
     if (vdfAdminRefreshTimer) return;
     vdfAdminRefreshTimer = setInterval(function() {
         if (sessionStorage.getItem("vdfAdmin") === "true" && !vdfAdminActionBusy) {
-            loadAdminApplications(true);
+            loadAdminApplications(false);
         }
     }, 5000);
 }
@@ -3940,116 +4170,128 @@ function loadAdminApplications(skipSheetRefresh) {
         return;
     }
 
-    /* Admin dashboard is rendered only from localStorage. Google Sheet is write-only. */
+    function renderAdminFromCurrentData() {
 
-    var loans = getLoans();
+            var loans = getLoans();
 
-    setupAdminMonthSelector(loans);
-    updateAdminMonthlyDashboard();
+            setupAdminMonthSelector(loans);
+            updateAdminMonthlyDashboard();
 
-    var tbody = document.getElementById("adminTableBody");
-    var noApplications = document.getElementById("noApplications");
+            var tbody = document.getElementById("adminTableBody");
+            var noApplications = document.getElementById("noApplications");
 
-    tbody.innerHTML = "";
+            tbody.innerHTML = "";
 
-    if (loans.length === 0) {
-        noApplications.style.display = "block";
-        startVdfAdminAutoRefresh();
+            if (loans.length === 0) {
+                noApplications.style.display = "block";
+                startVdfAdminAutoRefresh();
+                return;
+            }
+
+            noApplications.style.display = "none";
+
+            loans.forEach(function(application) {
+
+                var history = ensureLoanHistory(application);
+                var latest = history[history.length - 1];
+
+                var row = document.createElement("tr");
+
+                var actionButtons = '<div class="admin-action-buttons">';
+
+                actionButtons += `
+                    <button type="button" class="btn-success"
+                        onclick="chooseLoanForStatus('${application.id}', 'Approved')">
+                        Approve
+                    </button>`;
+
+                actionButtons += `
+                    <button type="button" class="btn-danger"
+                        onclick="chooseLoanForStatus('${application.id}', 'Rejected')">
+                        Reject
+                    </button>`;
+
+                actionButtons += `
+                    <button type="button" class="btn-success"
+                        onclick="chooseLoanForClear('${application.id}')">
+                        Amount Cleared
+                    </button>`;
+
+                /* Delete Loan appears only when at least one loan is Amount Cleared or Rejected.
+                   Clicking it asks which loan (1, 2, 3...) should be deleted. */
+                if (history.some(function(loan) {
+                    return loan.status === "Amount Cleared" || loan.status === "Rejected";
+                })) {
+                    actionButtons += `
+                        <button type="button" class="btn-danger"
+                            onclick="chooseLoanForDelete('${application.id}')">
+                            Delete Loan
+                        </button>`;
+                }
+
+                if (history.length > 0 && history.every(function(loan) {
+                    return loan.status === "Amount Cleared";
+                })) {
+                    actionButtons += `
+                        <button type="button" class="btn-danger"
+                            onclick="deleteClearedApplication('${application.id}')">
+                            Delete Customer
+                        </button>`;
+                }
+
+                actionButtons += `
+                    <button type="button" class="btn-primary"
+                        onclick="sendAdminEmail('${application.id}')">
+                        Send Email
+                    </button>`;
+
+                actionButtons += '</div>';
+
+                row.innerHTML = `
+                    <td>${escapeHTML(application.id)}</td>
+                    <td>${escapeHTML(application.name)}</td>
+                    <td>${escapeHTML(application.mobile)}</td>
+                    <td>${escapeHTML(application.coApplicant || "")}</td>
+                    <td>${escapeHTML(application.email)}</td>
+                    <td>${escapeHTML(application.upiId || "")}</td>
+                    <td>${escapeHTML(application.loanReason)}</td>
+                    <td>${escapeHTML(application.address)}</td>
+                    <td>
+                        ${application.aadhaarFile ? `<a href="${application.aadhaarFile}" target="_blank" rel="noopener">${escapeHTML(application.aadhaarFileName || "View Aadhaar")}</a>` : escapeHTML(application.aadhaarFileName || "Not available")}
+                    </td>
+                    <td>${money(latest.amount)}</td>
+                    <td>${latest.period} Days</td>
+                    <td>${escapeHTML(latest.repaymentDate || getRepaymentDateFromCreatedAt(latest.createdAt))}</td>
+                    <td>${money(latest.interest)}</td>
+                    <td>${money(latest.fee)}</td>
+                    <td>${money(latest.total)}</td>
+                    <td>
+                        <span class="status ${getLoanStatusClass(latest.status)}">
+                            ${escapeHTML(latest.status || "Pending")}
+                        </span>
+                        <div style="margin-top:6px;font-size:12px;">
+                            ${history.length} loan(s)
+                        </div>
+                    </td>
+                    <td style="vertical-align:top;">${actionButtons}</td>
+                `;
+
+                tbody.appendChild(row);
+            });
+
+            startVdfAdminAutoRefresh();
+    }
+
+    /* Hosted Admin uses the shared backend so customer requests from other
+       phones/browsers appear here. Local storage is only the fallback cache. */
+    if (skipSheetRefresh === true) {
+        renderAdminFromCurrentData();
         return;
     }
 
-    noApplications.style.display = "none";
-
-    loans.forEach(function(application) {
-
-        var history = ensureLoanHistory(application);
-        var latest = history[history.length - 1];
-
-        var row = document.createElement("tr");
-
-        var actionButtons = '<div class="admin-action-buttons">';
-
-        actionButtons += `
-            <button type="button" class="btn-success"
-                onclick="chooseLoanForStatus('${application.id}', 'Approved')">
-                Approve
-            </button>`;
-
-        actionButtons += `
-            <button type="button" class="btn-danger"
-                onclick="chooseLoanForStatus('${application.id}', 'Rejected')">
-                Reject
-            </button>`;
-
-        actionButtons += `
-            <button type="button" class="btn-success"
-                onclick="chooseLoanForClear('${application.id}')">
-                Amount Cleared
-            </button>`;
-
-        /* Delete Loan appears only when at least one loan is Amount Cleared or Rejected.
-           Clicking it asks which loan (1, 2, 3...) should be deleted. */
-        if (history.some(function(loan) {
-            return loan.status === "Amount Cleared" || loan.status === "Rejected";
-        })) {
-            actionButtons += `
-                <button type="button" class="btn-danger"
-                    onclick="chooseLoanForDelete('${application.id}')">
-                    Delete Loan
-                </button>`;
-        }
-
-        if (history.length > 0 && history.every(function(loan) {
-            return loan.status === "Amount Cleared";
-        })) {
-            actionButtons += `
-                <button type="button" class="btn-danger"
-                    onclick="deleteClearedApplication('${application.id}')">
-                    Delete Customer
-                </button>`;
-        }
-
-        actionButtons += `
-            <button type="button" class="btn-primary"
-                onclick="sendAdminEmail('${application.id}')">
-                Send Email
-            </button>`;
-
-        actionButtons += '</div>';
-
-        row.innerHTML = `
-            <td>${escapeHTML(application.id)}</td>
-            <td>${escapeHTML(application.name)}</td>
-            <td>${escapeHTML(application.mobile)}</td>
-            <td>${escapeHTML(application.coApplicant || "")}</td>
-            <td>${escapeHTML(application.email)}</td>
-            <td>${escapeHTML(application.upiId || "")}</td>
-            <td>${escapeHTML(application.loanReason)}</td>
-            <td>${escapeHTML(application.address)}</td>
-            <td>
-                ${application.aadhaarFile ? `<a href="${application.aadhaarFile}" target="_blank" rel="noopener">${escapeHTML(application.aadhaarFileName || "View Aadhaar")}</a>` : escapeHTML(application.aadhaarFileName || "Not available")}
-            </td>
-            <td>${money(latest.amount)}</td>
-            <td>${latest.period} Days</td>
-            <td>${escapeHTML(latest.repaymentDate || getRepaymentDateFromCreatedAt(latest.createdAt))}</td>
-            <td>${money(latest.interest)}</td>
-            <td>${money(latest.fee)}</td>
-            <td>${money(latest.total)}</td>
-            <td>
-                <span class="status ${getLoanStatusClass(latest.status)}">
-                    ${escapeHTML(latest.status || "Pending")}
-                </span>
-                <div style="margin-top:6px;font-size:12px;">
-                    ${history.length} loan(s)
-                </div>
-            </td>
-            <td style="vertical-align:top;">${actionButtons}</td>
-        `;
-
-        tbody.appendChild(row);
+    fetchSharedApplications().finally(function() {
+        renderAdminFromCurrentData();
     });
-
-    startVdfAdminAutoRefresh();
 }
 
 function chooseApplicationIdForAdmin(actionLabel, callback) {
@@ -4299,6 +4541,46 @@ function sendApplicationReceivedEmail(application, loan) {
         "Applied Amount: ₹" + amount.toLocaleString("en-IN") + "\n" +
         "Status: Pending\n\n" +
         "Your loan application has been successfully received and is currently under review.\n\n" +
+        "Regards,\nVD Finance\nvdfinance3@gmail.com";
+
+    sendVDFEmail(application, subject, message, true);
+}
+
+function sendExistingCustomerLoanEmail(application, loanIndex) {
+    if (!application || !application.email) return;
+
+    var history = ensureLoanHistory(application);
+    var loan = history[loanIndex] || history[history.length - 1] || {};
+    var loanNumber = Number(loanIndex) + 1;
+    if (loanNumber < 1) loanNumber = history.length || 1;
+
+    var greeting = getVDFTimeGreeting();
+    var customerName = application.name || "Customer";
+    var amount = Number(loan.amount || application.amount || 0);
+    var total = Number(loan.total || application.total || 0);
+    var loanDate = loan.createdAt || application.createdAt || "";
+
+    function formatHistoricalDate(value) {
+        if (!value) return "";
+        var d = new Date(value);
+        if (!isNaN(d.getTime())) {
+            return d.toLocaleDateString("en-IN", { day: "2-digit", month: "2-digit", year: "numeric" });
+        }
+        return String(value);
+    }
+
+    var subject = "VD Finance - Existing Loan Record";
+    var message =
+        greeting + " " + customerName + ",\n\n" +
+        "This is a confirmation of your existing VD Finance loan record.\n\n" +
+        "Application ID: " + (application.id || "") + "\n" +
+        "Loan Number: " + loanNumber + "\n" +
+        "Loan Taken Date: " + formatHistoricalDate(loanDate) + "\n" +
+        "Loan Amount: ₹" + amount.toLocaleString("en-IN") + "\n" +
+        "Total Payable: ₹" + total.toLocaleString("en-IN") + "\n" +
+        "Due Date: " + formatHistoricalDate(loan.repaymentDate || application.repaymentDate) + "\n" +
+        "Status: " + (loan.status || application.status || "") + "\n\n" +
+        "Please keep this email for your records.\n\n" +
         "Regards,\nVD Finance\nvdfinance3@gmail.com";
 
     sendVDFEmail(application, subject, message, true);
@@ -4752,8 +5034,8 @@ function recordDashboardStatusChange(loan, status) {
         data[monthKey]._entries.push(entry);
     }
 
-    /* APPROVED: record the loan figures once. Never subtract them later. */
-    if ((normalized === "approved" || normalized === "amount cleared" || normalized === "cleared") && !entry.approvedRecorded) {
+    /* APPROVED: record loan figures only when Admin actually approves. */
+    if (normalized === "approved" && !entry.approvedRecorded) {
         data[monthKey].loanAmount += Number(loan.amount) || 0;
         data[monthKey].interest += Number(loan.interest) || 0;
         data[monthKey].fee += Number(loan.fee) || 0;
@@ -4761,13 +5043,16 @@ function recordDashboardStatusChange(loan, status) {
         entry.approvedRecorded = true;
     }
 
-    /* AMOUNT CLEARED: profit is recorded only now, once. */
+    /* AMOUNT CLEARED: always record this loan's profit once when repayment is cleared.
+       Do not depend on approvedRecorded, because older/previously approved loans
+       may not have that historical flag saved. */
     if ((normalized === "amount cleared" || normalized === "cleared") && !entry.profitRecorded) {
         data[monthKey].profit += (Number(loan.interest) || 0) + (Number(loan.fee) || 0);
         entry.profitRecorded = true;
     }
 
     saveDashboardData(data);
+    syncDashboardEventToBackend(loan, normalized);
 }
 
 function getDashboardData() {
@@ -4862,7 +5147,7 @@ function editDashboardMetric(metric) {
     var monthKey = select.value;
 
     if (!data[monthKey]) {
-        data[monthKey] = calculateDashboardMonthFromLoans(getLoans(), monthKey);
+        data[monthKey] = { loanAmount: 0, interest: 0, fee: 0, total: 0, profit: 0, _entries: [] };
         saveDashboardData(data);
     }
 
@@ -4882,6 +5167,7 @@ function editDashboardMetric(metric) {
 
     data[monthKey][metric] = value;
     saveDashboardData(data);
+    syncDashboardEditToBackend(monthKey, metric, value);
     updateAdminMonthlyDashboard();
 }
 
@@ -4893,13 +5179,6 @@ function updateAdminMonthlyDashboard() {
     if (!selectedMonth) return;
 
     var data = getDashboardData();
-
-    /* First time only: capture the current application totals. After this,
-       the saved dashboard record becomes independent of customer deletion. */
-    if (!data[selectedMonth]) {
-        data[selectedMonth] = calculateDashboardMonthFromLoans(getLoans(), selectedMonth);
-        saveDashboardData(data);
-    }
 
     var values = data[selectedMonth] || {
         loanAmount: 0,
@@ -4982,13 +5261,22 @@ function changeApplicationStatus(id, loanIndex, newStatus) {
        Rejected/Pending do nothing; Amount Cleared records profit. */
     recordDashboardStatusChange(history[loanIndex], newStatus);
 
-    var backendWrite = syncToGoogleSheet("update", application);
+    var backendWrite;
+    try {
+        backendWrite = syncToGoogleSheet("update", application);
 
-    /* Automatic customer email for Approved / Rejected. */
-    sendAutomaticStatusEmail(application, loanIndex, newStatus);
+        /* Automatic customer email for Approved / Rejected. */
+        sendAutomaticStatusEmail(application, loanIndex, newStatus);
 
-    /* Save locally first. Google Sheet receives a write-only backup update. */
-    loadAdminApplications(true);
+        /* Render the result immediately. */
+        loadAdminApplications(false);
+    } catch (error) {
+        console.error("VDF admin status action failed:", error);
+        vdfAdminActionBusy = false;
+        alert("Action could not be completed. Please try again.");
+        return;
+    }
+
     Promise.resolve(backendWrite).finally(function() {
         vdfAdminActionBusy = false;
     });
@@ -5109,6 +5397,9 @@ function clearLoanAmount(id, loanIndex) {
         return;
     }
 
+    if (vdfAdminActionBusy) return;
+    vdfAdminActionBusy = true;
+
     history[loanIndex].status = "Amount Cleared";
 
     /* Queue a one-time customer popup for the cleared loan. */
@@ -5136,12 +5427,21 @@ function clearLoanAmount(id, loanIndex) {
        recorded when Admin approved this loan. Nothing is ever subtracted. */
     recordDashboardStatusChange(history[loanIndex], "Amount Cleared");
 
-    var backendWrite = syncToGoogleSheet("update", application);
+    var backendWrite;
+    try {
+        backendWrite = syncToGoogleSheet("update", application);
 
-    /* Automatic customer email for Amount Cleared. */
-    sendAutomaticStatusEmail(application, loanIndex, "Amount Cleared");
+        /* Automatic customer email for Amount Cleared. */
+        sendAutomaticStatusEmail(application, loanIndex, "Amount Cleared");
 
-    loadAdminApplications(true);
+        loadAdminApplications(false);
+    } catch (error) {
+        console.error("VDF clear action failed:", error);
+        vdfAdminActionBusy = false;
+        alert("Amount Cleared action could not be completed. Please try again.");
+        return;
+    }
+
     Promise.resolve(backendWrite).finally(function() {
         vdfAdminActionBusy = false;
     });
@@ -5222,13 +5522,27 @@ function deleteLoanTransaction(id, loanIndex) {
         return;
     }
 
+    /* Delete must execute immediately on the first click.
+       Do not wait for a previous network action before deleting. */
+    if (vdfAdminActionBusy) {
+        /* A previous action may still be syncing, but deletion itself is local-first.
+           Continue instead of silently ignoring the user's click. */
+    }
+    vdfAdminActionBusy = true;
+
     history.splice(loanIndex, 1);
 
     if (history.length === 0) {
         loans.splice(index, 1);
         saveLoans(loans);
-        syncToGoogleSheet("delete", application);
+        var deleteWrite = syncToGoogleSheet("delete", application);
+        /* Render immediately from the updated local data. Backend sync is background only. */
         loadAdminApplications(true);
+        Promise.resolve(deleteWrite).catch(function(error) {
+            console.warn("Delete backend sync failed:", error);
+        }).finally(function() {
+            vdfAdminActionBusy = false;
+        });
         return;
     }
 
@@ -5247,8 +5561,14 @@ function deleteLoanTransaction(id, loanIndex) {
     });
 
     saveLoans(loans);
-    syncToGoogleSheet("update", application);
+    var deleteWrite = syncToGoogleSheet("update", application);
+    /* Render immediately; never make the user click Delete again while backend sync runs. */
     loadAdminApplications(true);
+    Promise.resolve(deleteWrite).catch(function(error) {
+        console.warn("Delete backend sync failed:", error);
+    }).finally(function() {
+        vdfAdminActionBusy = false;
+    });
 
     alert("Loan " + (loanIndex + 1) + " deleted successfully.");
 }
@@ -5290,10 +5610,18 @@ function deleteClearedApplication(id) {
         return;
     }
 
+    /* Delete Customer is also local-first and must respond to the first click. */
+    vdfAdminActionBusy = true;
+
     loans.splice(index, 1);
     saveLoans(loans);
-    syncToGoogleSheet("delete", application);
+    var deleteWrite = syncToGoogleSheet("delete", application);
     loadAdminApplications(true);
+    Promise.resolve(deleteWrite).catch(function(error) {
+        console.warn("Customer delete backend sync failed:", error);
+    }).finally(function() {
+        vdfAdminActionBusy = false;
+    });
 }
 
 
@@ -5553,7 +5881,7 @@ function escapeHTML(value) {
 
 function toggleHomeMenu() {
     var menu = document.getElementById("homeNavLinks");
-    var toggle = document.querySelector(".home-menu-toggle");
+    var toggle = document.querySelector(".vdf-home-menu");
     if (!menu || !toggle) return;
 
     var isOpen = menu.classList.toggle("open");
@@ -5562,33 +5890,17 @@ function toggleHomeMenu() {
 
 function closeHomeMenu() {
     var menu = document.getElementById("homeNavLinks");
-    var toggle = document.querySelector(".home-menu-toggle");
+    var toggle = document.querySelector(".vdf-home-menu");
     if (menu) menu.classList.remove("open");
     if (toggle) toggle.setAttribute("aria-expanded", "false");
 }
 
-/* ================= GLOBAL BUTTON CLICK FIX ================= */
+/* ================= BUTTON HANDLERS ================= */
 /*
-   Keep every VDF button as a normal one-click button.
-   Do NOT lock the first click with a timer: that can interfere with
-   inline onclick handlers, dynamically-created Admin buttons, forms,
-   and modal buttons.  Only block a genuine double-click (event.detail > 1).
-   All normal single clicks are allowed through immediately.
+   No global click interception. Every button receives its normal browser
+   click event immediately. Action functions themselves handle their own
+   confirmation and duplicate-action protection.
 */
-(function installVdfButtonClickFix() {
-    document.addEventListener("click", function(event) {
-        var button = event.target && event.target.closest
-            ? event.target.closest("button")
-            : null;
-
-        if (!button) return;
-
-        if (event.detail && event.detail > 1) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
-    }, true);
-})();
 
 /* ================= INITIAL LOAD ================= */
 
@@ -5621,3 +5933,191 @@ window.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+<style id="vdf-final-home-polish">
+/* ================= VDF HOME FULL-SPACE POLISH ================= */
+#home {
+    min-height:100vh !important;
+    background:#08090d !important;
+    padding:0 !important;
+}
+#home .reference-home {
+    min-height:100vh !important;
+    background:linear-gradient(135deg,#07090f 0%,#111522 48%,#090b11 100%) !important;
+    display:flex;
+    flex-direction:column;
+}
+#home .reference-home-clean {
+    min-height:calc(100vh - 190px) !important;
+    flex:1;
+    background:
+      radial-gradient(circle at 78% 45%,rgba(233,197,106,.13),transparent 24%),
+      radial-gradient(circle at 8% 20%,rgba(214,30,30,.10),transparent 25%),
+      linear-gradient(135deg,#07090f 0%,#151821 52%,#090b10 100%) !important;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow:hidden;
+}
+#home .reference-home-clean:after {
+    content:"";
+    position:absolute;
+    width:420px;height:420px;
+    right:-170px;bottom:-220px;
+    border:1px solid rgba(233,197,106,.12);
+    border-radius:50%;
+    box-shadow:0 0 0 70px rgba(233,197,106,.025),0 0 0 140px rgba(233,197,106,.018);
+    pointer-events:none;
+}
+#home .clean-home-nav {
+    width:92%;max-width:1400px;
+    min-height:74px;
+    padding:16px 0;
+    margin:0 auto;
+    position:relative;z-index:10;
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+#home .clean-logo {
+    font-size:31px;
+    letter-spacing:1.5px;
+}
+#home .clean-logo:before { content:"VDF "; color:#fff; }
+#home .clean-logo { font-size:0; }
+#home .clean-logo span { font-size:31px;color:#e53935 !important; }
+#home .clean-home-hero {
+    width:92%;max-width:1400px;
+    flex:1;
+    min-height:0 !important;
+    grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);
+    gap:70px;
+    padding:45px 0 55px;
+    position:relative;z-index:2;
+}
+#home .clean-home-copy { padding:0; }
+#home .clean-home-badge {
+    display:inline-flex;
+    width:auto;
+    text-align:left;
+    background:rgba(233,197,106,.08) !important;
+    border:1px solid rgba(233,197,106,.25) !important;
+    color:#f4d47d !important;
+    padding:8px 16px;
+    margin-bottom:14px;
+}
+#home .home-time-greeting {
+    margin:0 0 12px;
+    color:#aaaeb9;
+    font-size:15px;
+    font-weight:700;
+}
+#home .clean-home-copy h1 {
+    max-width:760px;
+    font-size:clamp(44px,6vw,82px);
+    line-height:.98;
+    margin:0 0 22px;
+    letter-spacing:-3px;
+    color:#fff !important;
+}
+#home .clean-home-copy h1 span {
+    color:#e53935 !important;
+}
+#home .clean-home-copy p {
+    max-width:690px;
+    margin:0 0 30px;
+    color:#b9bec9 !important;
+    font-size:18px;
+    line-height:1.7;
+}
+#home .clean-home-actions { gap:14px; }
+#home .clean-home-actions .btn {
+    min-width:160px;
+    padding:15px 25px;
+    border-radius:12px;
+    font-size:15px;
+}
+#home .clean-home-actions .btn-primary {
+    background:linear-gradient(135deg,#e53935,#b91c1c) !important;
+    box-shadow:0 12px 30px rgba(229,57,53,.22);
+}
+#home .clean-home-actions .btn-light {
+    background:rgba(255,255,255,.055) !important;
+    border:1px solid rgba(255,255,255,.12) !important;
+    color:#f4d47d !important;
+}
+#home .clean-home-card {
+    width:min(390px,100%);
+    padding:42px 32px;
+    border-radius:30px;
+    background:linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.025)) !important;
+    border:1px solid rgba(233,197,106,.20) !important;
+    box-shadow:0 30px 90px rgba(0,0,0,.38);
+    backdrop-filter:blur(12px);
+}
+#home .clean-card-icon { background:linear-gradient(135deg,#f4d47d,#c9972d); }
+#home .vd-home-mark span {
+    border-color:rgba(233,197,106,.45);
+    color:#f4d47d;
+}
+#home .clean-home-card h3 { color:#fff !important; }
+#home .clean-home-card p { color:#aaaeb9 !important; font-size:15px; }
+#home .money-image { transform:scale(1.08); margin-bottom:18px; }
+#home .home-extra-content {
+    flex:none;
+    padding:34px 4% 42px !important;
+    background:#0b0d12 !important;
+    border-top:1px solid rgba(255,255,255,.06);
+}
+#home .home-extra-title { margin-bottom:20px; }
+#home .home-extra-title h2 {
+    margin:0 0 5px;
+    font-size:28px;
+    color:#f4d47d !important;
+}
+#home .home-extra-title p { margin:0;color:#858b98 !important; }
+#home .home-extra-cards {
+    width:92%;max-width:1400px;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+#home .home-extra-card {
+    min-height:118px;
+    padding:20px 18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:linear-gradient(145deg,#151820,#0f1117) !important;
+    border:1px solid rgba(255,255,255,.07) !important;
+    border-radius:16px;
+    box-shadow:none !important;
+}
+#home .home-extra-card h3 { margin:0 0 7px;color:#f4d47d !important; }
+#home .home-extra-card p { margin:0;color:#9298a5 !important; }
+#home .home-reviews { width:92%;max-width:1400px;margin:30px auto 0; }
+#home .home-review-grid { gap:14px; }
+#home .home-review-card {
+    background:#11141b !important;
+    border:1px solid rgba(255,255,255,.07) !important;
+    padding:20px;
+}
+#home .home-review-card p { color:#aeb3be !important; }
+#home .home-review-card strong { color:#f4d47d !important; }
+#home .review-title { margin-bottom:18px; }
+#home .reference-nav { display:none !important; }
+@media(max-width:900px){
+    #home .reference-home-clean { min-height:0 !important; }
+    #home .clean-home-hero { grid-template-columns:1fr;gap:30px;padding:35px 0 42px; }
+    #home .clean-home-copy h1 { font-size:clamp(42px,10vw,68px);letter-spacing:-2px; }
+    #home .clean-home-card { justify-self:center; }
+    #home .home-extra-cards { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:560px){
+    #home .clean-home-nav { width:90%; }
+    #home .clean-home-hero { width:90%;padding-top:28px; }
+    #home .clean-home-copy h1 { font-size:42px; }
+    #home .clean-home-copy p { font-size:16px; }
+    #home .clean-home-actions { flex-direction:column; }
+    #home .clean-home-actions .btn { width:100%; }
+    #home .home-extra-content { padding:28px 5% 34px !important; }
+    #home .home-extra-cards { width:100%;grid-template-columns:1fr; }
+    #home .home-reviews { width:100%; }
+}
+</style>
